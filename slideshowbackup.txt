@@ -1,0 +1,234 @@
+<div id="page-wrapper">
+    <?php
+    ini_set("SMTP", "ssl://smtp.gmail.com");
+    ini_set("smtp_port", "465");
+    /* @var $this SiteController */
+
+    $this->pageTitle = Yii::app()->name;
+    ?>
+
+
+    <?php
+    if (Yii::app()->user->hasFlash("msg"))
+        echo Yii::app()->user->getFlash("msg");
+    ?>
+    <!-- Header Carousel -->
+    <header id="myCarousel" class="carousel slide">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+            <li data-target="#myCarousel" data-slide-to="3"></li>
+            <li data-target="#myCarousel" data-slide-to="4"></li>
+
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner">
+            <div class="item active">
+                <div class="fill" style="background-image:<?php echo Yii::app()->request->baseUrl; ?>/images/logos/acep.png" alt="url('http://placehold.it/1900x1080&text=Slide One');">
+                    <image  src="<?php echo Yii::app()->request->baseUrl; ?>/images/logos/acep.png" alt="Bank"/>
+
+                </div>
+                <div class="carousel-caption">
+                    <h2> </h2>
+                </div>
+            </div>
+            <div class="item">
+                <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Two');">
+                    <image src="<?php echo Yii::app()->request->baseUrl; ?>/images/logos/advans_cameroon.jpeg" alt="Bank"/>
+                </div>
+                <div class="carousel-caption">
+                    <h2> </h2>
+                </div>
+            </div>
+            <div class="item">
+                <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Three');">
+                    <image src="<?php echo Yii::app()->request->baseUrl; ?>/images/logos/afriland.jpg" alt="Bank"/>
+                </div>
+                <div class="carousel-caption">
+                    <h2> </h2>
+                </div>
+            </div>
+            <div class="item">
+                <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Three');">
+                    <image src="<?php echo Yii::app()->request->baseUrl; ?>/images/logos/alios.gif" alt="Bank"/>
+
+                </div>
+                <div class="carousel-caption">
+                    <h2></h2>
+                </div>
+            </div>
+            <div class="item">
+                <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Three');">
+                    <image src="<?php echo Yii::app()->request->baseUrl; ?>/images/logos/atlantic.png" alt="Bank"/>
+                </div>
+                <div class="carousel-caption">
+                    <h2></h2>
+                </div>
+            </div>
+            <div class="item">
+                <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Three');">
+                    <image src="<?php echo Yii::app()->request->baseUrl; ?>/images/logos/bc-pme.png" alt="Bank"/>
+                </div>
+                <div class="carousel-caption">
+                    <h2></h2>
+                </div>
+            </div>
+            <div class="item">
+                <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Three');">
+                    <image src="<?php echo Yii::app()->request->baseUrl; ?>/images/logos/bgfi.jpg" alt="Bank"/>
+                </div>
+                <div class="carousel-caption">
+                    <h2></h2>
+                </div>
+            </div>
+            <div class="item">
+                <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Three');">
+                    <image src="<?php echo Yii::app()->request->baseUrl; ?>/images/logos/bicec.png" alt="Bank"/>
+                </div>
+                <div class="carousel-caption">
+                    <h2></h2>
+                </div>
+            </div>
+            <div class="item">
+                <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Three');">
+                    <image src="<?php echo Yii::app()->request->baseUrl; ?>/images/logos/camccul.jpg" alt="Bank"/>
+                </div>
+                <div class="carousel-caption">
+                    <h2></h2>
+                </div>
+            </div>
+            <div class="item">
+                <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Three');">
+                    <image src="<?php echo Yii::app()->request->baseUrl; ?>/images/logos/cbc.jpg" alt="Bank"/>
+                </div>
+                <div class="carousel-caption">
+                    <h2></h2>
+                </div>
+            </div>
+            <div class="item">
+                <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Three');">
+                    <image src="<?php echo Yii::app()->request->baseUrl; ?>/images/logos/cca.jpeg" alt="Bank"/>
+                </div>
+                <div class="carousel-caption">
+                    <h2></h2>
+                </div>
+            </div>
+            <div class="item">
+                <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Three');">
+                    <image src="<?php echo Yii::app()->request->baseUrl; ?>/images/logos/citibank.gif" alt="Bank"/>
+                </div>
+                <div class="carousel-caption">
+                    <h2></h2>
+                </div>
+            </div>
+            <div class="item">
+                <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Three');">
+                    <image src="<?php echo Yii::app()->request->baseUrl; ?>/images/logos/ecobank.jpeg" alt="Bank"/>
+                </div>
+                <div class="carousel-caption">
+                    <h2></h2>
+                </div>
+            </div>
+            <div class="item">
+                <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Three');">
+                    <image src="<?php echo Yii::app()->request->baseUrl; ?>/images/logos/nfc.jpg" alt="Bank"/>
+                </div>
+                <div class="carousel-caption">
+                    <h2></h2>
+                </div>
+            </div>
+            <div class="item">
+                <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Three');">
+                    <image src="<?php echo Yii::app()->request->baseUrl; ?>/images/logos/powerade.png" alt="Bank"/>
+                </div>
+                <div class="carousel-caption">
+                    <h2></h2>
+                </div>
+            </div>
+            <div class="item">
+                <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Three');">
+                    <image src="<?php echo Yii::app()->request->baseUrl; ?>/images/logos/pro-pme.gif" alt="Bank"/>
+                </div>
+                <div class="carousel-caption">
+                    <h2></h2>
+                </div>
+            </div>
+            <div class="item">
+                <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Three');">
+                    <image src="<?php echo Yii::app()->request->baseUrl; ?>/images/logos/scb.jpg" alt="Bank"/>
+                </div>
+                <div class="carousel-caption">
+                    <h2></h2>
+                </div>
+            </div>
+            <div class="item">
+                <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Three');">
+                    <image src="<?php echo Yii::app()->request->baseUrl; ?>/images/logos/sgbc.gif" alt="Bank"/>
+                </div>
+                <div class="carousel-caption">
+                    <h2></h2>
+                </div>
+            </div>
+            <div class="item">
+                <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Three');">
+                    <image src="<?php echo Yii::app()->request->baseUrl; ?>/images/logos/standard_chartered.png" alt="Bank"/>
+                </div>
+                <div class="carousel-caption">
+                    <h2></h2>
+                </div>
+            </div>
+            <div class="item">
+                <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Three');">
+                    <image src="<?php echo Yii::app()->request->baseUrl; ?>/images/logos/uba.png" alt="Bank"/>
+                </div>
+                <div class="carousel-caption">
+                    <h2></h2>
+                </div>
+            </div>
+            <div class="item">
+                <div class="fill" style="background-image:url('http://placehold.it/1900x1080&text=Slide Three');">
+                    <image src="<?php echo Yii::app()->request->baseUrl; ?>/images/logos/ubc.jpg" alt="Bank"/>
+                </div>
+                <div class="carousel-caption">
+                    <h2></h2>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls -->
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+            <span class="icon-prev"></span>
+        </a>
+        <a class="right carousel-control" href="#myCarousel" data-slide="next">
+            <span class="icon-next"></span>
+        </a>
+    </header>
+
+</div>
+<!-- /#page-wrapper -->
+<!-- jQuery -->
+<script src="<?php echo Yii::app()->request->baseUrl; ?>/extras/bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="<?php echo Yii::app()->request->baseUrl; ?>/extras/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- Metis Menu Plugin JavaScript -->
+<script src="<?php echo Yii::app()->request->baseUrl; ?>/extras/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+<!-- Morris Charts JavaScript -->
+<script src="<?php echo Yii::app()->request->baseUrl; ?>/extras/bower_components/raphael/raphael-min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="<?php echo Yii::app()->request->baseUrl; ?>/extras/dist/js/sb-admin-2.js"></script>
+<!-- DataTables JavaScript -->
+<script src="<?php echo Yii::app()->request->baseUrl; ?>/extras/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+<script src="<?php echo Yii::app()->request->baseUrl; ?>/extras/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+<!-- Page-Level Demo Scripts - Tables - Use for reference -->
+<script>
+    $(document).ready(function() {
+        $('#dataTables-example').DataTable({
+            responsive: true
+        });
+    });
+</script>
+

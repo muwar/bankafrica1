@@ -1,0 +1,43 @@
+.body{
+    color:#000000;
+    font-family: 'helvetica Neue',Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.42857;
+/*    background-color: green; */
+}
+.btn-primary {
+    background-color: purple;
+    border-color: #2E6DA4;
+    color: #FFFFFF;
+}
+.btn-primary.active, .btn-primary.focus, .btn-primary:active, .btn-primary:focus, .btn-primary:hover, .open > .dropdown-toggle.btn-primary {
+    background-color: #9900CC;
+    border-color: green;
+    color: #FFFFFF;
+}
+.btn-info {
+    background-color: green;
+/*    background-color: #5BC0DE;*/
+    border-color: #46B8DA;
+    color: #FFFFFF;
+}
+.btn-info.active, .btn-info.focus, .btn-info:active, .btn-info:focus, .btn-info:hover, .open > .dropdown-toggle.btn-info {
+    background-color: #9900CC;
+    border-color: green;
+    color: #FFFFFF;
+}
+.badge {
+    background-color: green;
+    border-radius: 10px 10px 10px 10px;
+    color: #FFFFFF;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+    min-width: 10px;
+    padding: 3px 7px;
+    text-align: center;
+    vertical-align: baseline;
+    white-space: nowrap;
+}
+
