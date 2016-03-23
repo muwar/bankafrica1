@@ -24,7 +24,7 @@
         <!--<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery-2.1.4.js"></script>-->
 
         <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery-1.7.1.min.js"></script>
-<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.js"></script>
+        <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.js"></script>
         <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/msdropdown/jquery.dd.js"></script>
         <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/msdropdown/jquery.dd.min.js"></script>
         <link rel="stylesheet" href="<?php echo Yii::app()->request->baseUrl; ?>/css/msdropdown/dd.css" />
@@ -68,13 +68,17 @@
     </head>
 
     <?php
-    $detusers = Evuti::model()->findAll('nom=:x', array(':x' => Yii::app()->user->name));
-    foreach ($detusers as $detuser)
-        ;
-    $detprofs = Evprof::model()->findAll('id=:x', array(':x' => $detuser->pro));
-    foreach ($detprofs as $detprof)
-        ;
-    $userprofile = $detprof->lib;
+    if (Yii::app()->user->name) {
+        $detusers = Evuti::model()->findAll('nom=:x', array(':x' => Yii::app()->user->name));
+        $detuser = current($detusers);
+        if ($detuser) {
+            $detprofs = Evprof::model()->findAll('id=:x', array(':x' => $detuser->pro));
+            $detprof = current($detprofs);
+            $userprofile = $detprof->lib;
+        } else {
+            $detprof = '';
+        }
+    }
     ?>
 
     <body>
@@ -326,14 +330,18 @@
                             </li>
                             <li>
                                 <form  class="form-control" role="form">
-                                    <?php echo CHtml::dropDownList('investmttype', 'id_countries', CHtml::listData(Countries::model()->findAll('id_countries=:w or id_countries=:x or id_countries=:y or id_countries=:z ',array(':w'=>38,':x'=>81,':y'=>110,':z'=>154)), 'id_countries', 'name'), array('empty' => 'Select a country')); ?>
+                                    <?php echo CHtml::dropDownList('investmttype', 'id_countries', CHtml::listData(Countries::model()->findAll('id_countries=:w or id_countries=:x or id_countries=:y or id_countries=:z ', array(':w' => 38, ':x' => 81, ':y' => 110, ':z' => 154)), 'id_countries', 'name'), array('empty' => 'Select a country')); ?>
                                 </form>
                             </li>
                             <li>
 
                                 <?php
-                                if (($detprof->lib == 'admin') || ($detprof->lib == 'Admin') || ($detprof->lib == 'ADMIN') || ($detprof->lib == 'administrator') || ($detprof->lib == 'Administrator') || ($detprof->lib == 'ADMINISTRATOR'))
-                                    echo CHtml::link('Admin panel', array('/adminS5F1T6P0'));
+                                if (Yii::app()->user->isGuest) {
+                                    ;
+                                } else {
+                                    if (($detprof->lib == 'admin') || ($detprof->lib == 'Admin') || ($detprof->lib == 'ADMIN') || ($detprof->lib == 'administrator') || ($detprof->lib == 'Administrator') || ($detprof->lib == 'ADMINISTRATOR'))
+                                        echo CHtml::link('Admin panel', array('/adminS5F1T6P0'));
+                                }
                                 ?>
                             </li>
                             <li>
@@ -374,225 +382,235 @@
                                             ?>
                                         </li>
                                         <?php
-                                        if (($userprofile == 'Personal') || ($userprofile == 'Investor') || ($userprofile == 'Personal') || ($userprofile == 'Businesses/Institutions')) {
+                                        if (Yii::app()->user->isGuest) {
                                             ;
                                         } else {
+                                            if (($userprofile == 'Personal') || ($userprofile == 'Investor') || ($userprofile == 'Personal') || ($userprofile == 'Businesses/Institutions')) {
+                                                ;
+                                            } else {
+                                                ?>
+
+                                                <li>
+        <?php echo CHtml::link("<i class='fa fa-table fa-fw'></i>Inter-Bank Lending<span class='fa arrow'></span>", array('/ibl'));
+        ?>
+                                                    <ul class="nav nav-second-level">
+                                                        <li>
+        <?php
+        echo CHtml::link("<i class='fa fa-table fa-fw'></i> Rates<span class='fa arrow'></span>", array('/ibl'));
+        ?>                                              
+                                                        </li>
+                                                            <?php
+                                                            if (Yii::app()->user->isGuest)
+                                                                ;
+                                                            else {
+                                                                ?>
+                                                            <li>
+                                                            <?php
+                                                            if ($userprofile == 'Administrator') {
+                                                                ;
+                                                            } else {
+                                                                echo CHtml::link("<i class='fa fa-table fa-fw'></i>Configuration/requests<span class='fa arrow'></span>", array('/ibl/default/business'));
+                                                            }
+                                                            ?>
+                                                            </li>
+                                                            <?php } ?>
+                                                    </ul>
+                                                </li>
+    <?php }
+}
+?>
+                                        <li>
+                                            <?php
+                                            echo CHtml::link("<i class='fa fa-table fa-fw'></i>Fixed Deposit Rates<span class='fa arrow'></span>", array('/fdr'));
                                             ?>
 
-                                            <li>
-                                                <?php echo CHtml::link("<i class='fa fa-table fa-fw'></i>Inter-Bank Lending<span class='fa arrow'></span>", array('/ibl'));
-                                                ?>
-                                                <ul class="nav nav-second-level">
+                                            <ul class="nav nav-second-level">
+                                                <li>
+                                                    <?php
+                                                    echo CHtml::link("<i class='fa fa-table fa-fw'></i> Rates<span class='fa arrow'></span>", array('/fdr'));
+                                                    ?>
+                                                </li>
+
+                                                <?php
+                                                if (Yii::app()->user->isGuest)
+                                                    ;
+                                                else {
+                                                    ?>
                                                     <li>
                                                         <?php
-                                                        echo CHtml::link("<i class='fa fa-table fa-fw'></i> Rates<span class='fa arrow'></span>", array('/ibl'));
-                                                        ?>                                              
-                                                    </li>
-                                                        <?php
-                                                        if (Yii::app()->user->isGuest)
-                                                            ;
-                                                        else {
-                                                            ?>
-                                                        <li>
-                                                        <?php
-                                                        if ($userprofile == 'Administrator') {
+                                                        if (($userprofile == 'Administrator') || ($userprofile == 'Personal') || ($userprofile == 'Investor') || ($userprofile == 'Businesses/Institutions')) {
                                                             ;
                                                         } else {
-                                                            echo CHtml::link("<i class='fa fa-table fa-fw'></i>Configuration/requests<span class='fa arrow'></span>", array('/ibl/default/business'));
+
+                                                            echo CHtml::link("<i class='fa fa-table fa-fw'></i>Configuration/Requests<span class='fa arrow'></span>", array('/fdr/default/business'));
                                                         }
                                                         ?>
-                                                        </li>
-                                                        <?php } ?>
-                                                </ul>
-                                            </li>
+                                                    </li>
                                                 <?php } ?>
-                                        <li>
-                                        <?php
-                                        echo CHtml::link("<i class='fa fa-table fa-fw'></i>Fixed Deposit Rates<span class='fa arrow'></span>", array('/fdr'));
-                                        ?>
-
-                                            <ul class="nav nav-second-level">
-                                                <li>
-<?php
-echo CHtml::link("<i class='fa fa-table fa-fw'></i> Rates<span class='fa arrow'></span>", array('/fdr'));
-?>
-                                                </li>
-
-                                                    <?php
-                                                    if (Yii::app()->user->isGuest)
-                                                        ;
-                                                    else {
-                                                        ?>
-                                                    <li>
-                                                    <?php
-                                                    if (($userprofile == 'Administrator') || ($userprofile == 'Personal') || ($userprofile == 'Investor') || ($userprofile == 'Businesses/Institutions')) {
-                                                        ;
-                                                    } else {
-
-                                                        echo CHtml::link("<i class='fa fa-table fa-fw'></i>Configuration/Requests<span class='fa arrow'></span>", array('/fdr/default/business'));
-                                                    }
-                                                    ?>
-                                                    </li>
-                                                    <?php } ?>
                                             </ul>
                                         </li>
                                         <li>
-<?php
-echo CHtml::link("<i class='fa fa-table fa-fw'></i>Bulk Placement<span class='fa arrow'></span>", array('/bulkplacement'));
-?>
-
-                                            <ul class="nav nav-second-level">
-                                                <li>
-<?php
-echo CHtml::link("<i class='fa fa-table fa-fw'></i> Rates<span class='fa arrow'></span>", array('/bulkplacement'));
-?>
-                                                </li>
-
-                                                    <?php
-                                                    if (Yii::app()->user->isGuest)
-                                                        ;
-                                                    else {
-                                                        ?>
-                                                    <li>
-                                                    <?php
-                                                    if (($userprofile == 'Administrator') || ($userprofile == 'Personal') || ($userprofile == 'Investor') || ($userprofile == 'Businesses/Institutions')) {
-                                                        ;
-                                                    } else {
-
-                                                        echo CHtml::link("<i class='fa fa-table fa-fw'></i>Configuration/Requests<span class='fa arrow'></span>", array('/bulkplacement/default/business'));
-                                                    }
-                                                    ?>
-                                                    </li>
-                                                    <?php } ?>
-                                            </ul>
-                                        </li>
-                                        <li>
-<?php
-echo CHtml::link("<i class='fa fa-table fa-fw'></i>Com Borrowing Rates<span class='fa arrow'></span>", array('/cbr'));
-?>
-                                            <ul class="nav nav-second-level">
-                                                <li>
                                             <?php
-                                            echo CHtml::link("<i class='fa fa-table fa-fw'></i>Rates<span class='fa arrow'></span>", array('/cbr'));
-                                            ?>
-                                                </li>
-
-                                                    <?php
-                                                    if (Yii::app()->user->isGuest)
-                                                        ;
-                                                    else {
-                                                        ?>
-                                                    <li>
-                                                    <?php
-                                                    if (($userprofile == 'Administrator') || ($userprofile == 'Personal') || ($userprofile == 'Investor') || ($userprofile == 'Businesses/Institutions')) {
-                                                        ;
-                                                    } else {
-
-                                                        echo CHtml::link("<i class='fa fa-table fa-fw'></i>Configuration<span class='fa arrow'></span>", array('/cbr/default/business'));
-                                                    }
-                                                    ?>
-                                                    </li>
-                                                    <?php } ?>
-                                            </ul>
-                                        </li>
-
-                                        <li>
-<?php
-echo CHtml::link("<i class='fa fa-table fa-fw'></i>Corporate Finance<span class='fa arrow'></span>", array('/cf'));
-?>
-                                            <ul class="nav nav-second-level">
-                                                <li>
-                                            <?php
-                                            echo CHtml::link("<i class='fa fa-table fa-fw'></i>Investment Opportunitiess<span class='fa arrow'></span>", array('/cf'));
+                                            echo CHtml::link("<i class='fa fa-table fa-fw'></i>Bulk Placement<span class='fa arrow'></span>", array('/bulkplacement'));
                                             ?>
 
+                                            <ul class="nav nav-second-level">
+                                                <li>
+                                                    <?php
+                                                    echo CHtml::link("<i class='fa fa-table fa-fw'></i> Rates<span class='fa arrow'></span>", array('/bulkplacement'));
+                                                    ?>
+                                                </li>
+
+                                                <?php
+                                                if (Yii::app()->user->isGuest)
+                                                    ;
+                                                else {
+                                                    ?>
+                                                    <li>
+                                                        <?php
+                                                        if (($userprofile == 'Administrator') || ($userprofile == 'Personal') || ($userprofile == 'Investor') || ($userprofile == 'Businesses/Institutions')) {
+                                                            ;
+                                                        } else {
+
+                                                            echo CHtml::link("<i class='fa fa-table fa-fw'></i>Configuration/Requests<span class='fa arrow'></span>", array('/bulkplacement/default/business'));
+                                                        }
+                                                        ?>
+                                                    </li>
+                                                <?php } ?>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <?php
+                                            echo CHtml::link("<i class='fa fa-table fa-fw'></i>Com Borrowing Rates<span class='fa arrow'></span>", array('/cbr'));
+                                            ?>
+                                            <ul class="nav nav-second-level">
+                                                <li>
+                                                    <?php
+                                                    echo CHtml::link("<i class='fa fa-table fa-fw'></i>Rates<span class='fa arrow'></span>", array('/cbr'));
+                                                    ?>
+                                                </li>
+
+                                                <?php
+                                                if (Yii::app()->user->isGuest)
+                                                    ;
+                                                else {
+                                                    ?>
+                                                    <li>
+                                                        <?php
+                                                        if (($userprofile == 'Administrator') || ($userprofile == 'Personal') || ($userprofile == 'Investor') || ($userprofile == 'Businesses/Institutions')) {
+                                                            ;
+                                                        } else {
+
+                                                            echo CHtml::link("<i class='fa fa-table fa-fw'></i>Configuration<span class='fa arrow'></span>", array('/cbr/default/business'));
+                                                        }
+                                                        ?>
+                                                    </li>
+                                                <?php } ?>
+                                            </ul>
+                                        </li>
+
+                                        <li>
+                                            <?php
+                                            echo CHtml::link("<i class='fa fa-table fa-fw'></i>Corporate Finance<span class='fa arrow'></span>", array('/cf'));
+                                            ?>
+                                            <ul class="nav nav-second-level">
+                                                <li>
+                                                    <?php
+                                                    echo CHtml::link("<i class='fa fa-table fa-fw'></i>Investment Opportunitiess<span class='fa arrow'></span>", array('/cf'));
+                                                    ?>
+
                                                 </li>
                                                 <li>
                                                     <?php
+                                                    if (Yii::app()->user->isGuest){
+                                                            ;
+                                                    }else{
                                                     if ($userprofile == 'Administrator') {
                                                         ;
                                                     } else {
 
                                                         echo CHtml::link("<i class='fa fa-table fa-fw'></i>Entrepreneurs/Companies<span class='fa arrow'></span>", array('/cf/default/business'));
                                                     }
-                                                    ?>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                        <li>
-                                                    <?php
-                                                    echo CHtml::link("<i class='fa fa-table fa-fw'></i>Securities Trading<span class='fa arrow'></span>", array('/st'));
-                                                    ?>
-                                            <ul class="nav nav-second-level">
-                                                <li>
-                                            <?php
-                                            echo CHtml::link("<i class='fa fa-table fa-fw'></i>Listed Securities<span class='fa arrow'></span>", array('/st'));
-                                            ?>
-                                                </li>
-
-                                                    <?php
-                                                    if (Yii::app()->user->isGuest)
-                                                        ;
-                                                    else {
-                                                        ?>
-                                                    <li>
-                                                    <?php
-                                                    if ($userprofile == 'Administrator') {
-                                                        ;
-                                                    } else {
-
-                                                        echo CHtml::link("<i class='fa fa-table fa-fw'></i>List and Manage Financial Securities<span class='fa arrow'></span>", array('/st/default/business'));
                                                     }
                                                     ?>
-                                                    </li>
-                                                    <?php } ?>
+                                                </li>
                                             </ul>
                                         </li>
                                         <li>
-                                                    <?php echo CHtml::link("<i class='fa fa-table fa-fw'></i>Electronic Banking<span class='fa arrow'></span>", array('/st')); ?>
+                                            <?php
+                                            echo CHtml::link("<i class='fa fa-table fa-fw'></i>Securities Trading<span class='fa arrow'></span>", array('/st'));
+                                            ?>
                                             <ul class="nav nav-second-level">
                                                 <li>
-                                                <?php echo CHtml::link("<i class='fa fa-table fa-fw'></i>Electronic Banking<span class='fa arrow'></span>", array('/eb')); ?>                                                   
+                                                    <?php
+                                                    echo CHtml::link("<i class='fa fa-table fa-fw'></i>Listed Securities<span class='fa arrow'></span>", array('/st'));
+                                                    ?>
+                                                </li>
+
+                                                <?php
+                                                if (Yii::app()->user->isGuest)
+                                                    ;
+                                                else {
+                                                    ?>
+                                                    <li>
+                                                        <?php
+                                                        if ($userprofile == 'Administrator') {
+                                                            ;
+                                                        } else {
+
+                                                            echo CHtml::link("<i class='fa fa-table fa-fw'></i>List and Manage Financial Securities<span class='fa arrow'></span>", array('/st/default/business'));
+                                                        }
+                                                        ?>
+                                                    </li>
+                                                <?php } ?>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <?php echo CHtml::link("<i class='fa fa-table fa-fw'></i>Electronic Banking<span class='fa arrow'></span>", array('/st')); ?>
+                                            <ul class="nav nav-second-level">
+                                                <li>
+                                                    <?php echo CHtml::link("<i class='fa fa-table fa-fw'></i>Electronic Banking<span class='fa arrow'></span>", array('/eb')); ?>                                                   
                                                 </li>
 
                                                 <li>
-                                            <?php echo CHtml::link("<i class='fa fa-table fa-fw'></i>Electronic Banking<span class='fa arrow'></span>", array('/eb')); ?>                                                   
+                                                    <?php echo CHtml::link("<i class='fa fa-table fa-fw'></i>Electronic Banking<span class='fa arrow'></span>", array('/eb')); ?>                                                   
                                                 </li>
                                             </ul>
                                         </li>
                                         <li>
-<?php echo CHtml::link("<i class='fa fa-table fa-fw'></i>Reliability Analysis<span class='fa arrow'></span>", array('/ra')); ?>                                                    
+                                            <?php echo CHtml::link("<i class='fa fa-table fa-fw'></i>Reliability Analysis<span class='fa arrow'></span>", array('/ra')); ?>                                                    
                                         </li>
 
-<?php
-if (Yii::app()->user->isGuest)
-    ;
-else {
-    $users = Evuti::model()->findAll('nom=:x', array(':x' => Yii::app()->user->name));
-    foreach ($users as $user)
-        ;
-    $profiles = Evprof::model()->findAll('pro=:x', array(':x' => $user->pro));
-    foreach ($profiles as $profile)
-        ;
-    if ((Yii::app()->user->name == 'admin') || ($profile->pro == 'admin')) {
-        
-    }
-    ?>
+                                        <?php
+                                        if (Yii::app()->user->isGuest)
+                                            ;
+                                        else {
+                                            $users = Evuti::model()->findAll('nom=:x', array(':x' => Yii::app()->user->name));
+                                            foreach ($users as $user)
+                                                ;
+                                            $profiles = Evprof::model()->findAll('pro=:x', array(':x' => $user->pro));
+                                         if($profiles){   
+                                          $profile=current($profiles);
+                                             if ((Yii::app()->user->name == 'admin') || ($profile->pro == 'admin')) {
+                                                
+                                            }
+                                         }
+                                            ?>
                                             <li>
                                                 <a href="tables.html"><i class="fa fa-table fa-fw"></i>Settings<span class="fa arrow"></span></a>
                                                 <ul class="nav nav-second-level">
                                                     <li>
-                                            <?php echo CHtml::link('Set profiles', array('profiles/admin')); ?>
+                                                        <?php echo CHtml::link('Set profiles', array('profiles/admin')); ?>
                                                     </li>
                                                     <li>
-    <?php echo CHtml::link('User Accounts', array('#')); ?>
+                                                        <?php echo CHtml::link('User Accounts', array('#')); ?>
                                                     </li>
                                                     <li>
                                                         <?php echo CHtml::link('Professions', array('#')); ?>
                                                     </li>
                                                 </ul>
                                             </li>
-                                                    <?php } ?>
+                                        <?php } ?>
                                     </ul>
                                 </div>
                                 <!-- /.sidebar-collapse -->
@@ -611,23 +629,23 @@ else {
                             </button>
                         </div>
                         <div class="collapse navbar-collapse" id="navbar-collapse"><!--class="container" align="center" style="color:#ffd700;" style="height:auto; width:auto; "-->
-<?php
-$this->widget('zii.widgets.CMenu', array(
-    'items' => array(
-        array('label' => 'HOME', 'url' => array('/site/index'), 'htmlOptions' => array('role' => 'presentation')),
-        array('label' => 'HOW IT WORKS', 'url' => array('/site/page', 'view' => 'howto'), 'htmlOptions' => array('role' => 'presentation')),
-        array('label' => 'ABOUT US', 'url' => array('/site/page', 'view' => 'about'), 'htmlOptions' => array('role' => 'presentation')),
-        array('label' => 'CONTACT US', 'url' => array('/site/contact'), 'htmlOptions' => array('role' => 'presentation')),
-        array('label' => 'LOGIN', 'url' => array('/site/login'), 'visible' => Yii::app()->user->isGuest, 'htmlOptions' => array('role' => 'presentation')),
-        array('label' => 'LOGOUT (' . Yii::app()->user->name . ')', 'url' => array('/site/logout'), 'visible' => !Yii::app()->user->isGuest, 'htmlOptions' => array('role' => 'presentation'))
-    ),
-    'htmlOptions' => array('class' => "nav navbar-nav navbar-right")//nav nav-pills nav-justified
-        )
-);
-?>
+                            <?php
+                            $this->widget('zii.widgets.CMenu', array(
+                                'items' => array(
+                                    array('label' => 'HOME', 'url' => array('/site/index'), 'htmlOptions' => array('role' => 'presentation')),
+                                    array('label' => 'HOW IT WORKS', 'url' => array('/site/page', 'view' => 'howto'), 'htmlOptions' => array('role' => 'presentation')),
+                                    array('label' => 'ABOUT US', 'url' => array('/site/page', 'view' => 'about'), 'htmlOptions' => array('role' => 'presentation')),
+                                    array('label' => 'CONTACT US', 'url' => array('/site/contact'), 'htmlOptions' => array('role' => 'presentation')),
+                                    array('label' => 'LOGIN', 'url' => array('/site/login'), 'visible' => Yii::app()->user->isGuest, 'htmlOptions' => array('role' => 'presentation')),
+                                    array('label' => 'LOGOUT (' . Yii::app()->user->name . ')', 'url' => array('/site/logout'), 'visible' => !Yii::app()->user->isGuest, 'htmlOptions' => array('role' => 'presentation'))
+                                ),
+                                'htmlOptions' => array('class' => "nav navbar-nav navbar-right")//nav nav-pills nav-justified
+                                    )
+                            );
+                            ?>
                         </div>
                     </nav>
-                            <?php echo $content; ?>
+                    <?php echo $content; ?>
                 </div><!-- wrapper -->
             </div>
         </div>

@@ -15,19 +15,6 @@
                 ?><!-- /.panel-heading -->
                 <div class="panel-body">
                     <div class="dataTable_wrapper">
-                        <?php
-                        /*
-                          $form = $this->beginWidget('CActiveForm', array(
-                          'id' => 'class-list-form2',
-                          'enableAjaxValidation' => false,
-                          'action' => Yii::app()->request->baseUrl . '/index.php?r=export/default/FdrExport',
-                          'htmlOptions' => array('enctype' => 'multipart/form-data', 'align' => 'center'),
-                          ));
-                          echo CHtml::dropDownList("export", "export", array('pdf' => 'pdf', 'csv' => 'csv'), array("name" => "export"));
-                          echo CHtml::submitButton('Export', array('style' => 'color:blue;', 'class' => 'btn-default', 'name' => 'exporter'));
-                          $this->endWidget();
-                         */
-                        ?>
                         <button class="btn  btn-success btn1" id="button">Export</button>
 
                         <table class="table table-striped table-bordered table-hover" id="dataTables-example">
@@ -36,8 +23,12 @@
                                     <th> Bank</th>
                                     <th>Minimum</th>
                                     <?php foreach ($terms as $tterm) { ?>
-                                        <th><div class="tooltip-demo"> <label data-toggle="tooltip" data-placement="top" title="<?php echo $tterm->term_duration ?>"><?php echo $tterm->term_name; ?>
-                                    </label >  </div></th>
+                                        <th>
+                                <div class="tooltip-demo"> 
+                                    <label data-toggle="tooltip" data-placement="top" title="<?php echo $tterm->term_duration ?>"><?php echo $tterm->term_name; ?>
+                                    </label >  
+                                </div>
+                                </th>
                             <?php } ?>
                             <th>Special Rates?</th>
                             <th>Fees</th>
@@ -158,17 +149,17 @@
                                                         </label>
                                                     </div>
                                                 </td>
-                                            <? } ?>
-                                            <!--                                
-                                                                            <td><div class="tooltip-demo"><label data-toggle="tooltip" data-placement="top" title="Click to send a request" 
-                                                                                                                         onclick="loadform(<?php echo current($instrates)->lrate . ",'" . $user->resnam . "','" . $term1->term_name . "','" . $user->cus . "'," . current($instrates)->institutions_quotation_id . ",'" . $bankl->cdos . "'"; ?>);">                                                                  
-                                            <?php echo current($instrates)->lrate; ?></label></div></td>
-                                            -->
                                             <?php
+                                        }
                                         }
                                         unset($instrates);
                                     }
                                 }
+                                if(count($bankrates)==0){  ?>
+                                 <td>- </td>   
+                                 <td>-</td>
+                         <?php       }
+                                else{
                                 if ($bankrate->special_rate == 0)
                                     echo "<td> NO</td>";
                                 if ($bankrate->special_rate == 1)
@@ -176,10 +167,11 @@
                                 if (count($bankrates) != 0) {
                                     echo "<td>" . $bankrate->other_fees . "</td>";
                                 }
-                                else
+                                else{
                                     echo "<td>-</td>";
-                                $i++;
 
+                                }
+                                }
                                 echo "</tr>";
                                 unset($bankrates);
                             }
@@ -287,7 +279,6 @@
                                         ),
                                     ));
                                     ?>
-    <!--<input class="form-control" style="border-radius: 5px 10px 5px 10px;width:400px;" placeholder="Expiry Date (yyyy-mm-dd)" name="edate" id="ledate" type="text" value="" data-toggle="tooltip" data-placement="right" title="On what date does this request become invalid?">-->
                                 </div>
                             </div>
                         </div>
@@ -301,7 +292,6 @@
                     <button style='border-radius: 0px 10px 0px 10px;' type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--                    <button type="submit" value="<?php echo $i . $j; ?>" id="<?php echo $i . $j; ?>" class="btn btn-primary" onclick="event.preventDefault();saverate(this.value);">Save</button> -->
 
                     <button style='border-radius: 0px 10px 0px 10px;' type="submit" onclick="event.preventDefault();
                                                                        sendrequest();" class="btn btn-primary">Send Request</button></p>
@@ -330,7 +320,6 @@
             <!-- /.modal-dialog -->
         </fieldset>
     </div>
-</div>
 </div>
 <script src="<?php echo Yii::app()->request->baseUrl; ?>/extras/bower_components/jquery/dist/jquery.min.js"></script>
 <script src="<?php echo Yii::app()->request->baseUrl; ?>/extras/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>

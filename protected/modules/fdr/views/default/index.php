@@ -15,19 +15,6 @@
                 ?><!-- /.panel-heading -->
                 <div class="panel-body">
                     <div class="dataTable_wrapper">
-                        <?php
-                        /*
-                        $form = $this->beginWidget('CActiveForm', array(
-                            'id' => 'class-list-form2',
-                            'enableAjaxValidation' => false,
-                            'action' => Yii::app()->request->baseUrl . '/index.php?r=export/default/FdrExport',
-                            'htmlOptions' => array('enctype' => 'multipart/form-data', 'align' => 'center'),
-                        ));
-                        echo CHtml::dropDownList("export", "export", array('pdf' => 'pdf', 'csv' => 'csv'), array("name" => "export"));
-                        echo CHtml::submitButton('Export', array('style' => 'color:blue;', 'class' => 'btn-default', 'name' => 'exporter'));
-                        $this->endWidget();
-                        */
-                        ?>
 
                         <button class="btn  btn-success btn1" id="button">Export</button>
                         <table class="table table-striped table-bordered table-hover" id="dataTables-example">
@@ -67,6 +54,7 @@
                                         echo "<td><div class='tooltip-demo'><div data-toggle='tooltip' data-placement='top' title='This value has not been set'>NA</div><div></td>";
                                     }
                                 } else {
+
                                     rsort($bankrates);
                                     $bankrate = current($bankrates);
                                     echo "<tr class='odd gradeX'>";
@@ -85,9 +73,11 @@
                                         rsort($instrates);
                                         if (count($instrates) == 0) {
                                             echo "<td><div class='tooltip-demo'><div data-toggle='tooltip' data-placement='top' title='This value has not been set'>NA</div><div></td>";
-                                        } else {
                                             ?>
-                                            <?php if (Yii::app()->user->name == 'admin') { ?>
+
+                                        <?php } else {
+                                            ?>
+                <?php if (Yii::app()->user->name == 'admin') { ?>
                                                 <td><div class="tooltip-demo">
                                                         <label type="label" data-html="true" class="" data-toggle="tooltip" data-placement="top" title="Click to send your request &#013;
                                                                Special rate: <?php
@@ -117,11 +107,12 @@
 
                                                                " value="<?php echo current($instrates)->institutions_quotation_id; ?>" 
                                                                >
-                                                                   <?php echo current($instrates)->lrate . " %" ?>
+                    <?php echo current($instrates)->lrate . " %" ?>
                                                         </label>
                                                     </div>
                                                 </td>
-                                            <?php }
+                                            <?php
+                                            }
                                             else {
                                                 ?>
                                                 <td><div class="tooltip-demo">
@@ -157,30 +148,29 @@
                                                         </label>
                                                     </div>
                                                 </td>
-                <?php } ?>
-                                            <!--                                
-                                                                            <td><div class="tooltip-demo"><label data-toggle="tooltip" data-placement="top" title="Click to send a request" 
-                                                                                                                         onclick="loadform(<?php echo current($instrates)->lrate . ",'" . $user->resnam . "','" . $term1->term_name . "','" . $user->cus . "'," . current($instrates)->institutions_quotation_id . ",'" . $bankl->cdos . "'"; ?>);">                                                                  
-                                            <?php echo current($instrates)->lrate; ?></label></div></td>
-                                            -->
+                                            <?php } ?>
                                             <?php
                                         }
                                         unset($instrates);
                                     }
                                 }
-                                if ($bankrate->special_rate == 0)
-                                    echo "<td> NO</td>";
-                                if ($bankrate->special_rate == 1)
-                                    echo "<td> YES</td>";
-                                if (count($bankrates) != 0) {
-                                    echo "<td>" . $bankrate->other_fees . "</td>";
-                                }
-                                else
-                                    echo "<td>-</td>";
-                                $i++;
+                                if (count($bankrates) == 0) {  ?>
+                                    <td> - </td>
+                                    <td> - </td>
+                         <?php       } else {
+                                    if ($bankrate->special_rate == 0)
+                                        echo "<td> NO</td>";
+                                    if ($bankrate->special_rate == 1)
+                                        echo "<td> YES</td>";
+                                    if (count($bankrates) != 0) {
+                                        echo "<td>" . $bankrate->other_fees . "</td>";
+                                    }
+                                    else
+                                        echo "<td>-</td>";
 
-                                echo "</tr>";
-                                unset($bankrates);
+                                    echo "</tr>";
+                                    unset($bankrates);
+                                }
                             }
                             ?>
                             </tbody>
@@ -237,9 +227,8 @@
                     <button style='border-radius: 0px 10px 0px 10px;' type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--                    <button type="submit" value="<?php echo $i . $j; ?>" id="<?php echo $i . $j; ?>" class="btn btn-primary" onclick="event.preventDefault();saverate(this.value);">Save</button> -->
                     <button style='border-radius: 0px 10px 0px 10px;' type="submit" onclick="event.preventDefault();
-                                                                   sendrequest();" class="btn btn-primary">Send Request</button></p>
+                                                                       sendrequest();" class="btn btn-primary">Send Request</button></p>
             </div>
         </div>
     </div>
@@ -287,103 +276,103 @@
 </script>
 
 <script>
-                                                               function closesuccessdialog() {
-                                                                   setTimeout(function() {
-                                                                       location.reload();
-                                                                       ;
-                                                                   }, 5);
-                                                               }
+    function closesuccessdialog() {
+        setTimeout(function() {
+            location.reload();
+            ;
+        }, 5);
+    }
 
 
-                                                               function loadform(depositrate, bankname, term, userid, id, loggedbankid) {
-                                                                   var msg = bankname + " @ " + depositrate + "  " + term + " Deposit Rate";
-                                                                   document.getElementById("theTitle").value = msg;
-                                                                   document.getElementById("customer").value = loggedbankid;
-                                                                   document.getElementById("prate").value = depositrate;
-                                                                   document.getElementById("amount").value = '';
-                                                                   document.getElementById("dbank").value = userid;
-                                                                   document.getElementById("rateid").value = id;
-                                                                   if (loggedbankid === '') {
-                                                                       alert("You must login in order to perform this action");
-                                                                       window.location = 'index.php?r=site/login';
-                                                                   }
-                                                                   else {
-                                                                       if (loggedbankid === userid)
-                                                                           alert("You cannot make a deposit to yourself. Please choose some other bank.");
-                                                                       else
-                                                                           $('#formModal').modal('show');
+    function loadform(depositrate, bankname, term, userid, id, loggedbankid) {
+        var msg = bankname + " @ " + depositrate + "  " + term + " Deposit Rate";
+        document.getElementById("theTitle").value = msg;
+        document.getElementById("customer").value = loggedbankid;
+        document.getElementById("prate").value = depositrate;
+        document.getElementById("amount").value = '';
+        document.getElementById("dbank").value = userid;
+        document.getElementById("rateid").value = id;
+        if (loggedbankid === '') {
+            alert("You must login in order to perform this action");
+            window.location = 'index.php?r=site/login';
+        }
+        else {
+            if (loggedbankid === userid)
+                alert("You cannot make a deposit to yourself. Please choose some other bank.");
+            else
+                $('#formModal').modal('show');
 
-                                                                   }
-                                                               }
-                                                               function sendrequest() {
-                                                                   var customer = document.getElementById("customer").value;
-                                                                   var prate = document.getElementById("prate").value;
-                                                                   var amount = document.getElementById("amount").value;
-                                                                   var dbank = document.getElementById("dbank").value;//document.getElementById("specialrates"+button).value;
-                                                                   var rateid = document.getElementById("rateid").value;
-                                                                   if (document.getElementById("bankacc").value === 'No')
-                                                                       var bankacc = 0;
-                                                                   else
-                                                                       var bankacc = 1;
+        }
+    }
+    function sendrequest() {
+        var customer = document.getElementById("customer").value;
+        var prate = document.getElementById("prate").value;
+        var amount = document.getElementById("amount").value;
+        var dbank = document.getElementById("dbank").value;//document.getElementById("specialrates"+button).value;
+        var rateid = document.getElementById("rateid").value;
+        if (document.getElementById("bankacc").value === 'No')
+            var bankacc = 0;
+        else
+            var bankacc = 1;
 
-                                                                   if ((amount === '') || (amount === 0)) {
-                                                                       alert("Error: The amount you wish to deposit cannot be nothing! Verify that it is not zero");
-                                                                   }
-                                                                   else {
+        if ((amount === '') || (amount === 0)) {
+            alert("Error: The amount you wish to deposit cannot be nothing! Verify that it is not zero");
+        }
+        else {
 
-                                                                       if ((Number.isInteger(amount)) === 'false') {
-                                                                           alert("The amount provided is not valid");
-                                                                       }
-                                                                       else {
-
-
-                                                                           $.ajax({
-                                                                               type: "GET",
-                                                                               url: "http://" + document.getElementById("url").value + "/bankafrica1/index.php?r=fdr/default/propose" + "&customer=" + customer +
-                                                                                       "&amount=" + amount +
-                                                                                       "&rate=" + rateid +
-                                                                                       "&dbank=" + dbank +
-                                                                                       "&bankacc=" + bankacc +
-                                                                                       "&prate=" + prate
-
-                                                                                       ,
-                                                                               data: "", //ProposedSites
-                                                                               cache: false,
-                                                                               success: function(data) {
-                                                                                   if (data == 'true') {
-                                                                                       $('#formModal').modal('hide');
-
-                                                                                       $('#msg').html(" Your request has been sent successfully");
-
-                                                                                       $('#sModal').modal('show');
-                                                                                   } else {
-                                                                                       alert(data + "Failure: Data Could Not Be Saved. Try Again.");
-                                                                                   }
-                                                                               },
-                                                                               error: function(data) {
-                                                                                   alert("Error Sending Data.");
-                                                                               }
-                                                                           });
-                                                                       }
-                                                                   }
-                                                               }
+            if ((Number.isInteger(amount)) === 'false') {
+                alert("The amount provided is not valid");
+            }
+            else {
 
 
-                                                               $(document).ready(function() {
-                                                                   $('#dataTables-example').DataTable({
-                                                                       responsive: true
-                                                                   });
-                                                               });
-                                                               $(document).ready(function() {
-                                                                   $('#dataTables-examplea').DataTable({
-                                                                       responsive: true
-                                                                   });
-                                                               });
-                                                               $('.tooltip-demo').tooltip({
-                                                                   selector: "[data-toggle=tooltip]",
-                                                                   container: "body"
-                                                               })
+                $.ajax({
+                    type: "GET",
+                    url: "http://" + document.getElementById("url").value + "/bankafrica1/index.php?r=fdr/default/propose" + "&customer=" + customer +
+                            "&amount=" + amount +
+                            "&rate=" + rateid +
+                            "&dbank=" + dbank +
+                            "&bankacc=" + bankacc +
+                            "&prate=" + prate
 
-                                                               $("[data-toggle=popover]")
-                                                                       .popover()
+                            ,
+                    data: "", //ProposedSites
+                    cache: false,
+                    success: function(data) {
+                        if (data == 'true') {
+                            $('#formModal').modal('hide');
+
+                            $('#msg').html(" Your request has been sent successfully");
+
+                            $('#sModal').modal('show');
+                        } else {
+                            alert(data + "Failure: Data Could Not Be Saved. Try Again.");
+                        }
+                    },
+                    error: function(data) {
+                        alert("Error Sending Data.");
+                    }
+                });
+            }
+        }
+    }
+
+
+    $(document).ready(function() {
+        $('#dataTables-example').DataTable({
+            responsive: true
+        });
+    });
+    $(document).ready(function() {
+        $('#dataTables-examplea').DataTable({
+            responsive: true
+        });
+    });
+    $('.tooltip-demo').tooltip({
+        selector: "[data-toggle=tooltip]",
+        container: "body"
+    })
+
+    $("[data-toggle=popover]")
+            .popover()
 </script>

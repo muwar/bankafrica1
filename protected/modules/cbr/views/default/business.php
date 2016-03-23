@@ -150,7 +150,6 @@
                                                         <?php
                                                     }
                                                 }
-                                                $i++;
                                                 //               echo "<td>".CHtml::link('', array('#'), array('class' => 'fa fa-edit fa-2x', 'data-toggle' => 'modal', 'data-target' => '#editModal'))."</td>";
                                                 echo "</tr>";
                                             }
@@ -967,7 +966,7 @@
                                                         ?>
                                                         <td><?php echo Bqcus::model()->findByPk($cbhis->cus)->resnam; ?></td>
                                                     <?php } ?>
-                              <!--              <td><?php echo RateTypes::model()->findByPk(InstitutionsQuotation::model()->findByPk($cbhis->num)->quotation_id)->rt_name; ?></td> -->
+                          <!--              <td><?php echo RateTypes::model()->findByPk(InstitutionsQuotation::model()->findByPk($cbhis->num)->quotation_id)->rt_name; ?></td> -->
                                                     <td><?php echo Terms::model()->findByPk(InstitutionsQuotation::model()->findByPk($cbhis->num)->term_id)->term_name; ?></td>
                                                     <td><?php echo $cbhis->lrat . " %"; ?></td>
                                                     <td><?php echo $cbhis->amo; ?></td>
@@ -985,7 +984,7 @@
                                                     }
                                                     ?>
                                                     <?php if (($cbhis->proc == 4) || ($cbhis->proc == 5) || ($cbhis->proc == 9)) { ?>
-                                                        <td><?php echo date('d/m/Y', strtotime(current(Bqdfd::model()->findAll('fd_id=:x and proc=:y', array(':x' => $cbhis->cdos, ':y' => 4)))->dou)); ?></td>
+                                                        <td><?php echo date('d/m/Y', strtotime(current(Bqdcb::model()->findAll('cb_id=:x and proc=:y', array(':x' => $cbhis->cdos, ':y' => 4)))->dou)); ?></td>
                                                     <?php } else { ?>
                                                         <td>Pending approval</td>
                                                     <?php } ?>
@@ -1042,7 +1041,7 @@
                                                                     <td><?php echo date('d/m/Y', strtotime($inrate->date_set)); ?></td>
                                                                     <td><?php echo date('H:ia', strtotime($inrate->time_set)); ?></td>
                                                                 </tr>
-        <?php } ?>
+                                                            <?php } ?>
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -1340,7 +1339,7 @@
     }
     function savebulkrate(button) {
         var termcount = document.getElementById("termcount").value;
-   for (var j = 1; j <= termcount; j++) {
+        for (var j = 1; j <= termcount; j++) {
             var institution = document.getElementById("institution" + button + j).value;
             var rateT = document.getElementById("rateT" + button + j).value;
             var rate = document.getElementById("rate" + button + j).value;
@@ -1388,7 +1387,7 @@
 
 
     function saverate(button) {
-             var institution = document.getElementById("institution" + button).value;
+        var institution = document.getElementById("institution" + button).value;
         var rateT = document.getElementById("rateT" + button).value;
         var rate = document.getElementById("rate" + button).value;
         var specialrates = document.getElementById("state" + button).value;//document.getElementById("specialrates"+button).value;

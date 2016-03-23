@@ -50,11 +50,11 @@ class DefaultController extends Controller {
         $rates = RateTypes::model()->findAll();
         $ucode = current(Evuti::model()->findAll('nom=:x', array(':x' => Yii::app()->user->name)))->id;
         $allfds = Bqfd::model()->findAll('rban=:y', array(':y' => $ucode));
-        $fdhistory = Bqfd::model()->findAll('rban=:y or cus=:x', array(':y' => $ucode->id, ':x' => $ucode));
-            $customercode = current(Bqcus::model()->findAll('cus=:x', array(':x' => $ucode)))->identity;
-            $minvalues = Fdmin::model()->findAll('institution=:x', array(':x' => $customercode));
-            arsort($minvalues);
-            $minfd=  current($minvalues)->amt;
+        $fdhistory = Bqfd::model()->findAll('rban=:y or cus=:x', array(':y' => $ucode, ':x' => $ucode));
+        $customercode = current(Bqcus::model()->findAll('cus=:x', array(':x' => $ucode)))->identity;
+        $minvalues = Fdmin::model()->findAll('institution=:x', array(':x' => $customercode));
+        arsort($minvalues);
+        $minfd = current($minvalues)->amt;
 
 
         $this->render('business', array(
@@ -147,7 +147,7 @@ class DefaultController extends Controller {
         $mPDF1->showWatermarkText = true;
 
         $mPDF1->WriteHTML($this->renderPartial('requestform', array('cus_id' => $cus_id, 'allfd_id' => $allfd_id), true));
-        $mPDF1->SetHTMLFooter('<p align="center" style="font-size:10px;"><h6>' . 'Standard Financials Trading Platform   '. date('d/m/Y H:i:sa'));
+        $mPDF1->SetHTMLFooter('<p align="center" style="font-size:10px;"><h6>' . 'Standard Financials Trading Platform   ' . date('d/m/Y H:i:sa'));
 
         $mPDF1->Output(' Request form.pdf', 'I');
     }
@@ -165,7 +165,7 @@ class DefaultController extends Controller {
         $mPDF1->showWatermarkText = true;
 
         $mPDF1->WriteHTML($this->renderPartial('printapproval', array('cus_id' => $cus_id, 'allfd_id' => $allfd_id), true));
-        $mPDF1->SetHTMLFooter('<p align="center" style="font-size:10px;"><h6>' . 'Standard Financials Trading Platform   '. date('d/m/Y H:i:sa'));
+        $mPDF1->SetHTMLFooter('<p align="center" style="font-size:10px;"><h6>' . 'Standard Financials Trading Platform   ' . date('d/m/Y H:i:sa'));
 
         $mPDF1->Output(' Request form.pdf', 'I');
     }
@@ -183,7 +183,7 @@ class DefaultController extends Controller {
         $mPDF1->showWatermarkText = true;
 
         $mPDF1->WriteHTML($this->renderPartial('printhistory', array('id' => $id, 'mid' => $mid), true));
-        $mPDF1->SetHTMLFooter('<p align="center" style="font-size:10px;"><h6>' . 'Standard Financials Trading Platform   '. date('d/m/Y H:i:sa'));
+        $mPDF1->SetHTMLFooter('<p align="center" style="font-size:10px;"><h6>' . 'Standard Financials Trading Platform   ' . date('d/m/Y H:i:sa'));
         $mPDF1->Output(' Transaction history page.pdf', 'I');
     }
 
@@ -275,7 +275,7 @@ class DefaultController extends Controller {
                 $model = Bqibl::model()->findByPk($_GET['id']);
             if ($_GET['op'] == 'FD')
                 $model = Bqfd::model()->findByPk($_GET['id']);
-            $model->sta='VA';
+            $model->sta = 'VA';
             $model->proc = 4;
             $model->dmo = date('Y-m-d H:i:s');
             if ($model->update()) {

@@ -16,7 +16,7 @@
                 <!-- /.panel-heading -->
                 <div class="panel-body">
                     <div class="dataTable_wrapper">
-                       
+
                         <button class="btn  btn-success btn1" id="button">Export</button>
 
                         <table class="table table-striped table-bordered table-hover table2excel tableresults" id="dataTables-example1">
@@ -29,8 +29,8 @@
                                 </tr>
                                 <tr>
                                     <?php foreach ($terms as $tterm) { ?>
-                                        <th><?php echo LR; ?></th>
-                                        <th><?php echo BR; ?></th>
+                                        <th><?php echo 'LR'; ?></th>
+                                        <th><?php echo 'BR'; ?></th>
                                     <?php } ?>
                                 </tr>
                             </thead>
@@ -82,33 +82,33 @@
                                             <?php
                                         } else {
                                             ?>
-                                            <?php if (Yii::app()->user->name == admin) { ?>
+                                            <?php if (Yii::app()->user->name == 'admin') { ?>
                                                 <td><div class="tooltip-demo">
                                                         <label type="label" data-html="true" class="" data-toggle="tooltip" data-placement="top" title="Click to send your request &#013;
                                                                Special rate: <?php
-                            if (current($linstrates)->special_rate == 0)
-                                echo "No<br>";
-                            if (current($linstrates)->special_rate == 1)
-                                echo "Yes<br>";
-                                                ?>
+                                                               if (current($linstrates)->special_rate == 0)
+                                                                   echo "No<br>";
+                                                               if (current($linstrates)->special_rate == 1)
+                                                                   echo "Yes<br>";
+                                                               ?>
                                                                Minimum amount:<?php
-                                           if (current($linstrates)->minimum_amount == '')
-                                               echo "0";
-                                           else
-                                               echo current($linstrates)->minimum_amount;
-                                                ?><br>
+                                                               if (current($linstrates)->minimum_amount == '')
+                                                                   echo "0";
+                                                               else
+                                                                   echo current($linstrates)->minimum_amount;
+                                                               ?><br>
                                                                Setup Charges:<?php
-                                           if (current($linstrates)->setup_charges == '')
-                                               echo '0';
-                                           else
-                                               echo current($linstrates)->setup_charges;
-                                                ?> <br>
+                                                               if (current($linstrates)->setup_charges == '')
+                                                                   echo '0';
+                                                               else
+                                                                   echo current($linstrates)->setup_charges;
+                                                               ?> <br>
                                                                Other Fees: <?php
-                                           if (current($linstrates)->other_fees == '')
-                                               echo '0';
-                                           else
-                                               echo current($linstrates)->other_fees;
-                                                ?><br>
+                                                               if (current($linstrates)->other_fees == '')
+                                                                   echo '0';
+                                                               else
+                                                                   echo current($linstrates)->other_fees;
+                                                               ?><br>
 
                                                                " value="<?php echo current($linstrates)->institutions_quotation_id; ?>"  >
                                                                    <?php echo current($linstrates)->lrate . " %" ?>
@@ -122,29 +122,29 @@
                                                 <td><div class="tooltip-demo">
                                                         <label type="label" data-html="true" class="" data-toggle="tooltip" data-placement="top" title="Click to send your request &#013;
                                                                Special rate: <?php
-                            if (current($linstrates)->special_rate == 0)
-                                echo "No<br>";
-                            if (current($linstrates)->special_rate == 1)
-                                echo "Yes<br>";
-                                                ?>
+                                                               if (current($linstrates)->special_rate == 0)
+                                                                   echo "No<br>";
+                                                               if (current($linstrates)->special_rate == 1)
+                                                                   echo "Yes<br>";
+                                                               ?>
                                                                Minimum amount:<?php
-                                           if (current($linstrates)->minimum_amount == '')
-                                               echo "0";
-                                           else
-                                               echo current($linstrates)->minimum_amount;
-                                                ?><br>
+                                                               if (current($linstrates)->minimum_amount == '')
+                                                                   echo "0";
+                                                               else
+                                                                   echo current($linstrates)->minimum_amount;
+                                                               ?><br>
                                                                Setup Charges:<?php
-                                           if (current($linstrates)->setup_charges == '')
-                                               echo '0';
-                                           else
-                                               echo current($linstrates)->setup_charges;
-                                                ?> <br>
+                                                               if (current($linstrates)->setup_charges == '')
+                                                                   echo '0';
+                                                               else
+                                                                   echo current($linstrates)->setup_charges;
+                                                               ?> <br>
                                                                Other Fees: <?php
-                                           if (current($linstrates)->other_fees == '')
-                                               echo '0';
-                                           else
-                                               echo current($linstrates)->other_fees;
-                                                ?><br>
+                                                               if (current($linstrates)->other_fees == '')
+                                                                   echo '0';
+                                                               else
+                                                                   echo current($linstrates)->other_fees;
+                                                               ?><br>
 
                                                                " value="<?php echo current($linstrates)->institutions_quotation_id; ?>" onclick="loadlform(<?php echo current($linstrates)->lrate . ",'" . $user->resnam . "','" . $term1->term_name . "','" . $user->cus . "'," . current($linstrates)->institutions_quotation_id . ",'" . $bankl->id . "'"; ?>)" >
                                                                    <?php echo current($linstrates)->lrate . " %" ?>
@@ -168,29 +168,29 @@
                                                 <td><div class="tooltip-demo">
                                                         <label type="label" class="" data-html="true" data-toggle="tooltip" data-placement="top" title="Click to send your request
                                                                Special rate :&nbsp;<?php
-                            if (current($binstrates)->special_rate == 0)
-                                echo "No<br>";
-                            if (current($binstrates)->special_rate == 1)
-                                echo "Yes<br>";
-                                                ?>
+                                                               if (current($binstrates)->special_rate == 0)
+                                                                   echo "No<br>";
+                                                               if (current($binstrates)->special_rate == 1)
+                                                                   echo "Yes<br>";
+                                                               ?>
                                                                Minimum amount :&nbsp;<?php
-                                           if (current($binstrates)->minimum_amount == '')
-                                               echo "0";
-                                           else
-                                               echo current($binstrates)->minimum_amount;
-                                                ?><br>
+                                                               if (current($binstrates)->minimum_amount == '')
+                                                                   echo "0";
+                                                               else
+                                                                   echo current($binstrates)->minimum_amount;
+                                                               ?><br>
                                                                Setup Charges :&nbsp;<?php
-                                           if (current($binstrates)->setup_charges == '')
-                                               echo '0';
-                                           else
-                                               echo current($binstrates)->setup_charges;
-                                                ?> <br>
+                                                               if (current($binstrates)->setup_charges == '')
+                                                                   echo '0';
+                                                               else
+                                                                   echo current($binstrates)->setup_charges;
+                                                               ?> <br>
                                                                Other Fees :&nbsp; <?php
-                                           if (current($binstrates)->other_fees == '')
-                                               echo '0';
-                                           else
-                                               echo current($binstrates)->other_fees;
-                                                ?><br>
+                                                               if (current($binstrates)->other_fees == '')
+                                                                   echo '0';
+                                                               else
+                                                                   echo current($binstrates)->other_fees;
+                                                               ?><br>
                                                                " value="<?php echo current($binstrates)->institutions_quotation_id; ?>" >
                                                                    <?php echo current($binstrates)->lrate . " %" ?>
                                                         </label>
@@ -203,29 +203,29 @@
                                                 <td><div class="tooltip-demo">
                                                         <label type="label" class="" data-html="true" data-toggle="tooltip" data-placement="top" title="Click to send your request
                                                                Special rate :&nbsp;<?php
-                            if (current($binstrates)->special_rate == 0)
-                                echo "No<br>";
-                            if (current($binstrates)->special_rate == 1)
-                                echo "Yes<br>";
-                                                ?>
+                                                               if (current($binstrates)->special_rate == 0)
+                                                                   echo "No<br>";
+                                                               if (current($binstrates)->special_rate == 1)
+                                                                   echo "Yes<br>";
+                                                               ?>
                                                                Minimum amount :&nbsp;<?php
-                                           if (current($binstrates)->minimum_amount == '')
-                                               echo "0";
-                                           else
-                                               echo current($binstrates)->minimum_amount;
-                                                ?><br>
+                                                               if (current($binstrates)->minimum_amount == '')
+                                                                   echo "0";
+                                                               else
+                                                                   echo current($binstrates)->minimum_amount;
+                                                               ?><br>
                                                                Setup Charges :&nbsp;<?php
-                                           if (current($binstrates)->setup_charges == '')
-                                               echo '0';
-                                           else
-                                               echo current($binstrates)->setup_charges;
-                                                ?> <br>
+                                                               if (current($binstrates)->setup_charges == '')
+                                                                   echo '0';
+                                                               else
+                                                                   echo current($binstrates)->setup_charges;
+                                                               ?> <br>
                                                                Other Fees :&nbsp; <?php
-                                           if (current($binstrates)->other_fees == '')
-                                               echo '0';
-                                           else
-                                               echo current($binstrates)->other_fees;
-                                                ?><br>
+                                                               if (current($binstrates)->other_fees == '')
+                                                                   echo '0';
+                                                               else
+                                                                   echo current($binstrates)->other_fees;
+                                                               ?><br>
                                                                " value="<?php echo current($binstrates)->institutions_quotation_id; ?>" onclick="loadbform(<?php echo current($binstrates)->lrate . ",'" . $user->resnam . "','" . $term1->term_name . "','" . $user->cus . "'," . current($binstrates)->institutions_quotation_id . ",'" . $bankl->id . "'"; ?>)">
                                                                    <?php echo current($binstrates)->lrate . " %" ?>
                                                         </label>
@@ -236,7 +236,7 @@
                                         }
                                     }
                                 }
-                                $i++;
+                      
                                 unset($binstrates);
                                 unset($linstrates);
                                 unset($bankrates);
@@ -334,7 +334,6 @@
                                         ),
                                     ));
                                     ?>
-    <!--<input class="form-control" style="border-radius: 5px 10px 5px 10px;width:400px;" placeholder="Expiry Date (yyyy-mm-dd)" name="edate" id="ledate" type="text" value="" data-toggle="tooltip" data-placement="right" title="On what date does this request become invalid?">-->
                                 </div>
                             </div>
                         </div>
@@ -350,7 +349,6 @@
                     <button style='border-radius: 0px 10px 0px 10px;' type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--                    <button type="submit" value="<?php echo $i . $j; ?>" id="<?php echo $i . $j; ?>" class="btn btn-primary" onclick="event.preventDefault();saverate(this.value);">Save</button> -->
                     <button style='border-radius: 0px 10px 0px 10px;' type="submit" onclick="event.preventDefault();
                                                                        sendrequestl();" class="btn btn-primary">Send Request</button></p>
             </div>

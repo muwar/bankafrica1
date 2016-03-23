@@ -77,7 +77,7 @@ class SiteController extends Controller {
 
     public function actionProfile() {
 
-        $this->render('profile', array('id' => $id, 'model' => $model, 'tmodel' => $tmodel));
+        $this->render('profile', array());
     }
 
     public function actionupdatecustomer() {

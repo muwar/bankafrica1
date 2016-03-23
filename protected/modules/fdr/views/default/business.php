@@ -142,8 +142,6 @@
                                                         <?php
                                                     }
                                                 }
-                                                $i++;
-                                                //               echo "<td>".CHtml::link('', array('#'), array('class' => 'fa fa-edit fa-2x', 'data-toggle' => 'modal', 'data-target' => '#editModal'))."</td>";
                                                 echo "</tr>";
                                             }
                                             else
@@ -245,7 +243,7 @@
                                                                 <td><input type="text" class="form-control" id="ofees<?php echo $rate->rt_id . $term->term_id; ?>" name="ofees" placeholder="<?php echo $checkrecentrecord->other_fees; ?>"></td>
                                                                 </tr>
 
-                                                            <?php
+                                                                <?php
                                                             }
                                                         }
                                                         ?>
@@ -265,7 +263,7 @@
                             </div>
                             <div class="tab-pane fade" id="creq">
                                 <div class="dataTable_wrapper">
-  <button class="btn  btn-success btn1" id="button">Export</button>
+                                    <button class="btn  btn-success btn1" id="button">Export</button>
 
                                     <table class="table table-striped table-bordered table-hover" id="dataTables-exampler1">
                                         <thead>
@@ -297,8 +295,8 @@
                                                     } else {
                                                         ?>
                                                     <tr>
-    <?php } ?>
-                                                        <td><?php echo Fdterms::model()->findByPk($statedrate)->term_name; ?></td>
+                                                    <?php } ?>
+                                                    <td><?php echo Fdterms::model()->findByPk($statedrate->quotation_id)->term_name; ?></td>
                                                     <td><?php echo current($clients)->resnam; ?></td>
                                                     <td><?php echo date('d/m/Y', strtotime($allfd->dou)); ?></td>
                                                     <td><div class="tooltip-demo">
@@ -329,7 +327,7 @@
                                                                        echo $statedrate->other_fees;
                                                                    ?><br>
                                                                    " value="<?php echo $statedrate->institutions_quotation_id; ?>" >
-    <?php echo $allfd->drat . " %" ?>
+                                                                       <?php echo $allfd->drat . " %" ?>
                                                             </label>
                                                         </div>
                                                     </td>
@@ -361,7 +359,7 @@
                                                                        echo $statedrate->other_fees;
                                                                    ?><br>
                                                                    " value="<?php echo $statedrate->institutions_quotation_id; ?>" >
-    <?php echo $allfd->amo; ?>
+                                                                       <?php echo $allfd->amo; ?>
                                                             </label>
                                                         </div>
                                                     </td>
@@ -432,7 +430,7 @@
                                                                 data-content="<?php foreach ($dibls as $dibl) { ?>
                                                                     <div class='panel-body'>
                                                                     <ul class='chat'>
-        <?php if ($dibl->proc == 0) { ?>
+                                                                    <?php if ($dibl->proc == 0) { ?>
                                                                         <li class='left clearfix'>                                                                        
 
                                                                         <div class='timeline-badge info'><i class='fa fa-user'><?php echo current($clients)->resnam; ?></i>&nbsp;
@@ -449,14 +447,14 @@
                                                                         <p><?php echo current($clients)->resnam; ?>  <?php echo Terms::model()->findByPk(InstitutionsQuotation::model()->findByPk($allfd->num)->term_id)->term_name; ?> request of  <?php echo $allfd->amo . " for rate  " . $allfd->drat . " %"; ?> .
                                                                         <a href='<?php echo '/bankafrica1/index.php?r=fdr/default/printrequest&cus_id=' . current($clients)->cus . "&allfd_id=" . $allfd->cdos; ?>'>Print Request</a>
                                                                         <?php // echo CHtml::link('Print',array('printrequest','cus_id'=>current($clients)->cdos, 'allbl_id'=>                                            $allfd->cdos));  ?>
-            <?php // echo CHtml::link('print',array('print'));    ?>
+                                                                        <?php // echo CHtml::link('print',array('print'));    ?>
                                                                         </p>
                                                                         </div>
 
                                                                         </div>    
                                                                         </li>
                                                                     <?php } ?>
-        <?php if ($dibl->proc == 1) { ?>
+                                                                    <?php if ($dibl->proc == 1) { ?>
                                                                         <li class='right clearfix'>
                                                                         <div class='timeline-badge info'><i class='fa fa-user'>Me</i>
                                                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -473,7 +471,7 @@
                                                                         </div>
                                                                         </li>
                                                                     <?php } ?>
-        <?php if ($dibl->proc == 2) { ?>
+                                                                    <?php if ($dibl->proc == 2) { ?>
                                                                         <li class='right clearfix'>
                                                                         <div class='timeline-badge info'><i class='fa fa-user'>Me</i>
                                                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -497,7 +495,7 @@
                                                                         </div>
                                                                         </li>
                                                                     <?php } ?>
-        <?php if ($dibl->proc == 3) { ?>
+                                                                    <?php if ($dibl->proc == 3) { ?>
                                                                         <li class='right clearfix'>
                                                                         <div class='timeline-badge info'><i class='fa fa-user'><?php echo current($clients)->resnam; ?></i>
                                                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -516,7 +514,7 @@
                                                                         </div>
                                                                         </li>
                                                                     <?php } ?>
-        <?php if ($dibl->proc == 4) { ?>
+                                                                    <?php if ($dibl->proc == 4) { ?>
                                                                         <li class='right clearfix'>
                                                                         <div class='timeline-badge info'><i class='fa fa-check'><?php echo current($clients)->resnam; ?></i>
                                                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -535,7 +533,7 @@
                                                                         </div>
                                                                         </li>
                                                                     <?php } ?>
-        <?php if ($dibl->proc == 5) { ?>  
+                                                                    <?php if ($dibl->proc == 5) { ?>  
                                                                         <li class='right clearfix'>
                                                                         <div class='timeline-badge info'><i class='fa fa-refresh'></i>
                                                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -553,7 +551,7 @@
                                                                         </div>
                                                                         </li>
                                                                     <?php } ?>
-        <?php if ($dibl->proc == 8) { ?>
+                                                                    <?php if ($dibl->proc == 8) { ?>
                                                                         <li class='right clearfix'>
                                                                         <div class='timeline-badge'> <i class='fa fa-user'>&nbsp;Me</i>
                                                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -573,7 +571,7 @@
                                                                         </div>
                                                                         </li>
                                                                     <?php } ?>
-        <?php if ($dibl->proc == 9) { ?>
+                                                                    <?php if ($dibl->proc == 9) { ?>
                                                                         <li class='right clearfix'>
                                                                         <div class='timeline-badge'><i class='fa fa-check fa-2x'></i>
                                                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -592,10 +590,10 @@
                                                                         </div>
 
                                                                         </li>
-        <?php } ?>
+                                                                    <?php } ?>
                                                                     </ul>
                                                                     </div>
-    <?php } ?>">
+                                                                <?php } ?>">
                                                             Details </button>
                                                     </td>
                                                 </tr>
@@ -661,7 +659,7 @@
                                                                        echo $ratingibl->other_fees;
                                                                    ?><br>
                                                                    " value="<?php echo $ratingibl->institutions_quotation_id; ?>" >
-    <?php echo $myreqfd->drat . " %"; ?>  
+                                                                       <?php echo $myreqfd->drat . " %"; ?>  
                                                             </label>
                                                         </div>
                                                     </td>
@@ -693,7 +691,7 @@
                                                                        echo $ratingibl->other_fees;
                                                                    ?><br>
                                                                    " value="<?php echo $ratingibl->institutions_quotation_id; ?>" >
-    <?php echo $myreqfd->amo; ?>    
+                                                                       <?php echo $myreqfd->amo; ?>    
                                                             </label>
                                                         </div>
                                                     </td>
@@ -736,7 +734,7 @@
                                                         if (($myreqfd->proc == 1) || ($myreqfd->proc == 0) || ($myreqfd->proc == 5)) {
                                                             ?>
                                                             <h1 align='center'>    ...</h1>
-                                                                <?php } if ($myreqfd->proc == 2) { ?>
+                                                        <?php } if ($myreqfd->proc == 2) { ?>
                                                             <button type="submit" class="btn btn-primary" onclick="event.preventDefault();
                 modifyl(<?php echo $myreqfd->cdos . "," . current($detailibls)->rate . "," . "'FD'"; ?>);">Respond</button> <?php
                                                                 }
@@ -782,7 +780,7 @@
                                                                 data-content="<?php foreach ($detailibls as $detailibl) { ?>
                                                                     <div class='panel-body'>
                                                                     <ul class='chat'>
-        <?php if ($detailibl->proc == 0) { ?>
+                                                                    <?php if ($detailibl->proc == 0) { ?>
                                                                         <li class='left clearfix'>                                                                        
                                                                         <div class='timeline-badge info'><i class='fa fa-user'>Me</i>&nbsp;
                                                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -802,7 +800,7 @@
                                                                         </div>    
                                                                         </li>
                                                                     <?php } ?>
-        <?php if ($detailibl->proc == 1) { ?>
+                                                                    <?php if ($detailibl->proc == 1) { ?>
                                                                         <li class='right clearfix'>
                                                                         <div class='timeline-badge info'><i class='fa fa-user'><?php echo current($senttoibl)->resnam; ?></i>
                                                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -819,7 +817,7 @@
                                                                         </div>
                                                                         </li>
                                                                     <?php } ?>
-        <?php if ($detailibl->proc == 2) { ?>
+                                                                    <?php if ($detailibl->proc == 2) { ?>
                                                                         <li class='right clearfix'>
                                                                         <div class='timeline-badge info'><i class='fa fa-user'><?php echo current($senttoibl)->resnam; ?></i>
                                                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -843,7 +841,7 @@
                                                                         </div>
                                                                         </li>
                                                                     <?php } ?>
-        <?php if ($detailibl->proc == 3) { ?>
+                                                                    <?php if ($detailibl->proc == 3) { ?>
                                                                         <li class='right clearfix'>
                                                                         <div class='timeline-badge info'><i class='fa fa-user'>Me</i>
                                                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -862,7 +860,7 @@
                                                                         </div>
                                                                         </li>
                                                                     <?php } ?>
-        <?php if ($detailibl->proc == 4) { ?>
+                                                                    <?php if ($detailibl->proc == 4) { ?>
                                                                         <li class='right clearfix'>
                                                                         <div class='timeline-badge info'><i class='fa fa-user'><?php echo current($senttoibl)->resnam; ?></i>
                                                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -883,7 +881,7 @@
                                                                         </div>
                                                                         </li>
                                                                     <?php } ?>
-        <?php if ($detailibl->proc == 5) { ?>  
+                                                                    <?php if ($detailibl->proc == 5) { ?>  
                                                                         <li class='right clearfix'>
                                                                         <div class='timeline-badge'><i class='fa fa-refresh'></i>
                                                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -901,7 +899,7 @@
                                                                         </div>
                                                                         </li>
                                                                     <?php } ?>
-        <?php if ($detailibl->proc == 8) { ?>
+                                                                    <?php if ($detailibl->proc == 8) { ?>
                                                                         <li class='right clearfix'>
                                                                         <div class='timeline-badge'> <i class='fa fa-user'>&nbsp;<?php echo current($senttoibl)->resnam; ?></i>
                                                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -921,7 +919,7 @@
                                                                         </div>
                                                                         </li>
                                                                     <?php } ?>
-        <?php if ($detailibl->proc == 9) { ?>
+                                                                    <?php if ($detailibl->proc == 9) { ?>
                                                                         <li class='right clearfix'>
                                                                         <div class='timeline-badge'><i class='fa fa-check fa-2x'></i>
                                                                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -940,12 +938,12 @@
                                                                         </div>
 
                                                                         </li>
-        <?php } ?>
+                                                                    <?php } ?>
                                                                     </ul>
                                                                     </div>
-                                                        <?php } ?>">
+                                                                <?php } ?>">
                                                             Details </button>
-    <?php echo CHtml::link(' Print', array('printhistory', 'id' => $myreqfd->cdos, 'mid' => $ucode)); ?>
+                                                        <?php echo CHtml::link(' Print', array('printhistory', 'id' => $myreqfd->cdos, 'mid' => $ucode)); ?>
                                                     </td>
                                                 </tr>
                                             <?php }
@@ -970,7 +968,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                                <?php foreach ($fdhistory as $fdhis) { ?>
+                                            <?php foreach ($fdhistory as $fdhis) { ?>
                                                 <tr>
                                                     <?php if ($ucode == $fdhis->cus) { ?>
                                                         <td><?php echo Bqcus::model()->findByPk($fdhis->rban)->resnam; ?></td>
@@ -978,9 +976,9 @@
                                                     } else {
                                                         ?>
                                                         <td><?php echo Bqcus::model()->findByPk($fdhis->cus)->resnam; ?></td>
-    <?php } ?>
-    <!--                                                    <td><?php echo RateTypes::model()->findByPk(InstitutionsQuotation::model()->findByPk($fdhis->num)->quotation_id)->rt_name.'---'.InstitutionsQuotation::model()->findByPk($fdhis->num)->quotation_id; ?></td>  -->
-                                                        <td><?php echo Fdterms::model()->findByPk(InstitutionsQuotation::model()->findByPk($fdhis->num)->term_id)->term_name; ?></td>
+                                                    <?php } ?>
+    <!--                                                    <td><?php echo RateTypes::model()->findByPk(InstitutionsQuotation::model()->findByPk($fdhis->num)->quotation_id)->rt_name . '---' . InstitutionsQuotation::model()->findByPk($fdhis->num)->quotation_id; ?></td>  -->
+                                                    <td><?php echo Fdterms::model()->findByPk(InstitutionsQuotation::model()->findByPk($fdhis->num)->term_id)->term_name; ?></td>
                                                     <td><?php echo $fdhis->drat . " %"; ?></td>
                                                     <td><?php echo $fdhis->amo; ?></td>
 
@@ -1001,9 +999,9 @@
                                                         <td><?php echo date('d/m/Y', strtotime(current(Bqdfd::model()->findAll('fd_id=:x and proc=:y', array(':x' => $fdhis->cdos, ':y' => 4)))->dou)); ?></td>
                                                     <?php } else { ?>
                                                         <td>Pending approval</td>
-                                                <?php } ?>
+                                                    <?php } ?>
                                                 </tr>
-<?php } ?>
+                                            <?php } ?>
                                         </tbody>
                                     </table>
                                 </div>
@@ -1043,11 +1041,12 @@
                                                                 <tr>
                                                                     <td><?php echo Fdterms::model()->findByPk($inrate->term_id)->term_name; ?></td>
                                                                     <td><?php echo $inrate->lrate . " %"; ?></td>
-                                                                    <td><?php if ($inrate->special_rate == 0)
-                                                                    echo "No";
-                                                                else
-                                                                    echo "Yes";
-                                                                ?></td>
+                                                                    <td><?php
+                                                                        if ($inrate->special_rate == 0)
+                                                                            echo "No";
+                                                                        else
+                                                                            echo "Yes";
+                                                                        ?></td>
                                                                     <td><?php echo $inrate->minimum_amount; ?></td>
                                                                     <td><?php echo $inrate->setup_charges; ?></td>
                                                                     <td><?php echo $inrate->other_fees; ?></td>
@@ -1180,14 +1179,14 @@
 <script src="<?php echo Yii::app()->request->baseUrl; ?>/extras/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
 <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.table2excel.js"></script>
 <script>
-                                                                   $(function() {
-                                                                       $("#button").click(function() {
-                                                                           $("#dataTables-exampler1").table2excel({
-                                                                               exclude: ".noExl",
-                                                                               name: "Table of Rates"
-                                                                           });
-                                                                       });
-                                                                   });
+    $(function() {
+        $("#button").click(function() {
+            $("#dataTables-exampler1").table2excel({
+                exclude: ".noExl",
+                name: "Table of Rates"
+            });
+        });
+    });
 
 </script>
 <script>

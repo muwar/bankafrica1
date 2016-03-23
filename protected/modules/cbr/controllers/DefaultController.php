@@ -41,8 +41,7 @@ class DefaultController extends Controller {
     public function actionIndex() {
         $terms = Fdterms::model()->findAll();
         $model=new Bqcb;
-        //       $bankrates=  InstitutionsQuotation::model()->findAll();
-        $this->render('index', array('terms' => $terms,'model'=>$model /* 'bankrates'=>$bankrates */));
+        $this->render('index', array('terms' => $terms,'model'=>$model ));
     }
     public function actionBusiness(){
                 $terms = Fdterms::model()->findAll();
