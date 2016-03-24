@@ -142,9 +142,7 @@
                                                         <?php
                                                     }
                                                 }
-                                                $i++;
-                                                //               echo "<td>".CHtml::link('', array('#'), array('class' => 'fa fa-edit fa-2x', 'data-toggle' => 'modal', 'data-target' => '#editModal'))."</td>";
-                                                echo "</tr>";
+                                               echo "</tr>";
                                             }
                                             else
                                                 continue;
@@ -298,7 +296,7 @@
                                                         ?>
                                                     <tr>
     <?php } ?>
-                                                        <td><?php echo Fdterms::model()->findByPk($statedrate)->term_name; ?></td>
+                                                        <td><?php echo Fdterms::model()->findByPk($statedrate->quotation_id)->term_name; ?></td>
                                                     <td><?php echo current($clients)->resnam; ?></td>
                                                     <td><?php echo date('d/m/Y', strtotime($allfd->dou)); ?></td>
                                                     <td><div class="tooltip-demo">

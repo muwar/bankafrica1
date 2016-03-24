@@ -381,8 +381,7 @@
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--                    <button type="submit" value="<?php echo $i . $j; ?>" id="<?php echo $i . $j; ?>" class="btn btn-primary" onclick="event.preventDefault();saverate(this.value);">Save</button> -->
-                    <button type="submit" onclick="event.preventDefault();
+  <button type="submit" onclick="event.preventDefault();
                                                         saverequest();" class="btn btn-primary">Save</button></p>
             </div>
         </div>
@@ -483,8 +482,7 @@
                     <button style='border-radius: 0px 10px 0px 10px;' type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--                    <button type="submit" value="<?php echo $i . $j; ?>" id="<?php echo $i . $j; ?>" class="btn btn-primary" onclick="event.preventDefault();saverate(this.value);">Save</button> -->
-                    <button style='border-radius: 0px 10px 0px 10px;' type="submit" onclick="event.preventDefault();
+     <button style='border-radius: 0px 10px 0px 10px;' type="submit" onclick="event.preventDefault();
                                                         permitcf();" class="btn btn-primary">Send</button></p>
             </div>
         </div>
@@ -530,7 +528,6 @@
                     <button style='border-radius: 0px 10px 0px 10px;' type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--                    <button type="submit" value="<?php echo $i . $j; ?>" id="<?php echo $i . $j; ?>" class="btn btn-primary" onclick="event.preventDefault();saverate(this.value);">Save</button> -->
                     <button style='border-radius: 0px 10px 0px 10px;' type="submit" onclick="event.preventDefault();
                                                         permitst();" class="btn btn-primary">Send</button></p>
             </div>
@@ -568,7 +565,6 @@
                     <button style='border-radius: 0px 10px 0px 10px;' type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--                    <button type="submit" value="<?php echo $i . $j; ?>" id="<?php echo $i . $j; ?>" class="btn btn-primary" onclick="event.preventDefault();saverate(this.value);">Save</button> -->
                     <button style='border-radius: 0px 10px 0px 10px;' type="submit" onclick="event.preventDefault();
                                                         sendalert();" class="btn btn-primary">Send</button></p>
             </div>

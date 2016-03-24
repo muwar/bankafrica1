@@ -161,7 +161,6 @@
                                                     <?php
                                                 }
                                             }
-                                            $i++;
                                             ?>
                                             <td onclick="
                 $('#rates1').prop('class', '');
@@ -186,7 +185,7 @@
                             <?php
                             foreach ($rates as $rate) {
                                 if (($rate->rt_name == "Inter-Bank Lending") || ($rate->rt_name == "Inter-Bank Borrowing")) {
-                                    $ratecount++;
+                                    
                                     ?>
                                     <input onclick="togglepane(<?php echo $rate->rt_id ?>)" class="pull-center" type="radio" name="ratetype" value="male" id="toggler<?php echo $rate->rt_name ?>"><?php echo $rate->rt_name ?>
                                     <?php
@@ -864,7 +863,7 @@
                 acceptmod(<?php echo $myreqibl->cdos . "," . current($detailibls)->rate . "," . "'IBL'"; ?>);">Accept</button>
 
                                                     <?php } else { ?>
-                                                        ...                                                <? }
+                                                        ...                                                <?php }
                                                     ?>
                                                 </td>
                                                 <td><button type="button" class="btn btn-default" data-container="body" data-html="true" data-toggle="popover" data-placement="bottom"  

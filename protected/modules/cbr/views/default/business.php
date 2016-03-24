@@ -150,7 +150,7 @@
                                                         <?php
                                                     }
                                                 }
-                                                $i++;
+                                             
                                                 //               echo "<td>".CHtml::link('', array('#'), array('class' => 'fa fa-edit fa-2x', 'data-toggle' => 'modal', 'data-target' => '#editModal'))."</td>";
                                                 echo "</tr>";
                                             }
@@ -985,7 +985,7 @@
                                                     }
                                                     ?>
                                                     <?php if (($cbhis->proc == 4) || ($cbhis->proc == 5) || ($cbhis->proc == 9)) { ?>
-                                                        <td><?php echo date('d/m/Y', strtotime(current(Bqdfd::model()->findAll('fd_id=:x and proc=:y', array(':x' => $cbhis->cdos, ':y' => 4)))->dou)); ?></td>
+                                                        <td><?php echo date('d/m/Y', strtotime(current(Bqdcb::model()->findAll('cb_id=:x and proc=:y', array(':x' => $cbhis->cdos, ':y' => 4)))->dou)); ?></td>
                                                     <?php } else { ?>
                                                         <td>Pending approval</td>
                                                     <?php } ?>

@@ -50,7 +50,7 @@ class DefaultController extends Controller {
         $rates = RateTypes::model()->findAll();
         $ucode = current(Evuti::model()->findAll('nom=:x', array(':x' => Yii::app()->user->name)))->id;
         $allfds = Bqfd::model()->findAll('rban=:y', array(':y' => $ucode));
-        $fdhistory = Bqfd::model()->findAll('rban=:y or cus=:x', array(':y' => $ucode->id, ':x' => $ucode));
+        $fdhistory = Bqfd::model()->findAll('rban=:y or cus=:x', array(':y' => $ucode, ':x' => $ucode));
             $customercode = current(Bqcus::model()->findAll('cus=:x', array(':x' => $ucode)))->identity;
             $minvalues = Fdmin::model()->findAll('institution=:x', array(':x' => $customercode));
             arsort($minvalues);

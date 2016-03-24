@@ -143,7 +143,7 @@
                                                         <?php
                                                     }
                                                 }
-                                                $i++;
+                                               
                                                 //               echo "<td>".CHtml::link('', array('#'), array('class' => 'fa fa-edit fa-2x', 'data-toggle' => 'modal', 'data-target' => '#editModal'))."</td>";
                                                 echo "</tr>";
                                             }

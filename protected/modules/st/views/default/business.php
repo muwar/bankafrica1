@@ -229,7 +229,7 @@
                                                                     </div>
                                                                     <div class='timeline-body'>
                                                                     <p><?php echo current(Bqcus::model()->findAll('cus=:x', array(':x' => $myreqsec->cus)))->resnam; ?>   request for a security of facevalue <?php echo $securityproper->facevalue; ?> At a discount of <?php echo $securityproper->discount . " %"; ?> 
-                                                                    <a href='<?php echo '/bankafrica1/index.php?r=cbr/default/printrequest&cus_id=' . current(Bqcus::model()->findAll($myreqsec->cus))->cus . "&allcb_id=" . $allcb->cdos; ?>'>Print Request</a>
+                                                                    <a href='<?php echo '/bankafrica1/index.php?r=cbr/default/printrequest&cus_id=' . current(Bqcus::model()->findAll($myreqsec->cus))->cus . "&allcb_id=" . $dsec->cdos; ?>'>Print Request</a>
                                                                     <?php // echo CHtml::link('Print',array('printrequest','cus_id'=>current($clients)->cdos, 'allbl_id'=>                                            $allcb->cdos));   ?>
                                                                     <?php // echo CHtml::link('print',array('print'));    ?>
                                                                     </p>
@@ -350,7 +350,7 @@
                                                                     <h4 class='timeline-title'>...</h4><i class='fa fa-times'></i>
                                                                     </div>
                                                                     <div class='timeline-body'>
-                                                                    <p><?php echo $allcb->rejmot; ?></p>
+                                                                    <p><?php // echo $allcb->rejmot; ?></p>
                                                                     <p><?php echo $dsec->remark; ?></p>
                                                                     </div>
                                                                     </li>
@@ -481,7 +481,7 @@
                                                                     </div>
                                                                     <div class='timeline-body'>
                                                                     <p><?php echo current(Bqcus::model()->findAll('cus=:x', array(':x' => $creqsec->cus)))->resnam; ?>   request for a security of facevalue <?php echo $securityproper->facevalue; ?> At a discount of <?php echo $securityproper->discount . " %"; ?> 
-                                                                    <a href='<?php echo '/bankafrica1/index.php?r=cbr/default/printrequest&cus_id=' . current(Bqcus::model()->findAll($creqsec->cus))->cus . "&allcb_id=" . $allcb->cdos; ?>'>Print Request</a>
+                                                                    <a href='<?php echo '/bankafrica1/index.php?r=cbr/default/printrequest&cus_id=' . current(Bqcus::model()->findAll($creqsec->cus))->cus . "&allcb_id=" . $dsec->cdos; ?>'>Print Request</a>
                                                                     <?php // echo CHtml::link('Print',array('printrequest','cus_id'=>current($clients)->cdos, 'allbl_id'=>                                            $allcb->cdos));    ?>
                                                                     <?php // echo CHtml::link('print',array('print'));     ?>
                                                                     </p>
@@ -838,7 +838,6 @@ $this->widget('zii.widgets.jui.CJuiDatePicker', array(
                     <button type="button" class="btn btn-default" data-dismiss="modal" style='border-radius: 0px 10px 0px 10px;'>Close</button>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--                    <button type="submit" value="<?php echo $i . $j; ?>" id="<?php echo $i . $j; ?>" class="btn btn-primary" onclick="event.preventDefault();saverate(this.value);">Save</button> -->
                     <button style='border-radius: 0px 10px 0px 10px;' type="submit" onclick="event.preventDefault();
                                     submitrequest();" class="btn btn-primary">Submit</button></p>
             </div>

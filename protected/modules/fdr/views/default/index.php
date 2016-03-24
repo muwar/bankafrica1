@@ -15,20 +15,7 @@
                 ?><!-- /.panel-heading -->
                 <div class="panel-body">
                     <div class="dataTable_wrapper">
-                        <?php
-                        /*
-                        $form = $this->beginWidget('CActiveForm', array(
-                            'id' => 'class-list-form2',
-                            'enableAjaxValidation' => false,
-                            'action' => Yii::app()->request->baseUrl . '/index.php?r=export/default/FdrExport',
-                            'htmlOptions' => array('enctype' => 'multipart/form-data', 'align' => 'center'),
-                        ));
-                        echo CHtml::dropDownList("export", "export", array('pdf' => 'pdf', 'csv' => 'csv'), array("name" => "export"));
-                        echo CHtml::submitButton('Export', array('style' => 'color:blue;', 'class' => 'btn-default', 'name' => 'exporter'));
-                        $this->endWidget();
-                        */
-                        ?>
-
+                  
                         <button class="btn  btn-success btn1" id="button">Export</button>
                         <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                             <thead>
@@ -168,6 +155,10 @@
                                         unset($instrates);
                                     }
                                 }
+                                if(count($bankrates)==0){ ?>
+                                  <td> - </td>
+                                  <td> - </td>
+                             <?php   }else{
                                 if ($bankrate->special_rate == 0)
                                     echo "<td> NO</td>";
                                 if ($bankrate->special_rate == 1)
@@ -177,11 +168,12 @@
                                 }
                                 else
                                     echo "<td>-</td>";
-                                $i++;
+                                
 
                                 echo "</tr>";
                                 unset($bankrates);
                             }
+                                }
                             ?>
                             </tbody>
                         </table>
@@ -237,7 +229,6 @@
                     <button style='border-radius: 0px 10px 0px 10px;' type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--                    <button type="submit" value="<?php echo $i . $j; ?>" id="<?php echo $i . $j; ?>" class="btn btn-primary" onclick="event.preventDefault();saverate(this.value);">Save</button> -->
                     <button style='border-radius: 0px 10px 0px 10px;' type="submit" onclick="event.preventDefault();
                                                                    sendrequest();" class="btn btn-primary">Send Request</button></p>
             </div>

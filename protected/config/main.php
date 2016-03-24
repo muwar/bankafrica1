@@ -95,7 +95,7 @@ return array(
                 'transportOptions'=>array(
                         'host'=>'127.0.0.1',
                         'username'=>'root',
-                        'password'=>'s3cr3t',
+                        'password'=>'',
                         'port'=>'25',                       
                 ),
                 'viewPath' => 'application.views.mail',             
@@ -130,7 +130,7 @@ return array(
             'connectionString' => 'mysql:host=localhost;dbname=bankafrica',
             'emulatePrepare' => true,
             'username' => 'root',
-            	'password' => 's3cr3t',//1170807906
+            	'password' => '',//1170807906
 //            'password' => '',
             'charset' => 'utf8',
         ),

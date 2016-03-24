@@ -48,7 +48,7 @@ $this->breadcrumbs = array(
                                     </td>
                                     &nbsp;&nbsp;
                                     <td>
-                                        <?php echo $form->textField($model, 'username', array('class' => 'form-control', 'placeholder' => 'Username', autofocus)); ?>
+                                        <?php echo $form->textField($model, 'username', array('class' => 'form-control', 'placeholder' => 'Username')); ?>
                                         <?php echo $form->error($model, 'username'); ?><br/>
                                     </td>
                                 </tr>

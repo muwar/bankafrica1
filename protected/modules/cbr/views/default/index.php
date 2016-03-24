@@ -158,7 +158,7 @@
                                                         </label>
                                                     </div>
                                                 </td>
-                                            <? } ?>
+                                            <?php } ?>
                                             <!--                                
                                                                             <td><div class="tooltip-demo"><label data-toggle="tooltip" data-placement="top" title="Click to send a request" 
                                                                                                                          onclick="loadform(<?php echo current($instrates)->lrate . ",'" . $user->resnam . "','" . $term1->term_name . "','" . $user->cus . "'," . current($instrates)->institutions_quotation_id . ",'" . $bankl->cdos . "'"; ?>);">                                                                  
@@ -168,7 +168,10 @@
                                         }
                                         unset($instrates);
                                     }
-                                }
+                                } if(count($bankrates)==0){  ?>
+                                    <td> - </td>
+                                  <td> - </td> 
+                              <?php  }else{
                                 if ($bankrate->special_rate == 0)
                                     echo "<td> NO</td>";
                                 if ($bankrate->special_rate == 1)
@@ -178,11 +181,11 @@
                                 }
                                 else
                                     echo "<td>-</td>";
-                                $i++;
-
+                             
                                 echo "</tr>";
                                 unset($bankrates);
                             }
+                                }
                             ?>
                             </tbody>
                         </table>
@@ -301,7 +304,6 @@
                     <button style='border-radius: 0px 10px 0px 10px;' type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--                    <button type="submit" value="<?php echo $i . $j; ?>" id="<?php echo $i . $j; ?>" class="btn btn-primary" onclick="event.preventDefault();saverate(this.value);">Save</button> -->
 
                     <button style='border-radius: 0px 10px 0px 10px;' type="submit" onclick="event.preventDefault();
                                                                        sendrequest();" class="btn btn-primary">Send Request</button></p>

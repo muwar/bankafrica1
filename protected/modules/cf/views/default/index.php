@@ -14,20 +14,7 @@
                 ?><!-- /.panel-heading -->
                 <div class="panel-body">
                     <div class="dataTable_wrapper">
-                        <?php
-                        /*
-                        $form = $this->beginWidget('CActiveForm', array(
-                            'id' => 'class-list-form2',
-                            'enableAjaxValidation' => false,
-                            'action' => Yii::app()->request->baseUrl . '/index.php?r=export/default/FdrExport',
-                            'htmlOptions' => array('enctype' => 'multipart/form-data', 'align' => 'center'),
-                        ));
-                        echo CHtml::dropDownList("export", "export", array('pdf' => 'pdf', 'csv' => 'csv'), array("name" => "export"));
-                        echo CHtml::submitButton('Export', array('style' => 'color:blue;', 'class' => 'btn-default', 'name' => 'exporter'));
-                        $this->endWidget();
-                         * 
-                         */
-                        ?>
+                      
                                                 <button class="btn  btn-success btn1" id="button">Export</button>
                         <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                             <thead>
@@ -124,7 +111,6 @@
                     <button style='border-radius: 0px 10px 0px 10px;' type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--                    <button type="submit" value="<?php echo $i . $j; ?>" id="<?php echo $i . $j; ?>" class="btn btn-primary" onclick="event.preventDefault();saverate(this.value);">Save</button> -->
                     <button style='border-radius: 0px 10px 0px 10px;' type="submit" onclick="event.preventDefault();
                                                             sendrequest();" class="btn btn-primary">Send</button></p>
             </div>
@@ -144,16 +130,6 @@
                 <form class="form-horizontal">
                     <fieldset>
                         <p align="center">
-                            <!--
-                               <div class="form-group">
-                                   <div class="tooltip-demo">
-                                       <label class="col-sm-4 control-label">Worth of investment</label>
-                                       <div class="col-sm-8">
-                                           <input data-toggle="tooltip" data-placement="top" title="How Much can you contribute to this project?" class="form-control" style='border-radius: 0px 10px 0px 10px;' placeholder="XXXFCFA" name="amount" id="amount" type="text" value="" autofocus>
-                                       </div>
-                                   </div>
-                               </div>
-                            -->
                         <p align='center'>
                             If this investment opportunity interests you, contact us for preliminary information on any possible participation. Or email us directly at <<<
                         </p>
@@ -212,7 +188,6 @@
                     <button style='border-radius: 0px 10px 0px 10px;' type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--                    <button type="submit" value="<?php echo $i . $j; ?>" id="<?php echo $i . $j; ?>" class="btn btn-primary" onclick="event.preventDefault();saverate(this.value);">Save</button> -->
                     <button style='border-radius: 0px 10px 0px 10px;' type="submit" onclick="event.preventDefault();
                                                             contactinterest();" class="btn btn-primary">Send</button></p>
             </div>

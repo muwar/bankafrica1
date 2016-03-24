@@ -29,8 +29,8 @@
                                 </tr>
                                 <tr>
                                     <?php foreach ($terms as $tterm) { ?>
-                                        <th><?php echo LR; ?></th>
-                                        <th><?php echo BR; ?></th>
+                                        <th><?php echo 'LR'; ?></th>
+                                        <th><?php echo 'BR'; ?></th>
                                     <?php } ?>
                                 </tr>
                             </thead>
@@ -82,7 +82,7 @@
                                             <?php
                                         } else {
                                             ?>
-                                            <?php if (Yii::app()->user->name == admin) { ?>
+                                            <?php if (Yii::app()->user->name == 'admin') { ?>
                                                 <td><div class="tooltip-demo">
                                                         <label type="label" data-html="true" class="" data-toggle="tooltip" data-placement="top" title="Click to send your request &#013;
                                                                Special rate: <?php
@@ -236,7 +236,7 @@
                                         }
                                     }
                                 }
-                                $i++;
+
                                 unset($binstrates);
                                 unset($linstrates);
                                 unset($bankrates);
@@ -350,7 +350,6 @@
                     <button style='border-radius: 0px 10px 0px 10px;' type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<!--                    <button type="submit" value="<?php echo $i . $j; ?>" id="<?php echo $i . $j; ?>" class="btn btn-primary" onclick="event.preventDefault();saverate(this.value);">Save</button> -->
                     <button style='border-radius: 0px 10px 0px 10px;' type="submit" onclick="event.preventDefault();
                                                                        sendrequestl();" class="btn btn-primary">Send Request</button></p>
             </div>
