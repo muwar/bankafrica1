@@ -1,0 +1,82 @@
+#left_content{
+	width: 20%;
+	display:inline-block;
+	float:left;
+}
+#left_content .sidebar{
+	position: relative;
+    width: 100%;
+	background-color: #41B3E7;
+	color:white;
+	box-shadow: 1px 1px 5px #424242;
+}
+.navbar-default {
+    background-color: #fcf8e3;
+}
+.sidebar ul li a.active, .sidebar ul li a:hover, .sidebar ul li a:focus{
+	background-color: #125089;
+	color:white;
+}
+#center_content{
+	width: 80%;
+	display:inline-block;
+	padding-left: 2%;
+    padding-right: 2%;
+}
+
+#page-wrapper{
+	position:relative;
+	margin:0 auto;
+	border:none;
+}
+
+#menu{
+    background-color: #41B3E7;
+    box-shadow: 1px 1px 5px #424242;
+    position: relative;
+	border: none;
+	border-radius: 0;
+	font-family: "Open Sans";
+	margin-bottom:5px;
+}
+#yw0,#yw1,#yw2{
+	margin: 0;
+    padding: 0;
+    border: 0px solid #000;
+    list-style-type: none;
+}
+
+#yw0 li, #yw1 li, #yw2 li{
+	float: left;
+    padding: 8px;
+    background-color: #41B3E7;
+    position: relative;
+	font-weight:600;
+}
+
+#yw0 li a,.sidebar ul li a, #yw1 li a, #yw2 li a {
+    font-size: 15px;
+    color: #fff;
+    padding: 8px;
+    text-transform: capitalize;
+}
+#yw0 li:hover > #yw0, #yw1 li:hover > #yw1, #yw2 li:hover > #yw2{
+	display: block;
+}
+
+#yw0 li:hover, #yw0 li:active, #yw0 li:focus, #yw0 .active, #yw1 li:hover, #yw1 li:active, #yw1 li:focus, #yw1 .active, #yw2 li:hover, #yw2 li:active, #yw2 li:focus, #yw2 .active{
+	background-color: #125089;
+}
+
+#yw0 .active>a, #yw1 .active>a, #yw2.active>a{
+	background:none;
+}
+
+.sidebar .fa.arrow:before {
+    content: "\f105";
+}
+
+.form-control, .btn-lg{
+	border-radius:8px 0;
+}
+
