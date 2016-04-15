@@ -227,6 +227,7 @@ body {
 .dataTables_wrapper {
     position: relative;
     clear: both;
+	margin-top:2%
 }
 
 table.dataTable thead .sorting,

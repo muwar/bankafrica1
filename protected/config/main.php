@@ -130,7 +130,7 @@ return array(
             'connectionString' => 'mysql:host=localhost;dbname=bankafrica',
             'emulatePrepare' => true,
             'username' => 'root',
-            	'password' => '',//1170807906
+            	'password' => 'root',//1170807906
 //            'password' => '',
             'charset' => 'utf8',
         ),

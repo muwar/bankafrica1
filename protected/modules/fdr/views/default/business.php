@@ -32,19 +32,7 @@
         font-weight: bold;
     }
 </style>
-<script>
-    function toggle1(id) {
-        $("#the_rest" + id).toggle();
-    }
-    $(document).ready(function() {
-        $(".sub1").hide();
-        $(".sub2").hide();
-    });
-    function toggle2(id) {
-//        alert(id);
-        $("#the_restinner" + id).toggle();
-    }
-</script>
+
 <div id="page-wrapper">
     <div class="row">
         <div class="col-md-12">
@@ -1178,23 +1166,17 @@
 <script src="<?php echo Yii::app()->request->baseUrl; ?>/extras/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
 <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.table2excel.js"></script>
 <script>
-                                                                   $(function() {
-                                                                       $("#button").click(function() {
-                                                                           $("#dataTables-exampler1").table2excel({
-                                                                               exclude: ".noExl",
-                                                                               name: "Table of Rates"
-                                                                           });
-                                                                       });
-                                                                   });
+   $(function() {
+	   $("#button").click(function() {
+		   $("#dataTables-exampler1").table2excel({
+			   exclude: ".noExl",
+			   name: "Table of Rates"
+		   });
+	   });
+   });
 
 </script>
 <script>
-    $(document).ready(function() {
-        //localStorage.clear();
-        //alert(localStorage.length);
-        //$("#Formore").append("localStorage.length");
-        //document.getElementById('basket').value = localStorage.length;
-    });
     function closedialog() {
         $('#closedialog').on('click', location.reload());
     }
@@ -1544,49 +1526,49 @@
         $('#dataTables-example').DataTable({
             responsive: true
         });
-    });
-
-    $(document).ready(function() {
-        $('#dataTables-exampler1').DataTable({
+		
+		$('#dataTables-exampler1').DataTable({
+            responsive: true
+        });
+		
+		$('#dataTables-exampler2').DataTable({
+            responsive: true
+        });
+		
+		$('#dataTables-exampler3').DataTable({
+            responsive: true
+        });
+		
+		$('#dataTables-exampler4').DataTable({
+            responsive: true
+        });
+		
+		$('#dataTables-exampler5').DataTable({
+            responsive: true
+        });
+		
+		$('#dataTables-exampler6').DataTable({
+            responsive: true
+        });
+		
+		$('#dataTables-exampler7').DataTable({
+            responsive: true
+        });
+		
+		$('#dataTables-exampleo').DataTable({
+            responsive: true
+        });
+		
+		$('#dataTables-examples3').DataTable({
+            responsive: true
+        });
+		
+		$('#dataTables-examples4').DataTable({
             responsive: true
         });
     });
-    $(document).ready(function() {
-        $('#dataTables-exampler2').DataTable({
-            responsive: true
-        });
-    });
-    $(document).ready(function() {
-        $('#dataTables-exampler3').DataTable({
-            responsive: true
-        });
-    });
-    $(document).ready(function() {
-        $('#dataTables-exampler4').DataTable({
-            responsive: true
-        });
-    });
-    $(document).ready(function() {
-        $('#dataTables-exampler5').DataTable({
-            responsive: true
-        });
-    });
-    $(document).ready(function() {
-        $('#dataTables-exampler6').DataTable({
-            responsive: true
-        });
-    });
-    $(document).ready(function() {
-        $('#dataTables-exampler7').DataTable({
-            responsive: true
-        });
-    });
-
-
-</script>
-<script>
-    function switcher(id) {
-        //alert(id);
+	
+	function switcher(id) {
         if (document.getElementById('state' + id).value == 1) {
             document.getElementById('state' + id).value = 0;
         }
@@ -1594,13 +1576,27 @@
             document.getElementById('state' + id).value = 1;
         }
     }
+	
+	function toggle1(id) {
+        $("#the_rest" + id).toggle();
+    }
+    $(document).ready(function() {
+        $(".sub1").hide();
+        $(".sub2").hide();
+    });
+    function toggle2(id) {
+        $("#the_restinner" + id).toggle();
+    }
+</script>
+<script>
+    
 </script>
 <script>
     // tooltip demo
     $('.tooltip-demo').tooltip({
         selector: "[data-toggle=tooltip]",
         container: "body"
-    })
+    });
 
     // popover demo
     $("[data-toggle=popover]")
@@ -1613,26 +1609,4 @@
     // popover demo
     $("[data-toggle=popover]")
             .popover()
-</script>
-<script>
-    $(document).ready(function() {
-        $('#dataTables-exampleo').DataTable({
-            responsive: true
-        });
-    });
-</script>
-
-<script>
-    $(document).ready(function() {
-        $('#dataTables-examples3').DataTable({
-            responsive: true
-        });
-    });
-</script>
-<script>
-    $(document).ready(function() {
-        $('#dataTables-examples4').DataTable({
-            responsive: true
-        });
-    });
 </script>

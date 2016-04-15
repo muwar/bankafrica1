@@ -31,8 +31,12 @@
         font-size: 9px;
         font-weight: bold;
     }
+	#register{
+		position:absolute;
+		top:27%;
+		left:38%;
+	}
 </style>
-
 <div id="page-wrapper">
     <!-- /.row -->
     <div class="row">
@@ -60,7 +64,7 @@
                     <!-- Tab panes -->
                     <div class="tab-content">
                         <div class="tab-pane fade in active" id="home">
-                            <button type="submit" onclick="event.preventDefault();
+                            <button id="register" type="submit" onclick="event.preventDefault();
                                     registerneed(<?php echo $userid ?>);" class="btn btn-primary">Register New Securities</button>
                                     <?php // echo CHtml::link('Register new investment needs',array('registerneeds','onclick'=>'event.preventDefault();sendrequest()'))  ?>
                             <div class="dataTable_wrapper">

@@ -1,3 +1,10 @@
+<style>
+#button{
+	position:absolute;
+	top:14.5%;
+	left:45%;
+}
+</style>
 <div id="page-wrapper">
     <div class="row">
         <div class="col-md-12">
@@ -23,8 +30,8 @@
                                     <th> Bank</th>
                                     <th>Minimum</th>
                                     <?php foreach ($terms as $tterm) { ?>
-                                        <th><div class="tooltip-demo"> <label data-toggle="tooltip" data-placement="top" title="<?php echo $tterm->term_duration ?>"><?php echo $tterm->term_name; ?>
-                                    </label >  </div></th>
+                                        <th class="tooltip-demo"><label data-toggle="tooltip" data-placement="top" title="<?php echo $tterm->term_duration ?>"><?php echo $tterm->term_name; ?>
+                                    </label ></th>
                             <?php } ?>
                             <th>Special Rates?</th>
                             <th>Fees</th>

@@ -32,19 +32,7 @@
         font-weight: bold;
     }
 </style>
-<script>
-    function toggle1(id) {
-        $("#the_rest" + id).toggle();
-    }
-    $(document).ready(function() {
-        $(".sub1").hide();
-        $(".sub2").hide();
-    });
-    function toggle2(id) {
-//        alert(id);
-        $("#the_restinner" + id).toggle();
-    }
-</script>
+
 <div id="page-wrapper">
     <div class="row">
         <div class="col-md-12">
@@ -1158,14 +1146,34 @@
     <!-- /.modal-dialog -->
 </div>
 
+<!-- jQuery -->
+<script src="<?php echo Yii::app()->request->baseUrl; ?>/extras/bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="<?php echo Yii::app()->request->baseUrl; ?>/extras/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+<!-- Flot Charts JavaScript -->
+<script src="extras/bower_components/flot/excanvas.min.js"></script>
+<script src="extras/bower_components/flot/jquery.flot.js"></script>
+<script src="extras/bower_components/flot/jquery.flot.pie.js"></script>
+<script src="extras/bower_components/flot/jquery.flot.resize.js"></script>
+<script src="extras/bower_components/flot/jquery.flot.time.js"></script>
+<script src="extras/bower_components/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
+<script src="//cdn.jsdelivr.net/jquery.flot/0.8.3/jquery.flot.min.js"></script>
+
+<!-- Metis Menu Plugin JavaScript -->
+<script src="<?php echo Yii::app()->request->baseUrl; ?>/extras/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+<!-- Morris Charts JavaScript -->
+<script src="<?php echo Yii::app()->request->baseUrl; ?>/extras/bower_components/raphael/raphael-min.js"></script>
+
+        <!--<script src="<?php echo Yii::app()->request->baseUrl; ?>/extras/js/morris-data.js"></script>-->
+<!-- Custom Theme JavaScript -->
+<script src="<?php echo Yii::app()->request->baseUrl; ?>/extras/dist/js/sb-admin-2.js"></script>
+<!-- DataTables JavaScript -->
+<script src="<?php echo Yii::app()->request->baseUrl; ?>/extras/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+<script src="<?php echo Yii::app()->request->baseUrl; ?>/extras/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+<!-- Page-Level Demo Scripts - Tables - Use for reference -->
 
 <script>
-    $(document).ready(function() {
-        //localStorage.clear();
-        //alert(localStorage.length);
-        //$("#Formore").append("localStorage.length");
-        //document.getElementById('basket').value = localStorage.length;
-    });
     function complete(id, op) {
         $.ajax({
             type: "GET",
@@ -1430,83 +1438,60 @@
     }
 </script>
 
-<!-- Flot Charts JavaScript -->
-<script src="extras/bower_components/flot/excanvas.min.js"></script>
-<script src="extras/bower_components/flot/jquery.flot.js"></script>
-<script src="extras/bower_components/flot/jquery.flot.pie.js"></script>
-<script src="extras/bower_components/flot/jquery.flot.resize.js"></script>
-<script src="extras/bower_components/flot/jquery.flot.time.js"></script>
-<script src="extras/bower_components/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
-<script src="extras/js/flot-data.js"></script>
-<script src="<?php echo Yii::app()->request->baseUrl; ?>/extras/bower_components/morrisjs/morris.min.js"></script>
-<script src="<?php echo Yii::app()->request->baseUrl; ?>/extras/js/morris-data.js"></script>
-
-
-
-<!-- jQuery -->
-<script src="<?php echo Yii::app()->request->baseUrl; ?>/extras/bower_components/jquery/dist/jquery.min.js"></script>
-<!-- Bootstrap Core JavaScript -->
-<script src="<?php echo Yii::app()->request->baseUrl; ?>/extras/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- Metis Menu Plugin JavaScript -->
-<script src="<?php echo Yii::app()->request->baseUrl; ?>/extras/bower_components/metisMenu/dist/metisMenu.min.js"></script>
-<!-- Morris Charts JavaScript -->
-<script src="<?php echo Yii::app()->request->baseUrl; ?>/extras/bower_components/raphael/raphael-min.js"></script>
-
-        <!--<script src="<?php echo Yii::app()->request->baseUrl; ?>/extras/js/morris-data.js"></script>-->
-<!-- Custom Theme JavaScript -->
-<script src="<?php echo Yii::app()->request->baseUrl; ?>/extras/dist/js/sb-admin-2.js"></script>
-<!-- DataTables JavaScript -->
-<script src="<?php echo Yii::app()->request->baseUrl; ?>/extras/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
-<script src="<?php echo Yii::app()->request->baseUrl; ?>/extras/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
-<!-- Page-Level Demo Scripts - Tables - Use for reference -->
 <script>
     $(document).ready(function() {
+		$(".sub1").hide();
+        $(".sub2").hide();
+		
+		$('#dataTables-exampleo').DataTable({
+            responsive: true
+        });
+		
+		$('#dataTables-examples4').DataTable({
+            responsive: true
+        });
+		
+		$('#dataTables-examples5').DataTable({
+            responsive: true
+        });
+		
+		$('#dataTables-examples6').DataTable({
+            responsive: true
+        });
+		
         $('#dataTables-example').DataTable({
             responsive: true
         });
-    });
-
-    $(document).ready(function() {
-        $('#dataTables-exampler1').DataTable({
+		
+		$('#dataTables-exampler1').DataTable({
+            responsive: true
+        });
+		
+		$('#dataTables-exampler2').DataTable({
+            responsive: true
+        });
+		
+		$('#dataTables-exampler3').DataTable({
+            responsive: true
+        });
+		
+		$('#dataTables-exampler4').DataTable({
+            responsive: true
+        });
+		
+		$('#dataTables-exampler5').DataTable({
+            responsive: true
+        });
+		
+		$('#dataTables-exampler6').DataTable({
+            responsive: true
+        });
+		
+		$('#dataTables-exampler7').DataTable({
             responsive: true
         });
     });
-    $(document).ready(function() {
-        $('#dataTables-exampler2').DataTable({
-            responsive: true
-        });
-    });
-    $(document).ready(function() {
-        $('#dataTables-exampler3').DataTable({
-            responsive: true
-        });
-    });
-    $(document).ready(function() {
-        $('#dataTables-exampler4').DataTable({
-            responsive: true
-        });
-    });
-    $(document).ready(function() {
-        $('#dataTables-exampler5').DataTable({
-            responsive: true
-        });
-    });
-    $(document).ready(function() {
-        $('#dataTables-exampler6').DataTable({
-            responsive: true
-        });
-    });
-    $(document).ready(function() {
-        $('#dataTables-exampler7').DataTable({
-            responsive: true
-        });
-    });
-
-
-</script>
-<script>
-    function switcher(id) {
-        //alert(id);
+	function switcher(id) {
         if (document.getElementById('state' + id).value == 1) {
             document.getElementById('state' + id).value = 0;
         }
@@ -1514,17 +1499,28 @@
             document.getElementById('state' + id).value = 1;
         }
     }
+	
+	function toggle1(id) {
+        $("#the_rest" + id).toggle();
+    }
+	
+	function toggle2(id) {
+        $("#the_restinner" + id).toggle();
+    }
+</script>
+<script>
+    
 </script>
 <script>
     // tooltip demo
     $('.tooltip-demo').tooltip({
         selector: "[data-toggle=tooltip]",
         container: "body"
-    })
+    });
 
     // popover demo
     $("[data-toggle=popover]")
-            .popover()
+        .popover()
 </script>
 <script>
     $('[data-toggle="popover"]').popover({
@@ -1532,34 +1528,5 @@
     });
     // popover demo
     $("[data-toggle=popover]")
-            .popover()
-</script>
-<script>
-    $(document).ready(function() {
-        $('#dataTables-exampleo').DataTable({
-            responsive: true
-        });
-    });
-</script>
-<script>
-    $(document).ready(function() {
-        $('#dataTables-examples4').DataTable({
-            responsive: true
-        });
-    });
-</script>
-<script>
-    $(document).ready(function() {
-        $('#dataTables-examples5').DataTable({
-            responsive: true
-        });
-    });
-</script>
-
-<script>
-    $(document).ready(function() {
-        $('#dataTables-examples6').DataTable({
-            responsive: true
-        });
-    });
+        .popover()
 </script>

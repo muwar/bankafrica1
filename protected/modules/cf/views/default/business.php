@@ -31,6 +31,11 @@
         font-size: 9px;
         font-weight: bold;
     }
+	#register{
+		position:absolute;
+		top:36%;
+		left:38%;
+	}
 </style>
 
 <div id="page-wrapper">
@@ -60,7 +65,7 @@
                     <!-- Tab panes -->
                     <div class="tab-content">
                         <div class="tab-pane fade in active" id="home">
-                            <button type="submit" onclick="event.preventDefault();
+                            <button id="register" type="submit" onclick="event.preventDefault();
                                     registerneed(<?php echo $userid ?>);" class="btn btn-primary">Register new investment needs</button>
                                     <?php // echo CHtml::link('Register new investment needs',array('registerneeds','onclick'=>'event.preventDefault();sendrequest()'))  ?>
                             <table class="table table-striped table-bordered table-hover" id="dataTables-example">

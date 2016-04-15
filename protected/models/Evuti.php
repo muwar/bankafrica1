@@ -45,7 +45,7 @@ class Evuti extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-                    array('nom, pswd,pro', 'required'),
+			array('nom, pswd, pro', 'required'),
 			array('cdos', 'length', 'max'=>5),
 			array('uti', 'length', 'max'=>45),
 			array('nom, sur, pswd, pro, rmk', 'length', 'max'=>50),

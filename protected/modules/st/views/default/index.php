@@ -1,3 +1,10 @@
+<style>
+#button{
+	position:absolute;
+	top:13.5%;
+	left:45%;
+}
+</style>
 <div id="page-wrapper">
     <div class="row">
         <div class="col-md-12">
@@ -14,9 +21,8 @@
                 ?><!-- /.panel-heading -->
                 <div class="panel-body">
                     <div class="dataTable_wrapper">
-                                                <button class="btn  btn-success btn1" id="button">Export</button>
-
-                        <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                         <button class="btn  btn-success btn1" id="button">Export</button>
+                        <table class="table table-striped table-bordered table-hover" id="dataTables-example" style="width:100%;overflow:hidden">
                             <thead>
                                 <tr>
                                     <th> Type</th>
@@ -29,8 +35,7 @@
                                     <th>Discount</th>
                                     <th>Price</th>
                                     <th>Biddable? </th>
-                                    <th>Contact Us
-                                    </th>
+                                    <th>Contact Us</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -55,28 +60,17 @@
                                                 echo 'No';
                                             }
                                             ?></td>
-                                        <td>
-                                            <!--
-                                            <div class="tooltip-demo">
-                                                <label  data-toggle="tooltip" data-placement="top" title="Click to Bid for this security" onclick="loadform(<?php echo $sec->id . "," . $loggeduser->id . "," . $sec->owner; ?>)">
-                                                    Buy
-                                                </label>
-                                            </div>
-                                            -->
+                                        <td class="tooltip-demo">
                                             <?php  if(Yii::app()->user->name=='admin'){ ?>
-                                                                                        <div class="tooltip-demo">
                                                 <label  data-toggle="tooltip" data-placement="top" title="Click to Bid for this security">
                                                     Contact Us
                                                 </label>
-                                            </div>
                                             <?php }
                                             else{
                                             ?>
-                                            <div class="tooltip-demo">
-                                                <label  data-toggle="tooltip" data-placement="top" title="Click to Bid for this security" onclick="contactus(<?php echo $sec->id . "," . $loggeduser->id . "," . $sec->owner; ?>)">
-                                                    Contact Us
-                                                </label>
-                                            </div>
+											<label  data-toggle="tooltip" data-placement="top" title="Click to Bid for this security" onclick="contactus(<?php echo $sec->id . "," . $loggeduser->id . "," . $sec->owner; ?>)">
+												Contact Us
+											</label>
                                             <?php  } ?>
                                         </td>
                                     </tr>

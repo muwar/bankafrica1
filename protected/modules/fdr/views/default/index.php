@@ -1,3 +1,10 @@
+<style>
+#button{
+	position:absolute;
+	top:14.5%;
+	left:45%;
+}
+</style>
 <div id="page-wrapper">
     <div class="row">
         <div class="col-md-12">
@@ -20,11 +27,11 @@
                         <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                             <thead>
                                 <tr>
-                                    <th> Bank</th>
+                                    <th>Bank</th>
                                     <th>Minimum</th>
                                     <?php foreach ($terms as $tterm) { ?>
-                                        <th><div class="tooltip-demo"> <label data-toggle="tooltip" data-placement="top" title="<?php echo $tterm->term_duration ?>"><?php echo $tterm->term_name; ?>
-                                    </label >  </div></th>
+                                        <th class="tooltip-demo"><label data-toggle="tooltip" data-placement="top" title="<?php echo $tterm->term_duration ?>"><?php echo $tterm->term_name; ?>
+                                    </label ></th>
                             <?php } ?>
                             <th>Special Rates?</th>
                             <th>Fees</th>
@@ -75,7 +82,7 @@
                                         } else {
                                             ?>
                                             <?php if (Yii::app()->user->name == 'admin') { ?>
-                                                <td><div class="tooltip-demo">
+                                                <td>
                                                         <label type="label" data-html="true" class="" data-toggle="tooltip" data-placement="top" title="Click to send your request &#013;
                                                                Special rate: <?php
                                                                if (current($instrates)->special_rate == 0)
@@ -106,12 +113,12 @@
                                                                >
                                                                    <?php echo current($instrates)->lrate . " %" ?>
                                                         </label>
-                                                    </div>
+                                                    
                                                 </td>
                                             <?php }
                                             else {
                                                 ?>
-                                                <td><div class="tooltip-demo">
+                                                <td>
                                                         <label type="label" data-html="true" class="" data-toggle="tooltip" data-placement="top" title="Click to send your request &#013;
                                                                Special rate: <?php
                                                                if (current($instrates)->special_rate == 0)
@@ -142,7 +149,7 @@
                                                                onclick="loadform(<?php echo current($instrates)->lrate . ",'" . $user->resnam . "','" . $term1->term_name . "','" . $user->cus . "'," . current($instrates)->institutions_quotation_id . ",'" . $bankl->id . "'"; ?>)" >
                     <?php echo current($instrates)->lrate . " %" ?>
                                                         </label>
-                                                    </div>
+                                                    
                                                 </td>
                 <?php } ?>
                                             <!--                                

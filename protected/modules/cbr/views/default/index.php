@@ -1,3 +1,10 @@
+<style>
+#button{
+	position:absolute;
+	top:14.5%;
+	left:45%;
+}
+</style>
 <div id="page-wrapper">
     <div class="row">
         <div class="col-md-12">
@@ -343,14 +350,14 @@
 <script src="<?php echo Yii::app()->request->baseUrl; ?>/extras/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
 <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.table2excel.js"></script>
 <script>
-                                                                   $(function() {
-                                                                       $("#button").click(function() {
-                                                                           $("#dataTables-example").table2excel({
-                                                                               exclude: ".noExl",
-                                                                               name: "Table of Rates"
-                                                                           });
-                                                                       });
-                                                                   });
+   $(function() {
+	   $("#button").click(function() {
+		   $("#dataTables-example").table2excel({
+			   exclude: ".noExl",
+			   name: "Table of Rates"
+		   });
+	   });
+   });
 
 </script>
 <script>

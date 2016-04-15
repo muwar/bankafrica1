@@ -13,11 +13,4 @@ $this->breadcrumbs = array(
   );
  */
 ?>
-<div class="container">
-    <div class="row" align="center">
-
-        <div class="col-md-6 col-md-offset-6">
-            <?php echo $this->renderPartial('_form', array('model' => $model, 'model1' => $model1)); ?>
-        </div>
-    </div>
-</div>
+<?php echo $this->renderPartial('_form', array('model' => $model, 'model1' => $model1)); ?>

@@ -32,20 +32,13 @@
         font-size: 9px;
         font-weight: bold;
     }
+	#button{
+		position:absolute;
+		top:28%;
+		left:45%;
+	}
 </style>
-<script>
-    function toggle1(id) {
-        $("#the_rest" + id).toggle();
-    }
-    $(document).ready(function() {
-        $(".sub1").hide();
-        $(".sub2").hide();
-    });
-    function toggle2(id) {
-//        alert(id);
-        $("#the_restinner" + id).toggle();
-    }
-</script>
+
 <div id="page-wrapper">
     <div class="row">
         <div class="col-md-12">
@@ -301,29 +294,6 @@
                                 }
                             }
                             ?>
-
-                            <script>
-    $(document).ready(function() {
-        $('#ratetoggle1').show();
-        $('#ratetoggle2').hide();
-    });
-    function  togglepane(id) {
-
-
-        if (id == 1) {
-            $('#ratetoggle1').show();
-            $('#ratetoggle2').hide();
-        }
-        else {
-            if (id == 2) {
-                $('#ratetoggle2').show();
-                $('#ratetoggle1').hide();
-            }
-        }
-
-    }
-                            </script>
-
                             <input type="hidden" class="form-control" id="ratecount" name="ratecount" value="<?php echo $ratecount; ?>">
                             <input type="hidden" class="form-control" id="termcount" name="termcount" value="<?php echo $termcount; ?>">
                         </div>
@@ -1333,12 +1303,6 @@
 </script>
 
 <script>
-    $(document).ready(function() {
-        //localStorage.clear();
-        //alert(localStorage.length);
-        //$("#Formore").append("localStorage.length");
-        //document.getElementById('basket').value = localStorage.length;
-    });
     function closedialog() {
         $('#closedialog').on('click', location.reload());
     }
@@ -1661,10 +1625,12 @@
     }
 </script>
 
-
 <script>
     $(document).ready(function() {
-        $('#dataTables-example').DataTable({
+		$('#ratetoggle1').show();
+        $('#ratetoggle2').hide();
+		
+		$('#dataTables-example').DataTable({
             responsive: true
         });
         $('#dataTables-exampler1').DataTable({
@@ -1697,8 +1663,26 @@
         $('#dataTables-examples2').DataTable({
             responsive: true
         });
+		
+		$('#dataTables-exampleo').DataTable({
+            responsive: true
+        });
     });
+	
+    function  togglepane(id) {
+        if (id == 1) {
+            $('#ratetoggle1').show();
+            $('#ratetoggle2').hide();
+        }
+        else {
+            if (id == 2) {
+                $('#ratetoggle2').show();
+                $('#ratetoggle1').hide();
+            }
+        }
 
+    }
+	
     function switcher(id) {
         //alert(id);
         if (document.getElementById('state' + id).value == 1) {
@@ -1707,6 +1691,18 @@
         else {
             document.getElementById('state' + id).value = 1;
         }
+    }
+	
+	function toggle1(id) {
+        $("#the_rest" + id).toggle();
+    }
+    $(document).ready(function() {
+        $(".sub1").hide();
+        $(".sub2").hide();
+    });
+    function toggle2(id) {
+//        alert(id);
+        $("#the_restinner" + id).toggle();
     }
 </script>
 <script>
@@ -1727,11 +1723,4 @@
     // popover demo
     $("[data-toggle=popover]")
             .popover()
-</script>
-<script>
-    $(document).ready(function() {
-        $('#dataTables-exampleo').DataTable({
-            responsive: true
-        });
-    });
 </script>
