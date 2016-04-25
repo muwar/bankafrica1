@@ -1,4 +1,4 @@
-<div id="page-wrapper" style="background: gray">
+<div id="page-wrapper">
     <?php
     ini_set("SMTP", "ssl://smtp.gmail.com");
     ini_set("smtp_port", "465");

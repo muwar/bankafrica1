@@ -36,6 +36,19 @@
 		top:36%;
 		left:38%;
 	}
+	.table-striped>tbody>tr:nth-of-type(odd)
+	{
+		background-color: #f0ad4e;
+		color:white;
+	}
+	.table-striped>tbody>tr:nth-child(2n)
+	{
+		background-color: #8a6d3b;
+		color:white;
+	}
+	.sorting_1{
+		background: #5cb85c;
+	}
 </style>
 
 <div id="page-wrapper">
@@ -70,7 +83,7 @@
                                     <?php // echo CHtml::link('Register new investment needs',array('registerneeds','onclick'=>'event.preventDefault();sendrequest()'))  ?>
                             <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                 <thead>
-                                    <tr>
+                                    <tr style="background:blue;color:white">
                                         <th>Project</th>
                                         <th>Executive Summary</th>
                                         <th>Investment need</th>
@@ -106,7 +119,7 @@
                             <div class="dataTable_wrapper">
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-examplemyreqcf">
                                     <thead>
-                                        <tr>
+                                        <tr style="background:blue;color:white">
                                             <th>Sent to </th>
                                             <th>Date</th>
                                             <th>Project</th>
@@ -367,7 +380,7 @@
                             <div class="dataTable_wrapper">
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-examplecreqcf">
                                     <thead>
-                                        <tr>
+                                        <tr style="background:blue;color:white">
                                             <th>From</th>
                                             <th>Date</th>
                                             <th>Project</th>
@@ -637,7 +650,7 @@
                             <div class="dataTable_wrapper">
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-examplemyreqcfint">
                                     <thead>
-                                        <tr>
+                                        <tr style="background:blue;color:white">
                                             <th>Project</th>
                                             <th>Date</th>
                                             <th>Status</th>

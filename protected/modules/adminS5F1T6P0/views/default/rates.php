@@ -1,3 +1,18 @@
+<style>
+.table-striped>tbody>tr:nth-of-type(odd)
+{
+	background-color: #f0ad4e;
+	color:white;
+}
+.table-striped>tbody>tr:nth-child(2n)
+{
+	background-color: #8a6d3b;
+	color:white;
+}
+.sorting_1{
+	background: #5cb85c;
+}
+</style>
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
@@ -20,7 +35,7 @@
                         <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                             <thead>
                                 <?php $i = 1; ?>
-                                <tr>
+                                <tr style="background:blue;color:white">
                                     <th>SN</th>
                                     <th>Rate Type</th>
                                 </tr>
@@ -67,7 +82,7 @@
                         <table class="table table-striped table-bordered table-hover" id="dataTables-example1">
                             <thead>
                                 <?php $i = 1; ?>
-                                <tr>
+                                <tr style="background:blue;color:white">
                                     <th>SN</th>
                                     <th>Term</th>
                                     <th>Detail</th>

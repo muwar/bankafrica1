@@ -36,6 +36,19 @@
 		top:27%;
 		left:38%;
 	}
+	.table-striped>tbody>tr:nth-of-type(odd)
+	{
+		background-color: #f0ad4e;
+		color:white;
+	}
+	.table-striped>tbody>tr:nth-child(2n)
+	{
+		background-color: #8a6d3b;
+		color:white;
+	}
+	.sorting_1{
+		background: #5cb85c;
+	}
 </style>
 <div id="page-wrapper">
     <!-- /.row -->
@@ -70,7 +83,7 @@
                             <div class="dataTable_wrapper">
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
-                                        <tr>
+                                        <tr style="background:blue;color:white">
                                             <th>Issuer</th>
                                             <th>Issue date</th>
                                             <th>Maturity</th>
@@ -100,7 +113,7 @@
                             <div class="dataTable_wrapper">
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-examplesechis">
                                     <thead>
-                                        <tr>
+                                        <tr style="background:blue;color:white">
                                             <th>Type </th>
                                             <th>Issuer </th>
                                             <th>Issue Date </th>
@@ -134,7 +147,7 @@
                             <div class="dataTable_wrapper">
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-examplemyreqsec">
                                     <thead>
-                                        <tr>
+                                        <tr style="background:blue;color:white">
                                             <th>Sent to </th>
                                             <th>Date</th>
                                             <th>Set Discount</th>
@@ -398,7 +411,7 @@
                             <div class="dataTable_wrapper">
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-examplemreqsec">
                                     <thead>
-                                        <tr>
+                                        <tr style="background:blue;color:white">
                                             <th>From</th>
                                             <th>Date</th>
                                             <th>Qty</th>
@@ -650,7 +663,7 @@
                             <div class="dataTable_wrapper">
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-examplemyreqcfint">
                                     <thead>
-                                        <tr>
+                                        <tr style="background:blue;color:white">
                                             <th>Security</th>
                                             <th>Date</th>
                                             <th>Status</th>

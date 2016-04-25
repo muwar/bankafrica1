@@ -1,10 +1,30 @@
+<style>
+#button{
+	position:absolute;
+	top:13.5%;
+	left:45%;
+}
+.table-striped>tbody>tr:nth-of-type(odd)
+{
+	background-color: #f0ad4e;
+	color:white;
+}
+.table-striped>tbody>tr:nth-child(2n)
+{
+	background-color: #8a6d3b;
+	color:white;
+}
+.sorting_1{
+	background: #5cb85c;
+}
+</style>
 <div id="page-wrapper">
     <div class="row">
         <div class="col-md-12">
             <div class="dataTable_wrapper">
                 <table class="table table-striped table-bordered table-hover" id="dataTables-example1">
                     <thead>
-                        <tr>
+                        <tr style="background:blue;color:white">
                             <th>#</th>
                             <th>User</th>
                             <th>Profile</th>
@@ -41,7 +61,7 @@
                                 ));
                                 ?>
 
-                                <td><?php echo $form->dropDownList($user, 'user_status', array('1' => 'Activate', '0' => 'Deactivate'), array('id' => 'value' . $user->id, 'onchange' => 'changestate(' . $user->id . ')')); ?></td>
+                                <td><?php echo $form->dropDownList($user, 'user_status', array('1' => 'Activate', '0' => 'Deactivate'), array('id' => 'value' . $user->id, 'style' =>'color:black', 'onchange' => 'changestate(' . $user->id . ')')); ?></td>
                                 <?php $this->endWidget(); ?>
                             </tr>
                             <?php

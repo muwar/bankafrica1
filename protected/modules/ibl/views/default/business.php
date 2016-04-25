@@ -37,6 +37,19 @@
 		top:28%;
 		left:45%;
 	}
+	.table-striped>tbody>tr:nth-of-type(odd)
+	{
+		background-color: #f0ad4e;
+		color:white;
+	}
+	.table-striped>tbody>tr:nth-child(2n)
+	{
+		background-color: #8a6d3b;
+		color:white;
+	}
+	.sorting_1{
+		background: #5cb85c;
+	}
 </style>
 
 <div id="page-wrapper">
@@ -93,7 +106,7 @@
 
                                 <table class="table table-striped table-bordered table-hover table2excel tableresults" id="dataTables-exampleX">
                                     <thead>
-                                        <tr>
+                                        <tr style="background:blue;color:white">
                                             <th> Operation</th>
                                             <?php foreach ($terms as $tterm) { ?>
                                                 <th><?php echo $tterm->term_name; ?></th>
@@ -221,7 +234,7 @@
 
                                                     <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                                         <thead>
-                                                            <tr>
+                                                            <tr style="background:blue;color:white">
                                                                 <th>Term</th>
                                                                 <th>Rate</th>
                                                                 <th>Biddable?</th>
@@ -315,7 +328,7 @@
                                 <button class="btn  btn-success btn1" id="button1">Export</button>
                                 <table class="table table-striped table-bordered table-hover table2excel tableresults" id="dataTables-exampler1">
                                     <thead>
-                                        <tr>
+                                        <tr style="background:blue;color:white">
                                             <th>For</th>
                                             <th>Client</th>
                                             <th>Date</th>
@@ -668,7 +681,7 @@
 
                                 <table class="table table-striped table-bordered table-hover table2excel tableresults" id="dataTables-exampler4">
                                     <thead>
-                                        <tr>
+                                        <tr style="background:blue;color:white">
                                             <th>Sent to </th>
                                             <th>Date</th>
                                             <th>Rate</th>
@@ -1029,7 +1042,7 @@
                                   <button class="btn  btn-success btn1" id="button3">Export</button>
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-exampleo">
                                     <thead>
-                                        <tr>
+                                        <tr style="background:blue;color:white">
                                             <th>Bank</th>
                                             <th>Transaction</th>
                                             <th>Term</th>
@@ -1109,7 +1122,7 @@
                                   <button class="btn  btn-success btn1" id="buttons<?php  echo $i; ?>">Export</button>
                                                 <table class="table table-striped table-bordered table-hover" id="dataTables-examples<?php  echo $i; ?>">
                                                     <thead>
-                                                        <tr>
+                                                        <tr style="background:blue;color:white">
                                                             <th>Term</th>
                                                             <th>Rate</th>
                                                             <th>Biddable?</th>
