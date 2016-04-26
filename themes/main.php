@@ -5,7 +5,6 @@
 // This is the main Web application configuration. Any writable
 // CWebApplication properties can be configured here.
 return array(
-     'sourceLanguage'=>'en',
     'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
     'name' => 'Standard Financials Trading Platform (SFTP)',
 //    'defaultController' => 'site/index', // <--- add this line and replace with correct controller/action
@@ -128,10 +127,10 @@ return array(
           ), */
         // uncomment the following to use a MySQL database
         'db' => array(
-            'connectionString' => 'mysql:host=localhost;dbname=bankafrica',
+            'connectionString' => 'mysql:host=localhost;dbname=ngtltd2_ibank',
             'emulatePrepare' => true,
-            'username' => 'root',
-            	'password' => 's3cr3t',//1170807906
+            'username' => 'ngtltd2_ibank',
+            	'password' => 'ngtltd2_ibank',//1170807906
 //            'password' => '',
             'charset' => 'utf8',
         ),
