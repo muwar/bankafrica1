@@ -31,6 +31,16 @@
         font-size: 9px;
         font-weight: bold;
     }
+	.table-striped>tbody>tr:nth-of-type(odd)
+	{
+		background-color: #f0ad4e;
+		color:white;
+	}
+	.table-striped>tbody>tr:nth-child(2n)
+	{
+		background-color: #8a6d3b;
+		color:white;
+	}
 </style>
 
 <div id="page-wrapper">
@@ -67,7 +77,7 @@
                                 <div class="dataTable_wrapper">
                                     <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                         <thead>
-                                            <tr>
+                                            <tr style="background:blue;color:white">
      <!--                                           <th> Operation</th>  -->
                                                 <th>Minimum</th>
                                                 <?php foreach ($terms as $tterm) { ?>
@@ -162,7 +172,7 @@
                                                 <div class="dataTable_wrapper">
 
                                                     <table class="table table-striped table-bordered table-hover">       
-                                                        <tr>
+                                                        <tr style="background:none">
                                                             <td>
                                                                 <div class="row">
                                                                     <div class="col-md-12 col-lg-12 col-xs-12">
@@ -179,7 +189,7 @@
                                                     </table> 
                                                     <table class="table table-striped table-bordered table-hover" id="dataTables-exampler">
                                                         <thead>
-                                                            <tr>
+                                                            <tr style="background:blue;color:white">
                                                                 <th>Term</th>
                                                                 <th>Rate</th>
                                                                 <th>Biddable?</th>
@@ -257,7 +267,7 @@
                                 <div class="dataTable_wrapper">
                                     <table class="table table-striped table-bordered table-hover" id="dataTables-exampler1">
                                         <thead>
-                                            <tr>
+                                            <tr style="background:blue;color:white">
                                                 <th>For</th>
                                                 <th>Client</th>
                                                 <th>Date</th>
@@ -597,7 +607,7 @@
                                 <div class="dataTable_wrapper">
                                     <table class="table table-striped table-bordered table-hover" id="dataTables-exampler4">
                                         <thead>
-                                            <tr>
+                                            <tr style="background:blue;color:white">
                                                 <th>Sent to </th>
                                                 <th>Date</th>
                                                 <th>Rate</th>
@@ -946,7 +956,7 @@
                                 <div class="dataTable_wrapper">
                                     <table class="table table-striped table-bordered table-hover" id="dataTables-exampleo">
                                         <thead>
-                                            <tr>
+                                            <tr style="background:blue;color:white">
                                                 <th>Bank</th>
                                                 <th>Term</th>
                                                 <th>Rate</th>
@@ -1011,7 +1021,7 @@
                                                 <div class="dataTable_wrapper">
                                                     <table class="table table-striped table-bordered table-hover" id="dataTables-examples<?php echo $i; ?>">
                                                         <thead>
-                                                            <tr>
+                                                            <tr style="background:blue;color:white">
                                                                 <th>Term</th>
                                                                 <th>Rate</th>
                                                                 <th>Biddable?</th>

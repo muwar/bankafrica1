@@ -1,82 +1,85 @@
-<div id="page-wrapper">
-    <div class="row">
+<style>
+.table-striped>tbody>tr:nth-of-type(odd)
+{
+	background-color: #f0ad4e;
+	color:white;
+}
+.table-striped>tbody>tr:nth-child(2n)
+{
+	background-color: #8a6d3b;
+	color:white;
+}
+.sorting_1{
+	background: #5cb85c;
+}
+</style>
+<div id="page-wrapper" style="background: #e7e7e7;">
+    <div class="row" style="padding-top: 3%;">
         <div class="col-md-12">
-            <div class="col-md-6">
-                <div class="panel panel-default">
-                    <i class="fa fa-users fa-2x"></i>
-                    <div class="panel-body">
-                        #system users
-                        <span class="badge"><?php echo count(Evuti::model()->findAll()); ?></span>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="panel panel-default">
-                    <i class="fa fa-users fa-2x"></i>
-                    <div class="panel-body">
-                        <?php echo CHtml::link('Manage users', array('users'), array('onclick' => '$("#signup").dialog("open"); return false;')); ?>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-4">
-            <div class="panel panel-default">
-                <i class="fa fa-bell-o fa-2x"></i>
-                <div class="panel-body">
-                    #Banks Registered
-                    <?php
-                    $getbankprof = Evprof::model()->findAll('lib=:x', array(':x' => 'Bank'));
-                    foreach ($getbankprof as $bankprof)
-                        ;
-                    $getbanks = Evuti::model()->findAll('pro=:x', array(':x' => $bankprof->pro));
-                    ?>
-                    <span class="badge"><?php echo count($getbanks); ?></span>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="panel panel-default">
-                <i class="fa fa-thumbs-o-up fa-2x"></i>
-                <div class="panel-body">
-                    #Completed transactions&nbsp;
-                    <?php
-                    $tibl = Bqibl::model()->findall('sta=:x', array(':x' => 'VA'));
-                    $tfd = Bqfd::model()->findAll('sta=:x', array(':x' => 'VA'));
-                    $tcf = Bqcf::model()->findAll('sta=:x', array(':x' => 'VA'));
-                    $tcb = Bqcb::model()->findAll('sta=:x', array(':x' => 'VA'));
-                    $tdsec = Bqdsec::model()->findAll('sta=:x', array(':x' => 'VA'));
-                    ?>
-                    <span class="badge"><?php echo count($tibl) + count($tfd) + count($tcf) + count($tcb) + count($tdsec); ?></span>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="panel panel-default">
-                <i class="fa fa-gears fa-2x"></i>
-                <div class="panel-body">
-                    #New Requests&nbsp;
-                    <?php
-                    $nibl = Bqibl::model()->findall('proc=:x', array(':x' => '0'));
-                    $nfd = Bqfd::model()->findAll('proc=:x', array(':x' => '0'));
-                    $ncf = Bqcf::model()->findAll('proc=:x', array(':x' => '0'));
-                    $ncb = Bqcb::model()->findAll('proc=:x', array(':x' => '0'));
-                    $ndsec = Bqdsec::model()->findAll('proc=:x', array(':x' => '0'));
-                    ?>
-                    <span class="badge"><?php echo count($nibl) + count($nfd) + count($ncf) + count($ncb) + count($ndsec); ?></span>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-
-                </div>
-                <!-- /.panel-heading -->
-                <div class="panel-body">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<div class="row text-center">
+						<div class="col-md-4">
+							<a href="">
+								<i class="fa fa-users fa-5x"></i> <br/>
+								System Users (<?php echo count(Evuti::model()->findAll()); ?>)
+							</a>
+						</div>
+						
+						<div class="col-md-4">
+							<?php echo CHtml::link("<i class='fa fa-users fa-5x'></i> <br/>Manage users ", array('users'), array('onclick' => '$("#signup").dialog("open"); return false;')); ?>
+						</div>
+						
+						<div class="col-md-4">
+							<a href="">
+								<i class="fa fa-bell-o fa-5x"></i> <br/>
+								<?php
+									$getbankprof = Evprof::model()->findAll('lib=:x', array(':x' => 'Bank'));
+									foreach ($getbankprof as $bankprof)
+										;
+									$getbanks = Evuti::model()->findAll('pro=:x', array(':x' => $bankprof->pro));
+								?>
+								Banks Registered (<?php echo count($getbanks); ?>)
+							</a>
+						</div>
+					</div>
+					
+					<div style="padding:20px;"></div>
+					
+					<div class="row text-center">
+						<div class="col-md-4">
+							<a href="">
+								<i class="fa fa-thumbs-o-up fa-5x"></i> <br/>
+								<?php
+									$tibl = Bqibl::model()->findall('sta=:x', array(':x' => 'VA'));
+									$tfd = Bqfd::model()->findAll('sta=:x', array(':x' => 'VA'));
+									$tcf = Bqcf::model()->findAll('sta=:x', array(':x' => 'VA'));
+									$tcb = Bqcb::model()->findAll('sta=:x', array(':x' => 'VA'));
+									$tdsec = Bqdsec::model()->findAll('sta=:x', array(':x' => 'VA'));
+								?>
+								Completed transactions&nbsp; (<?php echo count($tibl) + count($tfd) + count($tcf) + count($tcb) + count($tdsec); ?>)
+							</a>
+						</div>
+						
+						<div class="col-md-4">
+							<a href="">
+								<i class="fa fa-gears fa-5x"></i> <br/>
+								<?php
+									$nibl = Bqibl::model()->findall('proc=:x', array(':x' => '0'));
+									$nfd = Bqfd::model()->findAll('proc=:x', array(':x' => '0'));
+									$ncf = Bqcf::model()->findAll('proc=:x', array(':x' => '0'));
+									$ncb = Bqcb::model()->findAll('proc=:x', array(':x' => '0'));
+									$ndsec = Bqdsec::model()->findAll('proc=:x', array(':x' => '0'));
+								?>
+								New Requests&nbsp; (<?php echo count($nibl) + count($nfd) + count($ncf) + count($ncb) + count($ndsec); ?>)
+							</a>
+						</div>
+					</div>
+					
+					<div style="padding:20px;"></div>
+				</div>
+				
+				<div class="panel-body">
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs">
 
@@ -112,7 +115,7 @@
                             <div class="dataTable_wrapper">
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
-                                        <tr>
+                                        <tr style="background:blue;color:white">
                                             <th> Owner</th>
                                             <th>Project</th>
                                             <th>Executive Summary</th>
@@ -157,7 +160,7 @@
                             <div class="dataTable_wrapper">
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example1">
                                     <thead>
-                                        <tr>
+                                        <tr style="background:blue;color:white">
                                             <th> Owner</th>
                                             <th>Project</th>
                                             <th>Investment need</th>
@@ -215,7 +218,7 @@
                             <div class="dataTable_wrapper">
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-examplesecr">
                                     <thead>
-                                        <tr>
+                                        <tr style="background:blue;color:white">
                                             <th> Owner</th>
                                             <th>Security</th>
                                             <th>Issuer</th>
@@ -272,7 +275,7 @@
                             <div class="dataTable_wrapper">
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-examplesecm">
                                     <thead>
-                                        <tr>
+                                        <tr style="background:blue;color:white">
                                             <th> Owner</th>
                                             <th>Buyer</th>
                                             <th>Security Type</th>
@@ -335,12 +338,9 @@
                         </div>
                     </div>
                 </div>
-                <!-- /.panel-body -->
-            </div>
-            <!-- /.panel -->
-
+				
+			</div>
         </div>
-
     </div>
 </div>
 <div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

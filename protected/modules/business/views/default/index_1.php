@@ -31,6 +31,19 @@
         font-size: 9px;
         font-weight: bold;
     }
+	.table-striped>tbody>tr:nth-of-type(odd)
+	{
+		background-color: #f0ad4e;
+		color:white;
+	}
+	.table-striped>tbody>tr:nth-child(2n)
+	{
+		background-color: #8a6d3b;
+		color:white;
+	}
+	.sorting_1{
+		background: #5cb85c;
+	}
 </style>
 <script>
     function toggle1(id) {
@@ -136,7 +149,7 @@
                                             <div class="dataTable_wrapper">
                                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                                     <thead>
-                                                        <tr>
+                                                        <tr style="background:blue;color:white">
                                                             <th> Operation</th>
                                                             <?php foreach ($terms as $tterm) { ?>
                                                                 <th><?php echo $tterm->term_name; ?></th>
@@ -265,7 +278,7 @@
                                             <div class="dataTable_wrapper">
                                                 <table class="table table-striped table-bordered table-hover" id="dataTables-exampler1">
                                                     <thead>
-                                                        <tr>
+                                                        <tr style="background:blue;color:white">
                                                             <th>For</th>
                                                             <th>Client</th>
                                                             <th>Rate</th>
@@ -579,7 +592,7 @@
                                             <div class="dataTable_wrapper">
                                                 <table class="table table-striped table-bordered table-hover" id="dataTables-exampler2">
                                                     <thead>
-                                                        <tr>
+                                                        <tr style="background:blue;color:white">
                                                             <th>For</th>
                                                             <th>Client</th>
                                                             <th>Rate</th>
@@ -895,7 +908,7 @@
                                             <div class="dataTable_wrapper">
                                                 <table class="table table-striped table-bordered table-hover" id="dataTables-exampler3">
                                                     <thead>
-                                                        <tr>
+                                                        <tr style="background:blue;color:white">
                                                             <th>Client</th>
                                                             <th>Rate</th>
                                                             <th>amt requested</th>
@@ -914,7 +927,7 @@
                                             <div class="dataTable_wrapper">
                                                 <table class="table table-striped table-bordered table-hover" id="dataTables-exampler4">
                                                     <thead>
-                                                        <tr>
+                                                        <tr style="background:blue;color:white">
                                                             <th>Sent to </th>
                                                             <th>Rate</th>
                                                             <th>amt requested</th>
@@ -1229,7 +1242,7 @@
                                             <div class="dataTable_wrapper">
                                                 <table class="table table-striped table-bordered table-hover" id="dataTables-exampler4">
                                                     <thead>
-                                                        <tr>
+                                                        <tr style="background:blue;color:white">
                                                             <th>Sent to </th>
                                                             <th>Rate</th>
                                                             <th>amt requested</th>

@@ -4,6 +4,19 @@
 	top:14.5%;
 	left:45%;
 }
+.table-striped>tbody>tr:nth-of-type(odd)
+{
+	background-color: #f0ad4e;
+	color:white;
+}
+.table-striped>tbody>tr:nth-child(2n)
+{
+	background-color: #8a6d3b;
+	color:white;
+}
+.sorting_1{
+	background: #5cb85c;
+}
 </style>
 <div id="page-wrapper">
     <div class="row">
@@ -26,7 +39,7 @@
                         <button class="btn  btn-success btn1" id="button">Export</button>
                         <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                             <thead>
-                                <tr>
+                                <tr style="background:blue;color:white">
                                     <th>Bank</th>
                                     <th>Minimum</th>
                                     <?php foreach ($terms as $tterm) { ?>

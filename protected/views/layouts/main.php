@@ -604,6 +604,8 @@
                             <!-- /.navbar-static-side -->	
 						</div>
                     </aside>
+					<div class="body"></div>
+					<div class="grad"></div>
                     <article id="center_content">
 					<?php echo $content; ?>
 					</article>

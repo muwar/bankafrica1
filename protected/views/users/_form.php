@@ -218,7 +218,7 @@ input, textarea, label {
 						<?php echo $form->textField($model, 'nom', array('size' => 45, 'maxlength' => 45, 'placeholder' => 'Username*')); ?>
 						<?php echo $form->error($model, 'nom'); ?>
 					</p>
-					<p class="contact-input">
+					<p class="contact-input" style="overflow:visible">
 						<?php echo $form->textField($model1, 'telephone', array('size' => 100, 'maxlength' => 45, 'type'=>'tel', 'id'=>'mobile-number', 'placeholder' => 'Telephone*')); ?>
 						<?php echo $form->error($model1, 'telephone'); ?>
 					</p>

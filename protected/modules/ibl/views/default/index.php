@@ -4,6 +4,19 @@
 	top:14.5%;
 	left:45%;
 }
+.table-striped>tbody>tr:nth-of-type(odd)
+{
+	background-color: #f0ad4e;
+	color:white;
+}
+.table-striped>tbody>tr:nth-child(2n)
+{
+	background-color: #8a6d3b;
+	color:white;
+}
+.sorting_1{
+	background: #5cb85c;
+}
 </style>
 <div id="page-wrapper">
     <div class="row">
@@ -27,13 +40,13 @@
 
                         <table class="table table-striped table-bordered table-hover table2excel tableresults" id="dataTables-example1">
                             <thead>
-                                <tr>
-                                    <th rowspan='2'> Banks</th>
+                                <tr style="background:blue;color:white">
+                                    <th rowspan='2' style="vertical-align: middle;"> Banks</th>
                                     <?php foreach ($terms as $tterm) { ?>
                                         <th colspan='2'><?php echo $tterm->term_name; ?></th>
                                     <?php } ?>
                                 </tr>
-                                <tr>
+                                <tr style="background:green;color:white">
                                     <?php foreach ($terms as $tterm) { ?>
                                         <th><?php echo 'LR'; ?></th>
                                         <th><?php echo 'BR'; ?></th>

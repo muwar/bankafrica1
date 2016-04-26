@@ -6587,6 +6587,7 @@ Stack trace:
 REQUEST_URI=/bankafrica/index.php?r=users/create
 HTTP_REFERER=http://localhost/bankafrica/index.php?r=site/login
 ---
+<<<<<<< HEAD
 2016/04/16 12:23:42 [error] [exception.CDbException] exception 'CDbException' with message 'CDbConnection failed to open the DB connection: SQLSTATE[28000] [1045] Access denied for user 'root'@'localhost' (using password: YES)' in C:\xampp\htdocs\bankafrica1\core\db\CDbConnection.php:381
 Stack trace:
 #0 C:\xampp\htdocs\bankafrica1\core\db\CDbConnection.php(330): CDbConnection->open()
@@ -6708,3 +6709,64 @@ Stack trace:
 REQUEST_URI=/bankafrica1/index.php?r=ra
 HTTP_REFERER=http://127.0.0.1/bankafrica1/index.php?r=eb
 ---
+=======
+2016/04/25 09:50:56 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "ra".' in C:\wamp\www\bankafrica\core\web\CWebApplication.php:286
+Stack trace:
+#0 C:\wamp\www\bankafrica\core\web\CWebApplication.php(141): CWebApplication->runController('ra')
+#1 C:\wamp\www\bankafrica\core\base\CApplication.php(169): CWebApplication->processRequest()
+#2 C:\wamp\www\bankafrica\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/bankafrica/index.php?r=ra
+HTTP_REFERER=http://localhost/bankafrica/index.php?r=st
+---
+2016/04/25 09:50:58 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "ra".' in C:\wamp\www\bankafrica\core\web\CWebApplication.php:286
+Stack trace:
+#0 C:\wamp\www\bankafrica\core\web\CWebApplication.php(141): CWebApplication->runController('ra')
+#1 C:\wamp\www\bankafrica\core\base\CApplication.php(169): CWebApplication->processRequest()
+#2 C:\wamp\www\bankafrica\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/bankafrica/index.php?r=ra
+HTTP_REFERER=http://localhost/bankafrica/index.php?r=ra
+---
+2016/04/25 10:55:35 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "ra".' in C:\wamp\www\bankafrica\core\web\CWebApplication.php:286
+Stack trace:
+#0 C:\wamp\www\bankafrica\core\web\CWebApplication.php(141): CWebApplication->runController('ra')
+#1 C:\wamp\www\bankafrica\core\base\CApplication.php(169): CWebApplication->processRequest()
+#2 C:\wamp\www\bankafrica\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/bankafrica/index.php?r=ra
+HTTP_REFERER=http://localhost/bankafrica/index.php?r=eb
+---
+2016/04/25 11:28:53 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "ra".' in C:\wamp\www\bankafrica\core\web\CWebApplication.php:286
+Stack trace:
+#0 C:\wamp\www\bankafrica\core\web\CWebApplication.php(141): CWebApplication->runController('ra')
+#1 C:\wamp\www\bankafrica\core\base\CApplication.php(169): CWebApplication->processRequest()
+#2 C:\wamp\www\bankafrica\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/bankafrica/index.php?r=ra
+HTTP_REFERER=http://localhost/bankafrica/index.php?r=eb
+---
+2016/04/25 12:00:53 [error] [php] link() expects exactly 2 parameters, 1 given (C:\wamp\www\bankafrica\protected\modules\adminS5F1T6P0\views\default\index.php:41)
+Stack trace:
+#0 C:\wamp\www\bankafrica\core\web\CBaseController.php(95): DefaultController->renderInternal()
+#1 C:\wamp\www\bankafrica\core\web\CController.php(869): DefaultController->renderFile()
+#2 C:\wamp\www\bankafrica\core\web\CController.php(782): DefaultController->renderPartial()
+#3 C:\wamp\www\bankafrica\protected\modules\adminS5F1T6P0\controllers\DefaultController.php(47): DefaultController->render()
+#4 C:\wamp\www\bankafrica\core\web\actions\CInlineAction.php(49): DefaultController->actionIndex()
+#5 C:\wamp\www\bankafrica\core\web\CController.php(308): CInlineAction->runWithParams()
+#6 C:\wamp\www\bankafrica\core\web\filters\CFilterChain.php(133): DefaultController->runAction()
+#7 C:\wamp\www\bankafrica\core\web\filters\CFilter.php(40): CFilterChain->run()
+#8 C:\wamp\www\bankafrica\core\web\CController.php(1145): CAccessControlFilter->filter()
+#9 C:\wamp\www\bankafrica\core\web\filters\CInlineFilter.php(58): DefaultController->filterAccessControl()
+#10 C:\wamp\www\bankafrica\core\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#11 C:\wamp\www\bankafrica\core\web\CController.php(291): CFilterChain->run()
+#12 C:\wamp\www\bankafrica\core\web\CController.php(265): DefaultController->runActionWithFilters()
+#13 C:\wamp\www\bankafrica\core\web\CWebApplication.php(282): DefaultController->run()
+#14 C:\wamp\www\bankafrica\core\web\CWebApplication.php(141): CWebApplication->runController()
+#15 C:\wamp\www\bankafrica\core\base\CApplication.php(169): CWebApplication->processRequest()
+#16 C:\wamp\www\bankafrica\index.php(13): CWebApplication->run()
+REQUEST_URI=/bankafrica/index.php?r=adminS5F1T6P0
+in C:\wamp\www\bankafrica\protected\modules\adminS5F1T6P0\views\default\index.php (41)
+in C:\wamp\www\bankafrica\protected\modules\adminS5F1T6P0\controllers\DefaultController.php (47)
+in C:\wamp\www\bankafrica\index.php (13)
+>>>>>>> f1ae418537e03f6ea0d089fc22a7f34d773473cd

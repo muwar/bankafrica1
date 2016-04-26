@@ -9,6 +9,7 @@
 	background-color: #41B3E7;
 	color:white;
 	box-shadow: 1px 1px 5px #424242;
+	z-index: 999;
 }
 .navbar-default {
     background-color: #fcf8e3;
@@ -22,12 +23,15 @@
 	display:inline-block;
 	padding-left: 2%;
     padding-right: 2%;
+	/*background:url("../images/background.jpg");
+	background-size:cover;*/
 }
 
 #page-wrapper{
 	position:relative;
 	margin:0 auto;
 	border:none;
+	z-index: 999;
 }
 
 #menu{
@@ -38,6 +42,7 @@
 	border-radius: 0;
 	font-family: "Open Sans";
 	margin-bottom:5px;
+	z-index:999;
 }
 #yw0,#yw1,#yw2{
 	margin: 0;
@@ -80,3 +85,29 @@
 	border-radius:8px 0;
 }
 
+.body{
+	position: absolute;
+	top: -20px;
+	left: -20px;
+	right: -40px;
+	bottom: -40px;
+	width: auto;
+	height: auto;
+	background-image: url(../images/background.jpg);
+	background-size: cover;
+	-webkit-filter: blur(5px);
+	z-index: 0;
+}
+
+.grad{
+	position: absolute;
+	top: -20px;
+	left: -20px;
+	right: -40px;
+	bottom: -40px;
+	width: auto;
+	height: auto;
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.65))); /* Chrome,Safari4+ */
+	z-index: 1;
+	opacity: 0.7;
+}
