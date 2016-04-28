@@ -93,7 +93,8 @@
 	bottom: -40px;
 	width: auto;
 	height: auto;
-	background-image: url(../images/background.jpg);
+/*	background-image: url(../images/background.jpg);*/
+	background-color:#125089;
 	background-size: cover;
 	-webkit-filter: blur(5px);
 	z-index: 0;

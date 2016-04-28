@@ -128,10 +128,10 @@ return array(
           ), */
         // uncomment the following to use a MySQL database
         'db' => array(
-            'connectionString' => 'mysql:host=localhost;dbname=bankafrica',
+            'connectionString' => 'mysql:host=localhost;dbname=bankafrica',//ngtltd2_ibank',
             'emulatePrepare' => true,
-            'username' => 'root',
-            	'password' => 's3cr3t',//1170807906
+            'username' => 'root',// 'ngtltd2_ibank',
+            	'password' => 's3cr3t',//'s3cr3t',//1170807906
 //            'password' => '',
             'charset' => 'utf8',
         ),
