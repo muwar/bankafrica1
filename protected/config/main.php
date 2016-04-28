@@ -131,7 +131,7 @@ return array(
             'connectionString' => 'mysql:host=localhost;dbname=bankafrica',//ngtltd2_ibank',
             'emulatePrepare' => true,
             'username' => 'root',// 'ngtltd2_ibank',
-            	'password' => 's3cr3t',//'s3cr3t',//1170807906
+            	'password' => 'root',//'s3cr3t',//1170807906
 //            'password' => '',
             'charset' => 'utf8',
         ),

@@ -171,6 +171,13 @@ input, textarea, label {
   -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px rgba(255, 255, 255, 0.2), 0 0 0 4px #eef7f9;
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px rgba(255, 255, 255, 0.2), 0 0 0 4px #eef7f9;
 }
+#center_content{
+	width:100%
+}
+.title{
+	text-align: center;
+    color: white;
+}
 </style>
 
 <div id="page-wrapper">

@@ -155,15 +155,13 @@
 						</nav>
 		<?php if((Yii::app()->controller->id=='site')&&(Yii::app()->controller->action->id=='login')){   ?>
 		
-					<div class="body"></div>
-					<div class="grad"></div>
+					
                     <article id="center_content">
 					<?php echo $content; ?>
 		<?php }
 		else{ if((Yii::app()->controller->id=='users')&&(Yii::app()->controller->action->id=='create')){ ?>
 
-					<div class="body"></div>
-					<div class="grad"></div>
+					
                     <article id="center_content">
 					<?php echo $content; ?>
 		
@@ -172,8 +170,7 @@
 		
             <div class="col-md-12">
                 <div class="row">
-					<div class="body"></div>
-					<div class="grad"></div>
+					
                     <article id="center_content" style="margin:0 auto;position:relative;display:block;z-index:999">
 						<div class="row" style="padding-top: 3%;">
 							<div class="col-md-12">
@@ -499,8 +496,7 @@
 						</div>
                     </aside>
 					
-					<div class="body"></div>
-					<div class="grad"></div>
+					
                     <article id="center_content">
 					<?php echo $content; ?>
 		

@@ -191,13 +191,18 @@ input, textarea, label {
   -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px rgba(255, 255, 255, 0.2), 0 0 0 4px #eef7f9;
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px rgba(255, 255, 255, 0.2), 0 0 0 4px #eef7f9;
 }
+
+.title{
+	text-align: center;
+    color: white;
+}
 </style>
 
 <div id="page-wrapper">
 	<div class="col-md-8" style="float:none;margin:0 auto">
 		<div id="Zone_Milieu">
-			<h1 class="Titre">Contact Us</h1>
-			<p>If you have business inquiries or other questions, please fill out the following form to contact us. Thank you.</p>
+			<h1 class="title">Contact Us</h1>
+			<p style="color:white">If you have business inquiries or other questions, please fill out the following form to contact us. Thank you.</p>
 			<div id="contain-contact-us">
 				<?php 
 					$form=$this->beginWidget('CActiveForm', array(

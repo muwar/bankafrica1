@@ -182,6 +182,13 @@ input, textarea, label {
   -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px rgba(255, 255, 255, 0.2), 0 0 0 4px #eef7f9;
   box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px rgba(255, 255, 255, 0.2), 0 0 0 4px #eef7f9;
 }
+#center_content{
+	width:100%
+}
+.title{
+	text-align: center;
+    color: white;
+}
 </style>
 
 <div id="page-wrapper">
@@ -189,7 +196,7 @@ input, textarea, label {
 		<div class="form">
 			<div class="tab-content">
 				<div id="signup" style="display:block;">   
-					<h1>Sign Up</h1>
+					<h1 class="title">Sign Up</h1>
 					<?php
 					$form = $this->beginWidget('CActiveForm', array(
 						'id' => 'evuti-form',
@@ -197,50 +204,50 @@ input, textarea, label {
 					));
 					?>
 					<fieldset class="contact-inner">
-					<p class="note">Fields with <span class="required">*</span> are required.</p>
-					<?php echo $form->errorSummary($model); ?>
-					<?php
-					if (Yii::app()->user->hasFlash("error"))
-						echo Yii::app()->user->getFlash("error");
-					?>
-					
-					<p class="contact-input">
-						<label for="Evuti_pro" class="select">
-						<?php echo $form->dropDownList($model, 'pro', CHtml::listData(Evprof::model()->findAll('lib !=:x',array(':x'=>'Administrator')), 'id', 'lib'), array('style' => 'color:gray', 'prompt' => 'Choose account type *')); ?>
-						<?php echo $form->error($model, 'pro'); ?>
-						</label>
-					</p>
-					<p class="contact-input">
-						<?php echo $form->textField($model1, 'resnam', array('size' => 45, 'maxlength' => 45, 'required' => 'required', 'autocomplete' => 'off', 'placeholder' => 'Name*')); ?>
-						<?php echo $form->error($model1, 'resnam'); ?>
-					</p>
-					<p class="contact-input">
-						<?php echo $form->textField($model, 'nom', array('size' => 45, 'maxlength' => 45, 'placeholder' => 'Username*')); ?>
-						<?php echo $form->error($model, 'nom'); ?>
-					</p>
-					<p class="contact-input" style="overflow:visible">
-						<?php echo $form->textField($model1, 'telephone', array('size' => 100, 'maxlength' => 45, 'type'=>'tel', 'id'=>'mobile-number', 'placeholder' => 'Telephone*')); ?>
-						<?php echo $form->error($model1, 'telephone'); ?>
-					</p>
-					<p class="contact-input">
-						<?php echo $form->textField($model1, 'email', array('size' => 100, 'maxlength' => 45, 'placeholder' => 'E-mail*')); ?>
-						<?php echo $form->error($model1, 'email'); ?>
-					</p>
-					<p class="contact-input">
-						<?php echo $form->passwordField($model, 'pswd', array('size' => 45, 'maxlength' => 45, 'placeholder' => 'Your Password*')); ?>
-						<?php echo $form->error($model, 'pswd'); ?>
-					</p>
-					<p class="contact-input">
-						<?php echo $form->passwordField($model, 'confirm_your_password', array('size' => 45, 'maxlength' => 45, 'placeholder' => 'Confirm Your Password*')); ?>
-						<?php echo $form->error($model, 'confirm_your_password'); ?>
-					</p>
-					<p class="contact-submit">
-						<?php echo CHtml::submitButton($model->isNewRecord ? 'Save' : 'Save', array('class' => 'button button-block')); ?>
-						<input type="reset" value="Reset!" class="button button-block">
-					</p>
-					<p>
-						<?php echo CHtml::link('LOGIN', array('site/login'), array('onclick' => '$("#signup").dialog("open"); return false;')); ?>
-					</p>
+						<p class="note">Fields with <span class="required">*</span> are required.</p>
+						<?php echo $form->errorSummary($model); ?>
+						<?php
+						if (Yii::app()->user->hasFlash("error"))
+							echo Yii::app()->user->getFlash("error");
+						?>
+						
+						<p class="contact-input">
+							<label for="Evuti_pro" class="select">
+							<?php echo $form->dropDownList($model, 'pro', CHtml::listData(Evprof::model()->findAll('lib !=:x',array(':x'=>'Administrator')), 'id', 'lib'), array('style' => 'color:gray', 'prompt' => 'Choose account type *')); ?>
+							<?php echo $form->error($model, 'pro'); ?>
+							</label>
+						</p>
+						<p class="contact-input">
+							<?php echo $form->textField($model1, 'resnam', array('size' => 45, 'maxlength' => 45, 'required' => 'required', 'autocomplete' => 'off', 'placeholder' => 'Name*')); ?>
+							<?php echo $form->error($model1, 'resnam'); ?>
+						</p>
+						<p class="contact-input">
+							<?php echo $form->textField($model, 'nom', array('size' => 45, 'maxlength' => 45, 'placeholder' => 'Username*')); ?>
+							<?php echo $form->error($model, 'nom'); ?>
+						</p>
+						<p class="contact-input" style="overflow:visible">
+							<?php echo $form->textField($model1, 'telephone', array('size' => 100, 'maxlength' => 45, 'type'=>'tel', 'id'=>'mobile-number', 'placeholder' => 'Telephone*')); ?>
+							<?php echo $form->error($model1, 'telephone'); ?>
+						</p>
+						<p class="contact-input">
+							<?php echo $form->textField($model1, 'email', array('size' => 100, 'maxlength' => 45, 'placeholder' => 'E-mail*')); ?>
+							<?php echo $form->error($model1, 'email'); ?>
+						</p>
+						<p class="contact-input">
+							<?php echo $form->passwordField($model, 'pswd', array('size' => 45, 'maxlength' => 45, 'placeholder' => 'Your Password*')); ?>
+							<?php echo $form->error($model, 'pswd'); ?>
+						</p>
+						<p class="contact-input">
+							<?php echo $form->passwordField($model, 'confirm_your_password', array('size' => 45, 'maxlength' => 45, 'placeholder' => 'Confirm Your Password*')); ?>
+							<?php echo $form->error($model, 'confirm_your_password'); ?>
+						</p>
+						<p class="contact-submit">
+							<?php echo CHtml::submitButton($model->isNewRecord ? 'Save' : 'Save', array('class' => 'button button-block')); ?>
+							<input type="reset" value="Reset!" class="button button-block">
+						</p>
+						<p>
+							<?php echo CHtml::link('LOGIN', array('site/login'), array('onclick' => '$("#signup").dialog("open"); return false;')); ?>
+						</p>
 					</fieldset>
 					<?php
 					$this->endWidget();
@@ -248,6 +255,7 @@ input, textarea, label {
 				</div>
 			</div><!-- tab-content -->
 		</div> <!-- /form -->
+		
 	</div>
 </div>
 
