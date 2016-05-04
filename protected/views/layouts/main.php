@@ -219,53 +219,53 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <br/>
-                                            <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-                                            <!--
-                                                    <div class="row" style="padding-top: 3%;">
-                                                    <article id="demo-default" class="demo">
-                                                            <div id="coverflow">
-                                                                    <ul class="flip-items">
-                                                                            <li data-flip-title="Red">
-                                                                                    <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/slider/text1.gif">
-                                                                            </li>
-                                                                            <li data-flip-title="Razzmatazz" data-flip-category="Purples">
-                                                                                    <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/slider/text2.gif">
-                                                                             </li>
-                                                                            <li data-flip-title="Deep Lilac" data-flip-category="Purples">
-                                                                                    <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/slider/text3.gif">
-                                                                            </li>
-                                                                            <li data-flip-title="Daisy Bush" data-flip-category="Purples">
-                                                                                    <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/slider/text4.gif">
-                                                                            </li>
-                                                                            <li data-flip-title="Cerulean Blue" data-flip-category="Blues">
-                                                                                    <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/slider/text5.gif">
-                                                                            </li>
-                                                                            <li data-flip-title="Dodger Blue" data-flip-category="Blues">
-                                                                                    <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/slider/text6.gif">
-                                                                            </li>
-                                                                            <li data-flip-title="Cyan" data-flip-category="Blues">
-                                                                                    <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/slider/text7.gif">
-                                                                            </li>
-                                                                            <li data-flip-title="Robin's Egg" data-flip-category="Blues">
-                                                                                    <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/slider/text8.gif">
-                                                                            </li>
-                                                                            <li data-flip-title="Deep Sea" data-flip-category="Greens">
-                                                                                    <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/slider/text9.gif">
-                                                                            </li>
-                                                                            <li data-flip-title="Apple" data-flip-category="Greens">
-                                                                                    <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/slider/text10.gif">
-                                                                            </li>
-                                                                    </ul>
-                                                            </div>
-                                                    </article>	
-                                            </div>	
-                                            -->
-                                        </article>
-                                    </div><!-- wrapper -->
-                                </div>
-
+							</div>
+										<br/>
+<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+						<!--
+							<div class="row" style="padding-top: 3%;">
+							<article id="demo-default" class="demo">
+								<div id="coverflow">
+									<ul class="flip-items">
+										<li data-flip-title="Red">
+											<img src="<?php echo Yii::app()->request->baseUrl; ?>/images/slider/text1.gif">
+										</li>
+										<li data-flip-title="Razzmatazz" data-flip-category="Purples">
+											<img src="<?php echo Yii::app()->request->baseUrl; ?>/images/slider/text2.gif">
+										 </li>
+										<li data-flip-title="Deep Lilac" data-flip-category="Purples">
+											<img src="<?php echo Yii::app()->request->baseUrl; ?>/images/slider/text3.gif">
+										</li>
+										<li data-flip-title="Daisy Bush" data-flip-category="Purples">
+											<img src="<?php echo Yii::app()->request->baseUrl; ?>/images/slider/text4.gif">
+										</li>
+										<li data-flip-title="Cerulean Blue" data-flip-category="Blues">
+											<img src="<?php echo Yii::app()->request->baseUrl; ?>/images/slider/text5.gif">
+										</li>
+										<li data-flip-title="Dodger Blue" data-flip-category="Blues">
+											<img src="<?php echo Yii::app()->request->baseUrl; ?>/images/slider/text6.gif">
+										</li>
+										<li data-flip-title="Cyan" data-flip-category="Blues">
+											<img src="<?php echo Yii::app()->request->baseUrl; ?>/images/slider/text7.gif">
+										</li>
+										<li data-flip-title="Robin's Egg" data-flip-category="Blues">
+											<img src="<?php echo Yii::app()->request->baseUrl; ?>/images/slider/text8.gif">
+										</li>
+										<li data-flip-title="Deep Sea" data-flip-category="Greens">
+											<img src="<?php echo Yii::app()->request->baseUrl; ?>/images/slider/text9.gif">
+										</li>
+										<li data-flip-title="Apple" data-flip-category="Greens">
+											<img src="<?php echo Yii::app()->request->baseUrl; ?>/images/slider/text10.gif">
+										</li>
+									</ul>
+								</div>
+							</article>	
+						</div>	
+					-->
+					</article>
+                </div><!-- wrapper -->
+            </div>
+        
         <?php } else { ?>
                                 <aside id="left_content">
                                     <!-- /.navbar-top-links -->
@@ -648,10 +648,10 @@ var e = document.getElementById("countrydbox").value;
                                                                     }
                                                                 });
     }
-</script>
-
-                        <!-- ClickDesk Live Chat Service for websites -->
-                        <script type='text/javascript'>
+		</script>
+				
+		    <!-- ClickDesk Live Chat Service for websites -->
+<script type='text/javascript'>
                             var _glc = _glc || [];
                             _glc.push('all_ag9zfmNsaWNrZGVza2NoYXRyDwsSBXVzZXJzGKrup98TDA');
                             var glcpath = (('https:' == document.location.protocol) ? 'https://my.clickdesk.com/clickdesk-ui/browser/' :
