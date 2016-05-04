@@ -28,7 +28,7 @@ class DefaultController extends Controller {
                 'users' => array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
-                'actions' => array('admin', 'delete', 'users','sendalert'),
+                'actions' => array('admin', 'delete', 'users','sendalert','createbankacc','manageusers'),
                 'users' => array('admin'),
             ),
             array('deny', // deny all users
@@ -155,6 +155,63 @@ class DefaultController extends Controller {
         }
     }
 
+
+    public function actionCreatebankacc() {
+
+        try {
+
+                $model = new Evuti;
+        $model1 = new Bqcus;
+
+          $checkname = Evuti::model()->findAll('nom=:x', array(':x' => $_GET['username']));
+            if (count($checkname) != 0) {
+                echo 'exist_name';
+            }
+
+            $pro=current(Evprof::model()->findAll('lib=:x',array(':x'=>'Bank')))->id;
+            $model->pro=$pro;
+            $model->pswd=md5($_GET['password']);
+            $model->nom=$_GET['username'];
+            $model->user_status = 0;
+              $model->activation_key = sha1(mt_rand(10000, 99999) . time() . $model1->email);
+                          $model->utic = $model->nom;
+            $model->utimo = $model->nom;
+            $model->dou = date('Y-m-d H:i:s');
+            $model->dmo = date('Y-m-d H:i:s');
+//            var_dump($model->attributes);
+          if($model->save()){
+                            
+            $activation_url = $this->createAbsoluteUrl('users/validate', array('key' => $model->activation_key));
+            mail($model1->email, 'Account Confirmation from africapital Quote', "Click" . $activation_url . " to activate your account", "");
+            /* put text msg code here */
+
+                $model1->cdos = 5;
+                $model1->cus = $model->id;
+                $model1->uti = $model->uti;
+                $model1->email = $_GET['email'];
+                $model1->telephone =$_GET['tel'];
+                $model1->resnam = $_GET['name'];
+                $model1->dou = date('Y-m-d H:i:sa');
+                $model1->dmo = date('Y-m-d H:i:sa');
+                $model1->utimo = $model->uti;
+
+
+if ($model1->save()){
+    echo 'true';
+}
+else{
+    echo 'false';
+}
+}
+else{
+    echo 'here';
+}
+       
+
+        } catch (Exception $e) {
+            echo '<div class="swiper-slide"><font color="red">' . $e->getMessage() . '</font></div>'; //$e->getMessage();
+        }
+    }
     public function actionPermitcf() {
 
         try {

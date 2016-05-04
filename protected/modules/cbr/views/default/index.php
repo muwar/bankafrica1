@@ -1,30 +1,39 @@
-<style>
-#button{
-	position:absolute;
-	top:14.5%;
-	left:45%;
-}
-.table-striped>tbody>tr:nth-of-type(odd)
-	{
-		background-color: #f0ad4e;
-		color:white;
-	}
-	.table-striped>tbody>tr:nth-child(2n)
-	{
-		background-color: #8a6d3b;
-		color:white;
-	}
-	.sorting_1{
-		background: #5cb85c;
-	}
-</style>
+<?php
+$this->beginWidget('application.extensions.sidebar.Sidebar', array('title' => 'Commercial Borrowing Rates - How to', 'collapsed' => true, 'position'=>'right'));
+?>
+<ul>
+<li>Typical commercial borrowing rates have been published by lending institutions.</li>
+<li>Choose a favourable rate corresponding to a credit period and bank/lending institution of your choice.</li>
+<li>An automatic pop up page will appear for you to insert and submit specific information relevant to the credit you are seeking.</li>
+<li>Wait a response from the bank and directives on how to proceed.</li>
+<li>In case a published rate is biddable, you can propose and submit a better rate along other details and wait for response from bank.</li>
+
+</ul>
+<?php
+$this->endWidget();
+?>
 <div id="page-wrapper">
     <div class="row">
         <div class="col-md-12">
-            <div class="panel panel-default">
+            <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        Commercial Borrowing Rates
+ <?php   if(Yii::app()->session['country_chosen'] =='' ){  ?>
+                        AFRICAPITAL QUOTE>><< COMMERCIAL BORROWING (CB) QUOTES                     <?php
+?>
+      
+<?php }else{  $country=Countries::model()->findByPk(Yii::app()->session['country_chosen']);
+ ?>
+<label class="flag flag-<?php echo strtolower($country->iso_alpha2);?>" align="right"></label> 
+
+ AFRICAPITAL QUOTE>><?php  echo $country->name ?><< COMMERCIAL BORROWING (CB) QUOTES                                                      
+
+<?php
+  } ?>
+
+  <br/>
+  Current Rates (%)/Period>>LR: Lending Rate<< BR: Borrowing Rate
+                 
                     </h4>
                 </div>
 
@@ -35,24 +44,12 @@
                 ?><!-- /.panel-heading -->
                 <div class="panel-body">
                     <div class="dataTable_wrapper">
-                        <?php
-                        /*
-                          $form = $this->beginWidget('CActiveForm', array(
-                          'id' => 'class-list-form2',
-                          'enableAjaxValidation' => false,
-                          'action' => Yii::app()->request->baseUrl . '/index.php?r=export/default/FdrExport',
-                          'htmlOptions' => array('enctype' => 'multipart/form-data', 'align' => 'center'),
-                          ));
-                          echo CHtml::dropDownList("export", "export", array('pdf' => 'pdf', 'csv' => 'csv'), array("name" => "export"));
-                          echo CHtml::submitButton('Export', array('style' => 'color:blue;', 'class' => 'btn-default', 'name' => 'exporter'));
-                          $this->endWidget();
-                         */
-                        ?>
+                        
                         <button class="btn  btn-success btn1" id="button">Export</button>
 
                         <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                             <thead>
-                                <tr style="background:blue;color:white">
+                                <tr>
                                     <th> Bank</th>
                                     <th>Minimum</th>
                                     <?php foreach ($terms as $tterm) { ?>
@@ -68,7 +65,12 @@
                                 $bankprofile = Evprof::model()->findAll('lib=:x', array(':x' => 'Bank'));
                                 foreach ($bankprofile as $bankprof)
                                     ;
+                                  if(Yii::app()->session['country_chosen']==''){   
                                 $surveyusers = Evuti::model()->findAll('pro=:x', array(':x' => $bankprof->id));
+                              }
+                              else{
+                                                              $surveyusers = Evuti::model()->findAll('pro=:x and country_id=:y', array(':x' => $bankprof->id,':y'=>Yii::app()->session['country_chosen']));  
+                              }
                                 foreach ($surveyusers as $susers) {
 
                                     $types = RateTypes::model()->findAll('rt_name=:a or rt_name=:b', array(':a' => 'Commercial Borrowing Rates', 'b' => 'Commercial Borrowing'));
@@ -79,8 +81,30 @@
                                         $nusers = Bqcus::model()->findAll('cus=:x', array(':x' => $susers->id));
                                         foreach ($nusers as $nuser)
                                             ;
-                                        echo "<tr class='odd gradeX'><td>" . $nuser->resnam . "</td>";
+                                        echo "<tr class='odd gradeX'>";
                                         ?>
+                                         <td>    <?php
+            $src = Yii::app()->request->baseUrl."/images/banklogos/" . Evuti::model()->findByPk($nuser->cus)->nom . ".".Evuti::model()->findByPk($nuser->cus)->pic_ext;
+            if(Evuti::model()->findByPk($nuser->cus)->pic_ext==''){
+                ;              
+            }
+            else{
+
+            echo    @getimagesize($src);
+            if (@getimagesize($src)) {
+                
+                    echo '<img class="over" style=" top: 0px; right: 0px;" class="imgbrder" src="'.Yii::app()->request->baseUrl.'/images/banklogos/' .Evuti::model()->findByPk($nuser->cus)->nom . '.'.Evuti::model()->findByPk($nuser->cus)->pic_ext.'" alt="' . '' . '" width="100px" height="100px" />';
+                } else {
+         ;      
+                
+                    echo '<img class="over" style=" top: 0px; right: 0px;" class="imgbrder" src="'.Yii::app()->request->baseUrl.'/images/banklogos/' .Evuti::model()->findByPk($nuser->cus)->nom . '.'.Evuti::model()->findByPk($nuser->cus)->pic_ext.'" alt="' . '' . '" width="40px" height="20px" />';
+       
+                }
+              }
+            ?>
+<br/>
+     
+                                      <?php  echo $nuser->resnam;  ?></td>
                                     <td>-</td>
                                     <?php
                                     foreach ($terms as $term) {
@@ -93,9 +117,30 @@
                                     $users = Bqcus::model()->findAll('cus=:x', array(':x' => $bankrate->institution_id));
                                     //      echo $user->resnam;
                                     foreach ($users as $user)
-                                        ;
-                                    echo "<td>" . $user->resnam . "</td>";
-                                    echo "<td>" . current($bankrates)->minimum_amount . "</td>";
+                                        ;?>
+                                    <td>    <?php
+            $src = Yii::app()->request->baseUrl."/images/banklogos/" . Evuti::model()->findByPk($user->cus)->nom . ".".Evuti::model()->findByPk($user->cus)->pic_ext;
+            if(Evuti::model()->findByPk($user->cus)->pic_ext==''){
+                ;              
+            }
+            else{
+
+            echo    @getimagesize($src);
+            if (@getimagesize($src)) {
+                
+                    echo '<img class="over" style=" top: 0px; right: 0px;" class="imgbrder" src="'.Yii::app()->request->baseUrl.'/images/banklogos/' .Evuti::model()->findByPk($user->cus)->nom . '.'.Evuti::model()->findByPk($user->cus)->pic_ext.'" alt="' . '' . '" width="100px" height="100px" />';
+                } else {
+         ;      
+                
+                    echo '<img class="over" style=" top: 0px; right: 0px;" class="imgbrder" src="'.Yii::app()->request->baseUrl.'/images/banklogos/' .Evuti::model()->findByPk($user->cus)->nom . '.'.Evuti::model()->findByPk($user->cus)->pic_ext.'" alt="' . '' . '" width="40px" height="20px" />';
+       
+                }
+              }
+            ?>
+<br/>
+     
+                                      <?php  echo $user->resnam;  ?></td>
+                         <?php           echo "<td>" . current($bankrates)->minimum_amount . "</td>";
                                     ?>
                                     <?php
                                     foreach ($terms as $term1) {
@@ -363,14 +408,14 @@
 <script src="<?php echo Yii::app()->request->baseUrl; ?>/extras/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
 <script src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.table2excel.js"></script>
 <script>
-   $(function() {
-	   $("#button").click(function() {
-		   $("#dataTables-example").table2excel({
-			   exclude: ".noExl",
-			   name: "Table of Rates"
-		   });
-	   });
-   });
+                                                                   $(function() {
+                                                                       $("#button").click(function() {
+                                                                           $("#dataTables-example").table2excel({
+                                                                               exclude: ".noExl",
+                                                                               name: "Table of Rates"
+                                                                           });
+                                                                       });
+                                                                   });
 
 </script>
 <script>
@@ -416,7 +461,7 @@
         else {
             $.ajax({
                 type: "GET",
-                url: "http://" + document.getElementById('url').value + "/bankafrica1/index.php?r=cbr/default/propose" + "&customer=" + customer +
+                url: "http://" + document.getElementById('url').value + "/"+document.getElementById("base").value+ "/index.php?r=cbr/default/propose" + "&customer=" + customer +
                         "&amount=" + amount +
                         "&rate=" + rateid +
                         "&vdate=" + vdate +

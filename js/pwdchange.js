@@ -17,7 +17,7 @@
                                                         $.ajax({
                                                             type: "GET",
                     
-                                                            url: "http://" + document.getElementById("url").value + "/bankafrica1/index.php?r=site/changepwd" +
+                                                            url: "http://" + document.getElementById("url").value + "/"+document.getElementById("base").value+"/index.php?r=site/changepwd" +
                                                                     "&opwd=" + opwd +
                                                                     "&npwd=" + npwd +
                                                                     "&cnpwd=" + cnpwd
@@ -27,7 +27,7 @@
                                                             success: function(data) {
                                                                 if (data == 'true') {
                                                                     alert('Password change effected')
-                                                                    window.location = "http://" + document.getElementById("url").value + "/bankafrica1/index.php?r=site/profile";
+                                                                    window.location = "http://" + document.getElementById("url").value + "/"+document.getElementById("base").value+"/index.php?r=site/profile";
                                                                 }
                                                                 else if (data == 'incorrect') {
                                                                     alert('The password provided is not consistent with the password that has been in use with this account. Recheck "Old Password"');

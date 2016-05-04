@@ -1,57 +1,42 @@
 
-<style>
-    /* The max width is dependant on the container (more info below) */
-    .popover{
-        max-width: 100%; /* Max Width of the popover (depending on the container!) */
-        width: 60%;
+<script>
+    function toggle1(id) {
+        $("#the_rest" + id).toggle();
     }
-    .box {
-        border-radius: 10px;
-        padding: 25px;
-        background-color: #fff;
-        text-align: center;
+    $(document).ready(function() {
+        $(".sub1").hide();
+        $(".sub2").hide();
+    });
+    function toggle2(id) {
+//        alert(id);
+        $("#the_restinner" + id).toggle();
     }
-    #progressbar {
-        border: 1px solid #333;
-        border-radius: 2px;
-        padding: 2px;
-    }
-    #progressbar > div {
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box;
-        background-color:currentColor;
-        width: 11%;  
-        height: 8px;
-        border: 1px solid #333;
-        border-radius: 0px;
-    }
-    .text {
-        color: #000;
-        margin-top: 15px;
-        font-size: 9px;
-        font-weight: bold;
-    }
-	#button{
-		position:absolute;
-		top:28%;
-		left:45%;
-	}
-	.table-striped>tbody>tr:nth-of-type(odd)
-	{
-		background-color: #f0ad4e;
-		color:white;
-	}
-	.table-striped>tbody>tr:nth-child(2n)
-	{
-		background-color: #8a6d3b;
-		color:white;
-	}
-	.sorting_1{
-		background: #5cb85c;
-	}
-</style>
+</script>
+<?php
 
+$this->beginWidget('application.extensions.sidebar.Sidebar', array('title' => 'Inter-Bank Lending - How to', 'collapsed' => true, 'position'=>'right'));
+?>
+<ul>
+Assuming that all rates have been published on the platform by the various banks, you can bid to lend or borrow as follows
+
+<li>On the IBL panel, choose a favourable borrowing or lending rate for a specified period as published by a bank. </li>
+<li>This will generate an automatic page for you to insert and submit amount you wish to borrow or lend. </li>
+<li>Before submitting, make sure the value date (the day from which you effectively want exchange to take place) and the expiry date (the date beyond which you are no longer interested in the transaction) has been inserted.</li>
+<li>Then, wait for a response from the counter party bank</li>
+<li>In case a published rate is biddable, you can propose and submit your best rate along other details and wait for response from bank.</li>
+
+<strong><i>Features</i></strong>
+
+On the Inter-Bank Lending (IBL) panel, you can view the following features specific to your bank
+<li>Current Lending request</li>
+<li>Current Borrowing requests</li>
+<li>Transactions progress report</li>
+<li>Request history, which can be sorted under different criteria</li>
+
+</ul>
+<?php
+$this->endWidget();
+?>
 <div id="page-wrapper">
     <div class="row">
         <div class="col-md-12">
@@ -62,9 +47,22 @@
             $allibl = Bqibl::model()->findall('target=:y', array(':y' => $ucode->id));
             $iblhistory = Bqibl::model()->findAll('target=:y or cus=:x', array(':y' => $ucode->id, ':x' => $ucode->id))
             ?>
-            <div class="panel panel-default">
+            <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h4 class="panel-title">
+                    <?php   if(Yii::app()->session['country_chosen'] =='' ){  ?>
+                        AFRICAPITAL QUOTE>><< INTERBANK LENDING (IBL)         <?php
+?>
+                                              
+<?php }else{ $country=Countries::model()->findByPk(Yii::app()->session['country_chosen']);
+ ?>
+<label class="flag flag-<?php echo strtolower($country->iso_alpha2);?>" align="right"></label> 
+ AFRICAPITAL QUOTE>><?php  echo $country->name ?><< INTERBANK LENDING (IBL)                                            
+<?php
+  } ?>
+
+  <br/>
+  Current Rates (%)/Period>>LR: Lending Rate<< BR: Borrowing Rate
                         <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"></a>
                     </h4>
                 </div>
@@ -89,24 +87,12 @@
                     <div class="tab-content">
                         <div class="tab-pane fade in active" id="rates">
                             <div class="dataTable_wrapper">
-                                <?php
-                                /*
-                                  $form = $this->beginWidget('CActiveForm', array(
-                                  'id' => 'class-list-form2',
-                                  'enableAjaxValidation' => false,
-                                  'action' => Yii::app()->request->baseUrl . '/index.php?r=export/default/IblbizExport',
-                                  'htmlOptions' => array('enctype' => 'multipart/form-data', 'align' => 'center'),
-                                  ));
-                                  echo CHtml::dropDownList("export", "export", array('pdf' => 'pdf', 'csv' => 'csv'), array("name" => "export"));
-                                  echo CHtml::submitButton('Export', array('style' => 'color:blue;', 'class' => 'btn-default', 'name' => 'export-rates'));
-                                  $this->endWidget();
-                                 */
-                                ?>
-                                <button class="btn  btn-success btn1" id="button">Export</button>
+                             
+                                  <h3 align="center"><button class="btn  btn-success btn1" id="button">Export to excel</button> </h3>
 
                                 <table class="table table-striped table-bordered table-hover table2excel tableresults" id="dataTables-exampleX">
                                     <thead>
-                                        <tr style="background:blue;color:white">
+                                        <tr>
                                             <th> Operation</th>
                                             <?php foreach ($terms as $tterm) { ?>
                                                 <th><?php echo $tterm->term_name; ?></th>
@@ -211,19 +197,7 @@
                                         <!-- /.panel-heading -->
                                         <div class="panel-body">
                                             <div class="dataTable_wrapper">
-                                                <?php
-                                                /*
-                                                  $form = $this->beginWidget('CActiveForm', array(
-                                                  'id' => 'class-list-form2',
-                                                  'enableAjaxValidation' => false,
-                                                  'action' => Yii::app()->request->baseUrl . '/index.php?r=export/default/IblbizExport',
-                                                  'htmlOptions' => array('enctype' => 'multipart/form-data', 'align' => 'center'),
-                                                  ));
-                                                  echo CHtml::dropDownList("export", "export", array('pdf' => 'pdf', 'csv' => 'csv'), array("name" => "export"));
-                                                  echo CHtml::submitButton('Export', array('style' => 'color:blue;', 'class' => 'btn-default', 'name' => 'export-config'));
-                                                  $this->endWidget();
-                                                 */
-                                                ?>
+                                               
                                                 <div class="form">
                                                     <?php
                                                     $form = $this->beginWidget('CActiveForm', array(
@@ -232,9 +206,9 @@
                                                     ));
                                                     ?>
 
-                                                    <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                                    <table class="table table-striped table-bordered table-hover" id="dataTables-exampler2">
                                                         <thead>
-                                                            <tr style="background:blue;color:white">
+                                                            <tr>
                                                                 <th>Term</th>
                                                                 <th>Rate</th>
                                                                 <th>Biddable?</th>
@@ -262,7 +236,10 @@
                                                                 <input type="hidden" value=0 id="state<?php echo $rate->rt_id . $term->term_id; ?>">
                                                                 <input type="hidden" class="form-control" id="term<?php echo $rate->rt_id . $term->term_id; ?>" name="term" value="<?php echo $term->term_id; ?>" placeholder="Term"><!--This will automatically be populated from the options-->
                                                                 <td><label><?php echo $term->term_name; ?></label></td>
-                                                                <td><input type="text" class="form-control" id="rate<?php echo $rate->rt_id . $term->term_id; ?>" name="rate" placeholder="Rate "></td>
+                                                                <td>
+<div class="input-group">
+                                                                <input type="text" class="form-control" id="rate<?php echo $rate->rt_id . $term->term_id; ?>" name="rate" placeholder="Rate "><span class="input-group-addon">%</span>
+                                                                </div></td>
                                                                 <td><input value='<?php echo $rate->rt_id . $term->term_id; ?>' type="checkbox" id="specialrates<?php echo $rate->rt_id . $term->term_id; ?>" name="specialrates<?php echo $rate->rt_id . $term->term_id; ?>" onclick="switcher(this.value)" ></td>
                                                                 <td><input type="text" class="form-control" id="minamount<?php echo $rate->rt_id . $term->term_id; ?>" name="minamount" placeholder="Minimum amt "></td>
                                                                 <td><input type="text" class="form-control" id="scharges<?php echo $rate->rt_id . $term->term_id; ?>" name="scharges" placeholder="Setup charges "></td>
@@ -277,7 +254,12 @@
                                                                 <input type="hidden" value=0 id="state<?php echo $rate->rt_id . $term->term_id; ?>">
                                                                 <input type="hidden" class="form-control" id="term<?php echo $rate->rt_id . $term->term_id; ?>" name="term" value="<?php echo $term->term_id; ?>" placeholder="Term"><!--This will automatically be populated from the options-->
                                                                 <td><label><?php echo $term->term_name; ?></label></td>
-                                                                <td><input type="text" class="form-control" id="rate<?php echo $rate->rt_id . $term->term_id; ?>" name="rate" placeholder="<?php echo $checkrecentrecord->lrate; ?> "></td>
+                                                                <td>
+<div class="input-group" style="width:100px">
+                                                                <input type="text" class="form-control" id="rate<?php echo $rate->rt_id . $term->term_id; ?>" name="rate" placeholder="<?php echo $checkrecentrecord->lrate; ?> ">
+                                                                <span class="input-group-addon">%</span>
+                                                                </div>
+                                                                </td>
                                                                 <td><input value='<?php echo $rate->rt_id . $term->term_id; ?>' type="checkbox" id="specialrates<?php echo $rate->rt_id . $term->term_id; ?>" name="specialrates<?php echo $rate->rt_id . $term->term_id; ?>" onclick="switcher(this.value)" <?php
                                                                     if ($checkrecentrecord->special_rate == 1)
                                                                         echo "checked";
@@ -307,38 +289,52 @@
                                 }
                             }
                             ?>
+
+                            <script>
+    $(document).ready(function() {
+        $('#ratetoggle1').show();
+        $('#ratetoggle2').hide();
+    });
+    function  togglepane(id) {
+
+
+        if (id == 1) {
+            $('#ratetoggle1').show();
+            $('#ratetoggle2').hide();
+        }
+        else {
+            if (id == 2) {
+                $('#ratetoggle2').show();
+                $('#ratetoggle1').hide();
+            }
+        }
+
+    }
+                            </script>
+
                             <input type="hidden" class="form-control" id="ratecount" name="ratecount" value="<?php echo $ratecount; ?>">
                             <input type="hidden" class="form-control" id="termcount" name="termcount" value="<?php echo $termcount; ?>">
                         </div>
                         <div class="tab-pane fade" id="creq">
                             <div class="dataTable_wrapper">
-                                <?php
-                                /*
-                                  $form = $this->beginWidget('CActiveForm', array(
-                                  'id' => 'class-list-form2',
-                                  'enableAjaxValidation' => false,
-                                  'action' => Yii::app()->request->baseUrl . '/index.php?r=export/default/FdrExport',
-                                  'htmlOptions' => array('enctype' => 'multipart/form-data', 'align' => 'center'),
-                                  ));
-                                  echo CHtml::dropDownList("export", "export", array('pdf' => 'pdf', 'csv' => 'csv'), array("name" => "export"));
-                                  echo CHtml::submitButton('Export', array('style' => 'color:blue;', 'class' => 'btn-default', 'name' => 'export-cusrequest'));
-                                  $this->endWidget();
-                                 */
-                                ?>
-                                <button class="btn  btn-success btn1" id="button1">Export</button>
+                              
+                                     <h3 align="center"><button class="btn  btn-success btn1" id="button1">Export to excel</button> </h3>
+
                                 <table class="table table-striped table-bordered table-hover table2excel tableresults" id="dataTables-exampler1">
                                     <thead>
-                                        <tr style="background:blue;color:white">
-                                            <th>For</th>
+                                        <tr>
+                                            <th>Transaction type</th>
                                             <th>Client</th>
                                             <th>Date</th>
                                             <th>Rate</th>
                                             <th>Amount</th>
                                             <th>Status</th>
-                                            <th>Approve</th>
+ <!--                                           <th>Approve</th>
                                             <th>Reject</th>
                                             <th>Modify</th>
-                                            <th>details</th>
+                                            <th>details</th> -->
+                                            <th>View Details</th>
+                                            <th>Customer's contact</th>
                                         </tr>
                                     </thead>
                                     
@@ -347,7 +343,18 @@
                                         foreach ($allibl as $allbl) {
                                             $statedrate = InstitutionsQuotation::model()->findByPk($allbl->num);
                                             $ratetype = RateTypes::model()->findByPk($statedrate->quotation_id);
+                                            if(Yii::app()->session['country_chosen'] =='' ){ 
                                             $clients = Bqcus::model()->findAll('cus=:x', array(':x' => $allbl->cus));
+                                        }
+                                        else{
+                                         $clients = Bqcus::model()->findAll('cus=:x and country_id=:y', array(':x' => $allbl->cus, ':y'=>Yii::app()->session['country_chosen']));   
+                                         if(count($clients)==0){
+                                            continue;
+                                         }
+                                         else{
+                                            ;
+                                         }
+                                        }
                                             $dibls = Bqdibl::model()->findAll('ibl_id=:x', array(':x' => $allbl->cdos));
                                             if ($allbl->proc == 0) {
                                                 ?>
@@ -358,7 +365,26 @@
                                                 <tr>
                                                 <?php } ?>
                                                 <td><?php echo $ratetype->rt_name; ?></td>
-                                                <td><?php echo current($clients)->resnam; ?></td>
+                                                <td> <?php
+            $src = Yii::app()->request->baseUrl."/images/banklogos/" . Evuti::model()->findByPk(current($clients)->cus)->nom . ".".Evuti::model()->findByPk(current($clients)->cus)->pic_ext;
+            if(Evuti::model()->findByPk(current($clients)->cus)->pic_ext==''){
+                ;              
+            }
+            else{
+            echo    @getimagesize($src);
+            if (@getimagesize($src)) {
+                
+                    echo '<img class="over" style=" top: 0px; right: 0px;" class="imgbrder" src="'.Yii::app()->request->baseUrl.'/images/banklogos/' .Evuti::model()->findByPk(current($clients)->cus)->nom . '.'.Evuti::model()->findByPk(current($clients)->cus)->pic_ext.'" alt="' . '' . '" width="100px" height="100px" />';
+                } else {
+         ;      
+                
+                    echo '<img class="over" style=" top: 0px; right: 0px;" class="imgbrder" src="'.Yii::app()->request->baseUrl.'/images/banklogos/' .Evuti::model()->findByPk(current($clients)->cus)->nom . '.'.Evuti::model()->findByPk(current($clients)->cus)->pic_ext.'" alt="' . '' . '" width="40px" height="20px" />';
+       
+                }
+              }
+            ?>
+<br/>
+                                                <?php echo current($clients)->resnam; ?></td>
                                                 <td><?php echo date('d/m/Y', strtotime($allbl->dou)); ?></td>
                                                 <td><div class="tooltip-demo">
                                                         <label type="label" data-html="true" class="" data-toggle="tooltip" data-placement="top" title="These values were stated;
@@ -428,64 +454,59 @@
                                                     if ($allbl->proc == 0)
                                                         echo "New";
                                                     else {
+                                                        if ($allbl->proc == 1)
+                                                            echo 'Viewed';
                                                         if ($allbl->proc == 9)
                                                             echo "Completed";
+                                                        if($allbl->proc == 10)
+                                                            echo 'Customer contacted';
                                                         else
-                                                            echo "Pending";
+                                                            echo "Customer contacted";
+                                                     
                                                     }
-                                                    ?></td>
-                                                <td>
-                                                    <?php if ($allbl->proc == 9) { ?>
-                                                        Approved<?php
-                                                    } if (($allbl->proc == 0) || ($allbl->proc == 3) || ($allbl->proc == 1)) {
-                                                        ?>
-                                                        <button type="submit" class="btn btn-primary" onclick="event.preventDefault();
-                accept(<?php echo $allbl->cdos . "," . "'IBL'" ?>);">Accept</button><?php
-                                                            }
-                                                            if (($allbl->proc == 5)) {
-                                                                ?>
-                                                        Approved
-                                                        <!--    <button type="submit" class="btn btn-primary" onclick="event.preventDefault();
-        approve(<?php echo $allbl->cdos . "," . "'IBL'" ?>);">Approve</button>--><?php } ?></td>
-                                                <td>
-                                                    <?php if ($allbl->proc == 5) { ?>
-                                                        Already approved<?php
-                                                    }
-                                                    if ($allbl->proc == 8) {
-                                                        ?>
-                                                        Rejected<?php
-                                                    } if (($allbl->proc == 0) || ($allbl->proc == 3) || ($allbl->proc == 1)) {
-                                                        ?>
-                                                        <button type="submit" class="btn btn-primary" onclick="event.preventDefault();
-                rejectl(<?php echo $allbl->cdos . "," . "'IBL'"; ?>);">Reject</button> <?php } ?></td>
-                                                <td>
-                                                    <?php
-                                                    if (($allbl->proc == 8)) {
-                                                        ?>
-                                                        Rejected <?php
-                                                    }
-                                                    if (($allbl->proc == 3) || ($allbl->proc == 4)) {
-                                                        ?>
-                                                        Modified<?php
-                                                    }
-                                                    if ($allbl->proc == 5) {
-                                                        ?>
-                                                        <!--        <button type="submit" class="btn btn-primary" onclick="event.preventDefault();
-        complete(<?php echo $allbl->cdos . "," . "'IBL'"; ?>);">Completed?</button> 
-            
-                                                        -->
-                                                        ...<?php
-                                                    }
-                                                    if ($allbl->proc == 9) {
-                                                        ?>Completed
-                                                        <?php
-                                                    }
-                                                    if (/* ($allbl->proc == 2) || */($allbl->proc == 1) || ($allbl->proc == 0)) {
-                                                        ?>  
-                                                        <button type="submit" class="btn btn-primary" onclick="event.preventDefault();
-                modifyl(<?php echo $allbl->cdos . "," . $allbl->brat . "," . "'IBL'"; ?>);">Modify</button> <?php } ?></td>
-                                                <td><button type="button" class="btn btn-default" data-container="body" data-html="true" data-toggle="popover" data-placement="bottom"  
-                                                            data-content="<?php foreach ($dibls as $dibl) { ?>
+                                  ?>
+                                  </td>
+                                           
+                                  <td>
+                                                    
+&nbsp;
+                <button type="button" class="btn btn-default" data-container="body" data-html="true" data-toggle="popover" data-placement="bottom"  
+                                                            data-content="<div class='row'>
+                                                            <div class='col-md-12'>
+                                                            <div class='col-md-6'> 
+                      <h3 align=center> 
+                                                           <strong>
+Customer: <?php echo current($clients)->resnam; ?><br/>
+Tel: <?php if(current($clients)->telephone!=''){
+    echo current($clients)->telephone;}
+        else{
+
+          echo   ' Not available'; 
+             } ?><br/>
+Email: <?php if(current($clients)->email!=''){
+    echo current($clients)->email;}
+        else{
+
+          echo   ' Not available'; 
+             } ?>
+             </div>
+             <div class='col-md-6'> 
+<?php  if(current($dibls)->proc!=10){  ?>
+<form>
+             Have you successfully contacted this customer?</br>
+              Yes
+              <input type='radio' name='contact' value=1 onclick='customercontact(1, <?php echo current($clients)->cus.",". current($dibls)->ibl_id;  ?>);' > 
+              No
+              <input type='radio' name='contact' value=0 onclick='customercontact(0,<?php echo current($clients)->cus.",". current($dibls)->ibl_id;  ?>);'> 
+ </form>    
+ <?php } ?>
+                            </strong>
+                            </h3>
+                                </div>
+             </div>
+                                         <?php
+
+                                                             foreach ($dibls as $dibl) { ?>
                                                                 <div class='panel-body'>
                                                                 <ul class='chat'>
                                                                 <?php if ($dibl->proc == 0) { ?>
@@ -652,9 +673,26 @@
                                                                 </ul>
                                                                 </div>
                                                             <?php } ?>">
-                                                        Details </button>
+                                                      View  Details </button>
                                                 </td>
+  <td>
+                                       
 
+Customer: <?php echo current($clients)->resnam; ?><br/>
+Tel: <?php if(current($clients)->telephone!=''){
+    echo current($clients)->telephone;}
+        else{
+
+          echo   ' Not available'; 
+             } ?><br/>
+Email: <?php if(current($clients)->email!=''){
+    echo current($clients)->email;}
+        else{
+
+          echo   ' Not available'; 
+             } ?>
+
+                                  </td>   
                                             </tr>
                                         <?php }
                                         ?>
@@ -664,24 +702,13 @@
                         </div>
                         <div class="tab-pane fade" id="mreq">
                             <div class="dataTable_wrapper">
-                                <?php
-                                /*
-                                $form = $this->beginWidget('CActiveForm', array(
-                                    'id' => 'class-list-form2',
-                                    'enableAjaxValidation' => false,
-                                    'action' => Yii::app()->request->baseUrl . '/index.php?r=export/default/FdrExport',
-                                    'htmlOptions' => array('enctype' => 'multipart/form-data', 'align' => 'center'),
-                                ));
-                                echo CHtml::dropDownList("export", "export", array('pdf' => 'pdf', 'csv' => 'csv'), array("name" => "export"));
-                                echo CHtml::submitButton('Export', array('style' => 'color:blue;', 'class' => 'btn-default', 'name' => 'export-myrequest'));
-                                $this->endWidget();
-                                */
-                                ?>
-                                 <button class="btn  btn-success btn1" id="button2">Export</button>
+                                  <h3 align="center"><button class="btn  btn-success btn1" id="button2">Export to excel</button> </h3>
+
+                              
 
                                 <table class="table table-striped table-bordered table-hover table2excel tableresults" id="dataTables-exampler4">
                                     <thead>
-                                        <tr style="background:blue;color:white">
+                                        <tr>
                                             <th>Sent to </th>
                                             <th>Date</th>
                                             <th>Rate</th>
@@ -698,11 +725,44 @@
                                         foreach ($myreqibls as $myreqibl) {
                                             $ratingibl = InstitutionsQuotation::model()->findByPk($myreqibl->num);
                                             $ratingrateibl = RateTypes::model()->findByPk($ratingibl->quotation_id);
+                                                if(Yii::app()->session['country_chosen'] =='' ){ 
                                             $senttoibl = Bqcus::model()->findAll('cus=:x', array(':x' => $myreqibl->target));
+                                        }
+                                        else{
+                                        $senttoibl = Bqcus::model()->findAll('cus=:x and country_id=:y', array(':x' => $myreqibl->target,':y'=>Yii::app()->session['country_chosen']));   
+                                        if(count($senttoibl)==0){
+                                            continue;
+                                        }
+                                        else{
+                                            ;
+                                        }
+                                        }
+                                            
                                             $detailibls = Bqdibl::model()->findAll('ibl_id=:x', array(':x' => $myreqibl->cdos));
                                             ?>
                                             <tr>
-                                                <td> <?php echo current($senttoibl)->resnam; ?></td>   
+                                                <td> 
+                                                 <?php
+            $src = Yii::app()->request->baseUrl."/images/banklogos/" . Evuti::model()->findByPk(current($senttoibl)->cus)->nom . ".".Evuti::model()->findByPk(current($senttoibl)->cus)->pic_ext;
+            if(Evuti::model()->findByPk(current($senttoibl)->cus)->pic_ext==''){
+                ;              
+            }
+            else{
+            echo    @getimagesize($src);
+            if (@getimagesize($src)) {
+                
+                    echo '<img class="over" style=" top: 0px; right: 0px;" class="imgbrder" src="'.Yii::app()->request->baseUrl.'/images/banklogos/' .Evuti::model()->findByPk(current($senttoibl)->cus)->nom . '.'.Evuti::model()->findByPk(current($senttoibl)->cus)->pic_ext.'" alt="' . '' . '" width="100px" height="100px" />';
+                } else {
+         ;      
+                
+                    echo '<img class="over" style=" top: 0px; right: 0px;" class="imgbrder" src="'.Yii::app()->request->baseUrl.'/images/banklogos/' .Evuti::model()->findByPk(current($senttoibl)->cus)->nom . '.'.Evuti::model()->findByPk(current($senttoibl)->cus)->pic_ext.'" alt="' . '' . '" width="40px" height="20px" />';
+       
+                }
+              }
+            ?>
+
+                                                <br/>
+                                                <?php echo current($senttoibl)->resnam; ?></td>   
                                                 <td><?php echo date('d/m/Y', strtotime($myreqibl->dou)); ?></td>
                                                 <td>
                                                     <div class="tooltip-demo">
@@ -1027,22 +1087,11 @@
                         </div>
                         <div class="tab-pane fade" id="his">
                             <div class="dataTable_wrapper">
-                                <?php
-                            /*    $form = $this->beginWidget('CActiveForm', array(
-                                    'id' => 'class-list-form2',
-                                    'enableAjaxValidation' => false,
-                                    'action' => Yii::app()->request->baseUrl . '/index.php?r=export/default/FdrExport',
-                                    'htmlOptions' => array('enctype' => 'multipart/form-data', 'align' => 'center'),
-                                ));
-                                echo CHtml::dropDownList("export", "export", array('pdf' => 'pdf', 'csv' => 'csv'), array("name" => "export"));
-                                echo CHtml::submitButton('Export', array('style' => 'color:blue;', 'class' => 'btn-default', 'name' => 'export-histtrans'));
-                                $this->endWidget();
-                               */
-                                ?>
-                                  <button class="btn  btn-success btn1" id="button3">Export</button>
+                                 <h3 align="center"><button class="btn  btn-success btn1" id="button3">Export to excel</button> </h3>
+
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-exampleo">
                                     <thead>
-                                        <tr style="background:blue;color:white">
+                                        <tr>
                                             <th>Bank</th>
                                             <th>Transaction</th>
                                             <th>Term</th>
@@ -1054,14 +1103,70 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php foreach ($iblhistory as $iblhis) { ?>
+                                        <?php foreach ($iblhistory as $iblhis) {
+
+                                            if(Yii::app()->session['country_chosen']!=''){
+                                                $country_test=Bqcus::model()->findByPk($iblhis->target);
+                                                if($country_test->country_id==Yii::app()->session['country_chosen']){
+                                                    ;
+                                                }
+                                                else{
+                                                    continue;
+                                                }
+
+                                            }
+                                            else{
+                                                ;
+                                            }
+                                         ?>
                                             <tr>
                                                 <?php if ($ucode->id == $iblhis->cus) { ?>
-                                                    <td><?php echo Bqcus::model()->findByPk($iblhis->target)->resnam; ?></td>
+                                                    <td>
+                                                     <?php
+            $src = Yii::app()->request->baseUrl."/images/banklogos/" . Evuti::model()->findByPk($iblhis->target)->nom . ".".Evuti::model()->findByPk($iblhis->target)->pic_ext;
+            if(Evuti::model()->findByPk($iblhis->target)->pic_ext==''){
+               echo '--' ;              
+            }
+            else{
+            echo    @getimagesize($src);
+            if (@getimagesize($src)) {
+                
+                    echo '<img class="over" style=" top: 0px; right: 0px;" class="imgbrder" src="'.Yii::app()->request->baseUrl.'/images/banklogos/' .Evuti::model()->findByPk($iblhis->target)->nom . '.'.Evuti::model()->findByPk($iblhis->target)->pic_ext.'" alt="' . '' . '" width="100px" height="100px" />';
+                } else {
+         ;      
+                
+                    echo '<img class="over" style=" top: 0px; right: 0px;" class="imgbrder" src="'.Yii::app()->request->baseUrl.'/images/banklogos/' .Evuti::model()->findByPk($iblhis->target)->nom . '.'.Evuti::model()->findByPk($iblhis->target)->pic_ext.'" alt="' . '' . '" width="40px" height="20px" />';
+       
+                }
+              }
+            ?>
+<br/>
+                                                    <?php echo Bqcus::model()->findByPk($iblhis->target)->resnam; ?></td>
                                                     <?php
                                                 } else {
                                                     ?>
-                                                    <td><?php echo Bqcus::model()->findByPk($iblhis->cus)->resnam; ?></td>
+                                                    <td>
+                                                     <?php
+            $src = Yii::app()->request->baseUrl."/images/banklogos/" . Evuti::model()->findByPk($iblhis->cus)->nom . ".".Evuti::model()->findByPk($iblhis->cus)->pic_ext;
+            if(Evuti::model()->findByPk($iblhis->cus)->pic_ext==''){
+               echo '--' ;              
+            }
+            else{
+            echo    @getimagesize($src);
+            if (@getimagesize($src)) {
+                
+                    echo '<img class="over" style=" top: 0px; right: 0px;" class="imgbrder" src="'.Yii::app()->request->baseUrl.'/images/banklogos/' .Evuti::model()->findByPk($iblhis->cus)->nom . '.'.Evuti::model()->findByPk($iblhis->cus)->pic_ext.'" alt="' . '' . '" width="100px" height="100px" />';
+                } else {
+         ;      
+                
+                    echo '<img class="over" style=" top: 0px; right: 0px;" class="imgbrder" src="'.Yii::app()->request->baseUrl.'/images/banklogos/' .Evuti::model()->findByPk($iblhis->cus)->nom . '.'.Evuti::model()->findByPk($iblhis->cus)->pic_ext.'" alt="' . '' . '" width="40px" height="20px" />';
+       
+                }
+              }
+            ?>
+
+<br/>
+                                                    <?php echo Bqcus::model()->findByPk($iblhis->cus)->resnam; ?></td>
                                                 <?php } ?>
                                                 <td><?php echo RateTypes::model()->findByPk(InstitutionsQuotation::model()->findByPk($iblhis->num)->quotation_id)->rt_name; ?></td>
                                                 <td><?php echo Terms::model()->findByPk(InstitutionsQuotation::model()->findByPk($iblhis->num)->term_id)->term_name; ?></td>
@@ -1105,24 +1210,12 @@
                                         <!-- /.panel-heading -->
                                         <div class="panel-body">
                                             <div class="dataTable_wrapper">
-                                                <?php
-                                                /*
-                                                $form = $this->beginWidget('CActiveForm', array(
-                                                    'id' => 'class-list-form2',
-                                                    'enableAjaxValidation' => false,
-                                                    'action' => Yii::app()->request->baseUrl . '/index.php?r=export/default/FdrExport',
-                                                    'htmlOptions' => array('enctype' => 'multipart/form-data', 'align' => 'center'),
-                                                ));
-                                                echo CHtml::dropDownList("export", "export", array('pdf' => 'pdf', 'csv' => 'csv'), array("name" => "export"));
-                                                echo CHtml::submitButton('Export', array('style' => 'color:blue;', 'class' => 'btn-default', 'name' => 'export-evorates'));
-                                                $this->endWidget();
-                                               */
-                                                  ?>
+                                                
                                                  
-                                  <button class="btn  btn-success btn1" id="buttons<?php  echo $i; ?>">Export</button>
+                           <h3 align="center">       <button class="btn  btn-success btn1" id="buttons<?php  echo $i; ?>">Export</button></h3>
                                                 <table class="table table-striped table-bordered table-hover" id="dataTables-examples<?php  echo $i; ?>">
                                                     <thead>
-                                                        <tr style="background:blue;color:white">
+                                                        <tr>
                                                             <th>Term</th>
                                                             <th>Rate</th>
                                                             <th>Biddable?</th>
@@ -1261,17 +1354,6 @@
     </div>
     <!-- /.modal-content -->
 </div>
-<script src="<?php echo Yii::app()->request->baseUrl; ?>/extras/bower_components/jquery/dist/jquery.min.js"></script>
-<script src="<?php echo Yii::app()->request->baseUrl; ?>/extras/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="<?php echo Yii::app()->request->baseUrl; ?>/extras/bower_components/metisMenu/dist/metisMenu.min.js"></script>
-<script src="<?php echo Yii::app()->request->baseUrl; ?>/extras/bower_components/raphael/raphael-min.js"></script>
-<script src="<?php echo Yii::app()->request->baseUrl; ?>/extras/dist/js/sb-admin-2.js"></script>
-<script src="<?php echo Yii::app()->request->baseUrl; ?>/extras/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
-<script src="<?php echo Yii::app()->request->baseUrl; ?>/extras/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
-<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.table2excel.js"></script>
-
-
-<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.table2excel.js"></script>
 <script>
     $(function() {
         $("#button").click(function() {
@@ -1316,13 +1398,19 @@
 </script>
 
 <script>
+    $(document).ready(function() {
+        //localStorage.clear();
+        //alert(localStorage.length);
+        //$("#Formore").append("localStorage.length");
+        //document.getElementById('basket').value = localStorage.length;
+    });
     function closedialog() {
         $('#closedialog').on('click', location.reload());
     }
     function complete(id, op) {
         $.ajax({
             type: "GET",
-            url: "http://" + document.getElementById("url").value + "/bankafrica1/index.php?r=business/default/complete&id=" + id + "&op=" + op
+            url: "http://" + document.getElementById("url").value + "/"+document.getElementById("base").value+"/index.php?r=business/default/complete&id=" + id + "&op=" + op
                     ,
             data: "", //ProposedSites
             cache: false,
@@ -1370,7 +1458,7 @@
         else {
             $.ajax({
                 type: "GET",
-                url: "http://" + document.getElementById("url").value + "/bankafrica1/index.php?r=business/default/reject" +
+                url: "http://" + document.getElementById("url").value + "/"+document.getElementById("base").value+"/index.php?r=business/default/reject" +
                         "&remark=" + remark +
                         "&id=" + id +
                         "&op=" + op,
@@ -1397,7 +1485,7 @@
 
         $.ajax({
             type: "GET",
-            url: "http://" + document.getElementById("url").value + "/bankafrica1/index.php?r=business/default/accept&id=" + id + "&op=" + op
+            url: "http://" + document.getElementById("url").value + "/"+document.getElementById("base").value+"/index.php?r=business/default/accept&id=" + id + "&op=" + op
                     ,
             data: "", //ProposedSites
             cache: false,
@@ -1422,7 +1510,7 @@
 
         $.ajax({
             type: "GET",
-            url: "http://" + document.getElementById("url").value + "/bankafrica1/index.php?r=business/default/approve&id=" + id + "&op=" + op
+            url: "http://" + document.getElementById("url").value + "/"+document.getElementById("base").value+"/index.php?r=business/default/approve&id=" + id + "&op=" + op
                     ,
             data: "", //ProposedSites
             cache: false,
@@ -1448,7 +1536,7 @@
         //  alert(id);
         $.ajax({
             type: "GET",
-            url: "http://" + document.getElementById("url").value + "/bankafrica1/index.php?r=business/default/vieweffect&id=" + id + "&op=" + op
+            url: "http://" + document.getElementById("url").value + "/"+document.getElementById("base").value+"/index.php?r=business/default/vieweffect&id=" + id + "&op=" + op
                     ,
             data: "", //ProposedSites
             cache: false,
@@ -1472,7 +1560,7 @@
         else {
             $.ajax({
                 type: "GET",
-                url: "http://" + document.getElementById("url").value + "/bankafrica1/index.php?r=business/default/modify" +
+                url: "http://" + document.getElementById("url").value + "/"+document.getElementById("base").value+"/index.php?r=business/default/modify" +
                         "&rate=" + rate +
                         "&remark=" + remark +
                         "&id=" + id +
@@ -1508,7 +1596,7 @@
         else {
             $.ajax({
                 type: "GET",
-                url: "http://" + document.getElementById("url").value + "/bankafrica1/index.php?r=business/default/modify" +
+                url: "http://" + document.getElementById("url").value + "/"+document.getElementById("base").value+"/index.php?r=business/default/modify" +
                         "&rate=" + rate +
                         "&remark=" + remark +
                         "&id=" + id +
@@ -1559,7 +1647,7 @@
                     else {
                         $.ajax({
                             type: "GET",
-                            url: "http://" + document.getElementById('url').value + "/bankafrica1/index.php?r=ibl/default/addrate" +
+                            url: "http://" + document.getElementById('url').value + "/"+document.getElementById("base").value+"/index.php?r=ibl/default/addrate" +
                                     "&institution=" + institution +
                                     "&rateT=" + rateT +
                                     "&rate=" + rate +
@@ -1609,7 +1697,7 @@
         else {
             $.ajax({
                 type: "GET",
-                url: "http://" + document.getElementById('url').value + "/bankafrica1/index.php?r=ibl/default/addrate" +
+                url: "http://" + document.getElementById('url').value + "/"+document.getElementById("base").value+"/index.php?r=ibl/default/addrate" +
                         "&institution=" + institution +
                         "&rateT=" + rateT +
                         "&rate=" + rate +
@@ -1636,14 +1724,45 @@
             });
         }
     }
+
+        function customercontact(state,customer,ibl_id) {
+            if(state==0){
+                                        $('#msg').html(" successfully Captured");
+                        $('#sModal').modal('show');
+
+            }
+      else{ 
+            $.ajax({
+                type: "GET",
+                url: "http://" + document.getElementById('url').value + "/bankafricat1/index.php?r=ibl/default/customercontact" +
+                        
+                        "&state=" + state +
+                        "&customer=" + customer +
+                        "&ibl_id=" + ibl_id,
+                data: "", //ProposedSites
+                cache: false,
+                success: function(data) {
+                    if (data == 'true') {
+                        $('#msg').html(" Good luck in your transactions");
+                        $('#sModal').modal('show');
+
+                    } else {
+                        alert(data + "Failure: Data Could Not Be Saved. Try Again.");
+                    }
+                },
+                error: function(data) {
+                    alert("Error Sending Data.");
+                }
+            });
+     }   
+    }
+
 </script>
+
 
 <script>
     $(document).ready(function() {
-		$('#ratetoggle1').show();
-        $('#ratetoggle2').hide();
-		
-		$('#dataTables-example').DataTable({
+        $('#dataTables-example').DataTable({
             responsive: true
         });
         $('#dataTables-exampler1').DataTable({
@@ -1676,26 +1795,8 @@
         $('#dataTables-examples2').DataTable({
             responsive: true
         });
-		
-		$('#dataTables-exampleo').DataTable({
-            responsive: true
-        });
     });
-	
-    function  togglepane(id) {
-        if (id == 1) {
-            $('#ratetoggle1').show();
-            $('#ratetoggle2').hide();
-        }
-        else {
-            if (id == 2) {
-                $('#ratetoggle2').show();
-                $('#ratetoggle1').hide();
-            }
-        }
 
-    }
-	
     function switcher(id) {
         //alert(id);
         if (document.getElementById('state' + id).value == 1) {
@@ -1704,18 +1805,6 @@
         else {
             document.getElementById('state' + id).value = 1;
         }
-    }
-	
-	function toggle1(id) {
-        $("#the_rest" + id).toggle();
-    }
-    $(document).ready(function() {
-        $(".sub1").hide();
-        $(".sub2").hide();
-    });
-    function toggle2(id) {
-//        alert(id);
-        $("#the_restinner" + id).toggle();
     }
 </script>
 <script>
@@ -1736,4 +1825,11 @@
     // popover demo
     $("[data-toggle=popover]")
             .popover()
+</script>
+<script>
+    $(document).ready(function() {
+        $('#dataTables-exampleo').DataTable({
+            responsive: true
+        });
+    });
 </script>

@@ -210,7 +210,7 @@
                                 else {
                                     $.ajax({
                                         type: "GET",
-                                        url: "http://localhost/bankafrica1/index.php?r=adminS5F1T6P0/default/addterm&termname="
+                                         url: "http://" + document.getElementById("url").value + "/"+document.getElementById("base").value+ "/index.php?r=adminS5F1T6P0/default/addterm&termname="
                                                 + termname+"&dterm="+dterm,
                                         data: "", //ProposedSites
                                         cache: false,
@@ -242,7 +242,7 @@
                                 else {
                                     $.ajax({
                                         type: "GET",
-                                        url: "http://localhost/bankafrica1/index.php?r=adminS5F1T6P0/default/addrate&typename="
+                                     url: "http://" + document.getElementById("url").value + "/"+document.getElementById("base").value+ "index.php?r=adminS5F1T6P0/default/addrate&typename="
                                                 + typename,
                                         data: "", //ProposedSites
                                         cache: false,

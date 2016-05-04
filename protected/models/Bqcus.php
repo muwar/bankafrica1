@@ -73,9 +73,8 @@ class Bqcus extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('resnam', 'required'),
 			array('email, telephone', 'required'),
-			array('sal, ca', 'numerical'),
+			array('sal, ca, country_id', 'numerical'),
 			array('cdos, qua', 'length', 'max'=>5),
 			array('cus', 'length', 'max'=>15),
 			array('nam, sur, mid, otn, breg, tpc, town, tbir, pro', 'length', 'max'=>50),
@@ -133,6 +132,7 @@ class Bqcus extends CActiveRecord
 			'qua' => 'Qua',
 			'sal' => 'Sal',
 			'ca' => 'Ca',
+			'country_id'=>'Country',
 			'town' => 'Town',
 			'tbir' => 'Tbir',
 			'pro' => 'Pro',

@@ -237,7 +237,7 @@
         else {
             $.ajax({
                 type: "GET",
-                url: "http://localhost/bankafrica1/index.php?r=business/default/addrate" +
+                url: "http://" + document.getElementById("url").value + "/"+document.getElementById("base").value+ "/index.php?r=business/default/addrate" +
                         "&institution=" + institution +
                         "&rateT=" + rateT +
                         "&lrate=" + lrate +

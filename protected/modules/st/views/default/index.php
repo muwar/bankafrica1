@@ -1,30 +1,49 @@
-<style>
-#button{
-	position:absolute;
-	top:13.5%;
-	left:45%;
-}
-.table-striped>tbody>tr:nth-of-type(odd)
-{
-	background-color: #f0ad4e;
-	color:white;
-}
-.table-striped>tbody>tr:nth-child(2n)
-{
-	background-color: #8a6d3b;
-	color:white;
-}
-.sorting_1{
-	background: #5cb85c;
-}
-</style>
+<?php
+$this->beginWidget('application.extensions.sidebar.Sidebar', array('title' => 'Securities Trading - How to', 'collapsed' => true, 'position'=>'right'));
+?>
+<ul>
+<i>If you wish to sell a financial security; </i>
+Go to the ‘Securities Trading’ panel and list the financial security that you wish to sell. Make sure you input the required characteristics before submitting.
+
+<i>Buying a financial security</i>
+<li>Review security type, issuer, maturity date, face value and current price </li>
+<li>Buy at stated price against an annual coupon (return) or bid for a discount, if price is biddable.</li>
+<li>Submit a buy or bid order and wait for a response from Africapital quote</li>
+</ul>
+<?php
+$this->endWidget();
+?>
 <div id="page-wrapper">
     <div class="row">
         <div class="col-md-12">
-            <div class="panel panel-default">
+            <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        Securities Trading
+ <!--      
+<ul>
+  <li><span class="flag flag-af"></span>Country Name</li>
+  <li><span class="flag flag-gg"></span>Cameroon</li>
+  <li><span class="flag flag-gg"></span> country
+</li>
+
+</ul>
+-->
+
+                      <?php   if(Yii::app()->session['country_chosen'] =='' ){  ?>
+                        AFRICAPITAL QUOTE>><< SECURITIES TRADING QUOTES                                                                          <?php
+?>
+                                              
+<?php }else{ 
+$country=Countries::model()->findByPk(Yii::app()->session['country_chosen']);
+ ?>
+<label class="flag flag-<?php echo strtolower($country->iso_alpha2);?>" align="right"></label> 
+ AFRICAPITAL QUOTE>><?php  echo strtoupper($country->name) ?><< SECURITIES TRADING QUOTES   
+                                                                                                   
+
+
+<?php
+  } ?>
+
                     </h4>
                 </div>
 
@@ -34,10 +53,11 @@
                 ?><!-- /.panel-heading -->
                 <div class="panel-body">
                     <div class="dataTable_wrapper">
-                         <button class="btn  btn-success btn1" id="button">Export</button>
-                        <table class="table table-striped table-bordered table-hover" id="dataTables-example" style="width:100%;overflow:hidden">
+                                              <h3 align="center">  <button class="btn  btn-success btn1" id="button">Export</button></h3>
+
+                        <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                             <thead>
-                                <tr style="background:blue;color:white">
+                                <tr>
                                     <th> Type</th>
                                     <th>Issuer</th>
                                     <th>Qty</th>
@@ -48,11 +68,23 @@
                                     <th>Discount</th>
                                     <th>Price</th>
                                     <th>Biddable? </th>
-                                    <th>Contact Us</th>
+                                    <th>Contact Us
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php foreach ($secrecords as $sec) {
+                                    if(Yii::app()->session['country_chosen']==''){
+
+                                    }
+                                    else{
+                                        if(Evuti::model()->findByPk($sec->owner)->country_id != Yii::app()->session['country_chosen']){
+                                            continue;
+                                        }
+                                        else{
+                                            ;
+                                        }
+                                    }
                                     ?>
                                     <tr >
                                         <td><?php echo SecurityTypes::model()->findByPk($sec->sectype)->name; ?></td>
@@ -73,17 +105,28 @@
                                                 echo 'No';
                                             }
                                             ?></td>
-                                        <td class="tooltip-demo">
+                                        <td>
+                                            <!--
+                                            <div class="tooltip-demo">
+                                                <label  data-toggle="tooltip" data-placement="top" title="Click to Bid for this security" onclick="loadform(<?php echo $sec->id . "," . $loggeduser->id . "," . $sec->owner; ?>)">
+                                                    Buy
+                                                </label>
+                                            </div>
+                                            -->
                                             <?php  if(Yii::app()->user->name=='admin'){ ?>
+                                                                                        <div class="tooltip-demo">
                                                 <label  data-toggle="tooltip" data-placement="top" title="Click to Bid for this security">
                                                     Contact Us
                                                 </label>
+                                            </div>
                                             <?php }
                                             else{
                                             ?>
-											<label  data-toggle="tooltip" data-placement="top" title="Click to Bid for this security" onclick="contactus(<?php echo $sec->id . "," . $loggeduser->id . "," . $sec->owner; ?>)">
-												Contact Us
-											</label>
+                                            <div class="tooltip-demo">
+                                                <label  data-toggle="tooltip" data-placement="top" title="Click to Bid for this security" onclick="contactus(<?php echo $sec->id . "," . $loggeduser->id . "," . $sec->owner; ?>)">
+                                                    Contact Us
+                                                </label>
+                                            </div>
                                             <?php  } ?>
                                         </td>
                                     </tr>
@@ -293,7 +336,7 @@
                                                         else {
                                                             $.ajax({
                                                                 type: "GET",
-                                                                url: "http://" + document.getElementById("url").value + "/bankafrica1/index.php?r=st/default/buysec" +
+                                                                url: "http://" + document.getElementById("url").value + "/"+document.getElementById("base").value+"/index.php?r=st/default/buysec" +
                                                                         "&discount=" + discount +
                                                                         "&user=" + user +
                                                                         "&id=" + idd
@@ -329,7 +372,7 @@
                                                  //       alert(msg);
                                                         $.ajax({
                                                             type: "GET",
-                                                            url: "http://" + document.getElementById("url").value + "/bankafrica1/index.php?r=st/default/seccontact" +
+                                                            url: "http://" + document.getElementById("url").value + "/"+document.getElementById("base").value+"/index.php?r=st/default/seccontact" +
                                                                     "&name=" + name +
                                                                     "&email=" + email +
                                                                     "&tel=" + tel +

@@ -64,34 +64,72 @@ class UsersController extends Controller {
         $this->performAjaxValidation($model);
 
         if (isset($_POST['Evuti'])) {
+            
+
 
             $model->attributes = $_POST['Evuti'];
             $model->confirm_your_password = $_POST['Evuti']['confirm_your_password'];
+            $model1->attributes=$_POST['Bqcus'];
+          
+            $model1->country_id=$_POST['Bqcus']['country_id'];
+              $model->country_id=$model1->country_id;
+
+
 
             // check duplicate username
             $checkname = Evuti::model()->findAll('nom=:x', array(':x' => $model->nom));
             if (count($checkname) != 0) {
                 Yii::app()->user->setFlash('error', 'This username is already in use');
-                $this->render('create', array('model' => $model));
+                $this->render('create', array('model' => $model,'model1' => $model1));
                 exit;
             }
             $checkcode = Evuti::model()->findAll('uti=:x', array(':x' => $model->uti));
             if (count($checkcode) != 0) {
                 Yii::app()->user->setFlash('error', 'This Identification is already in use');
-                $this->render('create', array('model' => $model));
+                $this->render('create', array('model' => $model,'model1' => $model1));
                 exit;
             }
             if ($model->pswd == "") {
                 Yii::app()->user->setFlash('error', 'The password field cannot be blank');
-                $this->render('create', array('model' => $model));
+                $this->render('create', array('model' => $model,'model1' => $model1));
                 exit;
             }
             $model->pro = $_POST['Evuti']['pro'];
             if ($model->pswd != $model->confirm_your_password) {
                 Yii::app()->user->setFlash('error', 'Passwords Are Incompatible');
-                $this->render('create', array('model' => $model));
+                $this->render('create', array('model' => $model,'model1' => $model1));
                 exit;
             }
+
+            if ($model->pro == '') {
+                Yii::app()->user->setFlash('error', 'You must choose a profile to register');
+                $this->render('create', array('model' => $model,'model1' => $model1));
+                exit;
+            }
+            if(count(Evuti::model()->findAll('nom=:x',array(':x'=>$model->pro)))!=0){
+              Yii::app()->user->setFlash('error', 'This username is already in use');
+                $this->render('create', array('model' => $model,'model1' => $model1));
+                exit;  
+            }
+
+ if ($model->nom == '') {
+                Yii::app()->user->setFlash('error', 'Please fill a valid username');
+                $this->render('create', array('model' => $model,'model1' => $model1));
+                exit;
+            }
+             if ($model1->email == '') {
+                Yii::app()->user->setFlash('error', 'Please fill in your email');
+                $this->render('create', array('model' => $model,'model1' => $model1));
+                exit;
+            }
+
+             if ($model1->telephone == '') {
+                Yii::app()->user->setFlash('error', 'Please fill in your telephone number');
+                $this->render('create', array('model' => $model,'model1' => $model1));
+                exit;
+            }
+
+
             $model->pswd = md5($model->pswd);
             if (Evprof::model()->findByPk($model->pro)->lib == 'Bank') {
                 $model->user_status = 0;
@@ -99,7 +137,7 @@ class UsersController extends Controller {
                 $this->redirect(Yii::app()->user->returnUrl);
             } else {
                 $model->user_status = 0;
-                $model->activation_key = sha1(mt_rand(10000, 99999) . time() . $model->email);
+                $model->activation_key = sha1(mt_rand(10000, 99999) . time() . $model1->email);
             }
             $model->utic = $model->nom;
             $model->utimo = $model->nom;
@@ -109,7 +147,7 @@ class UsersController extends Controller {
             if ($model->save())
                 ;
             $activation_url = $this->createAbsoluteUrl('users/validate', array('key' => $model->activation_key));
-            mail($model->email, 'Account Confirmation from africapital Quote', "Click" . $activation_url . " to activate your account", "");
+            mail($model1->email, 'Account Confirmation from africapital Quote', "Click" . $activation_url . " to activate your account", "");
             /* --------working to save customer info too */
             if (isset($_POST['Bqcus'])) {
                 $model1->cdos = 5;
@@ -184,17 +222,44 @@ class UsersController extends Controller {
         $id = current($customers)->identity;
         $id1 = current($customers)->cus;
         $models = Bqcus::model()->findAll('identity=:x and cus=:y', array(':x' => $id, ':y' => $id1));
-
+        $model1=new Evuti;
         foreach ($models as $model)
             ;
         if (isset($_POST['Bqcus'])) {
+//            var_dump($_POST);
+//            var_dump($_FILES['upload']);
             $model->attributes = $_POST['Bqcus'];
+
+            $model1=Evuti::model()->findByPk($model->cus);
+            /* --Checking for image upload-- */
+            $dir=YiiBase::getPathOfAlias("webroot") . '/images/banklogos/';
+            $tmpFilePath = $_FILES['upload']['tmp_name'][0];
+
+ if ($tmpFilePath != "") {
+                //Setup our new file path
+                $newFilePath = $dir . DIRECTORY_SEPARATOR . $_FILES['upload']['name'][0];
+                
+                $ext = pathinfo($newFilePath, PATHINFO_EXTENSION);
+                $testFilePath=$dir . DIRECTORY_SEPARATOR . Yii::app()->user->name.'.'.$ext;
+                
+               $array= explode('.', $_FILES['upload']['name'][0]);
+      
+                
+                //Upload the file into the temp dir
+                if (move_uploaded_file($tmpFilePath, $testFilePath)) {
+$model1->pic_ext=$ext;
+                   $model1->save();
+                }
+
+            }
+
             if ($model->save())
                 $this->redirect(array('site/profile'));
             exit;
         }
         $this->render('user', array(
             'model' => $model,
+            'model1'=>$model1,
         ));
     }
 

@@ -1,31 +1,41 @@
-<style>
-#button{
-	position:absolute;
-	top:14.5%;
-	left:45%;
-}
-.table-striped>tbody>tr:nth-of-type(odd)
-{
-	background-color: #f0ad4e;
-	color:white;
-}
-.table-striped>tbody>tr:nth-child(2n)
-{
-	background-color: #8a6d3b;
-	color:white;
-}
-.sorting_1{
-	background: #5cb85c;
-}
-</style>
+<?php
+$this->beginWidget('application.extensions.sidebar.Sidebar', array('title' => 'Fixed Deposit rates - How to', 'collapsed' => true, 'position'=>'right'));
+?>
+<ul>
+<li>Rates have been published for three different term periods which may be different, designed to attract short, medium and long term investors.</li>
+<li>First, ensure that you are willing to make a fixed deposit greater than or equal to the minimum specified amount</li>
+<li>Choose a favourable rate that corresponds to a term period and bank/financial institution of your choice.</li>
+<li>A page will pop up automatically for you to insert and submit the amount you wish to deposit along requested information</li>
+<li>Wait for a response from bank relating to approval and directives on how to complete transaction with bank.</li>
+<li>In case a published rate is biddable, you can propose and submit a rate along other details and wait from response from bank</li>
+
+
+</ul>
+<?php
+$this->endWidget();
+?>
 <div id="page-wrapper">
     <div class="row">
         <div class="col-md-12">
-            <div class="panel panel-default">
+            <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        Fixed Deposit Rates
-                    </h4>
+                                   <?php   if(Yii::app()->session['country_chosen'] =='' ){  ?>
+                        AFRICAPITAL QUOTE>><< FIXED TERM DEPOSITS (FTD) QUOTES                                     <?php
+?>
+                                              
+<?php }else{  $country=Countries::model()->findByPk(Yii::app()->session['country_chosen']);
+ ?>
+<label class="flag flag-<?php echo strtolower($country->iso_alpha2);?>" align="right"></label> 
+
+ AFRICAPITAL QUOTE>><?php  echo $country->name ?><< FIXED TERM DEPOSITS (FTD) QUOTES                                                                  
+
+ 
+<?php
+  } ?>
+
+  <br/>
+Current quotations in %/per year   </h4>
                 </div>
 
                 <?php
@@ -36,15 +46,15 @@
                 <div class="panel-body">
                     <div class="dataTable_wrapper">
                   
-                        <button class="btn  btn-success btn1" id="button">Export</button>
-                        <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                           <h3 align="center"><button class="btn  btn-success btn1" id="button">Export to excel</button> </h3>
+<table class="table table-striped table-bordered table-hover" id="dataTables-example">
                             <thead>
-                                <tr style="background:blue;color:white">
-                                    <th>Bank</th>
+                                <tr>
+                                    <th> Bank</th>
                                     <th>Minimum</th>
                                     <?php foreach ($terms as $tterm) { ?>
-                                        <th class="tooltip-demo"><label data-toggle="tooltip" data-placement="top" title="<?php echo $tterm->term_duration ?>"><?php echo $tterm->term_name; ?>
-                                    </label ></th>
+                                        <th><div class="tooltip-demo"> <label data-toggle="tooltip" data-placement="top" title="<?php echo $tterm->term_duration ?>"><?php echo $tterm->term_name; ?>
+                                    </label >  </div></th>
                             <?php } ?>
                             <th>Special Rates?</th>
                             <th>Fees</th>
@@ -55,7 +65,12 @@
                                 $bankprofile = Evprof::model()->findAll('lib=:x', array(':x' => 'Bank'));
                                 foreach ($bankprofile as $bankprof)
                                     ;
+                                  if(Yii::app()->session['country_chosen']==''){   
                                 $surveyusers = Evuti::model()->findAll('pro=:x', array(':x' => $bankprof->id));
+                              }
+                              else{
+                                                              $surveyusers = Evuti::model()->findAll('pro=:x and country_id=:y', array(':x' => $bankprof->id,':y'=>Yii::app()->session['country_chosen']));  
+                              }
                                 foreach ($surveyusers as $susers) {
 
                                     $types = RateTypes::model()->findAll('rt_name=:a or rt_name=:b', array(':a' => 'Fixed Deposit Rates', 'b' => 'Fixed Deposits'));
@@ -66,9 +81,30 @@
                                         $nusers = Bqcus::model()->findAll('cus=:x', array(':x' => $susers->id));
                                         foreach ($nusers as $nuser)
                                             ;
-                                        echo "<tr class='odd gradeX'><td>" . $nuser->resnam . "</td>";
-                                        ?>
-                                    <td>-</td>
+?>
+ <td>    <?php
+            $src = Yii::app()->request->baseUrl."/images/banklogos/" . Evuti::model()->findByPk($nuser->cus)->nom . ".".Evuti::model()->findByPk($nuser->cus)->pic_ext;
+            if(Evuti::model()->findByPk($nuser->cus)->pic_ext==''){
+                ;              
+            }
+            else{
+
+            echo    @getimagesize($src);
+            if (@getimagesize($src)) {
+                
+                    echo '<img class="over" style=" top: 0px; right: 0px;" class="imgbrder" src="'.Yii::app()->request->baseUrl.'/images/banklogos/' .Evuti::model()->findByPk($nuser->cus)->nom . '.'.Evuti::model()->findByPk($nuser->cus)->pic_ext.'" alt="' . '' . '" width="100px" height="100px" />';
+                } else {
+         ;      
+                
+                    echo '<img class="over" style=" top: 0px; right: 0px;" class="imgbrder" src="'.Yii::app()->request->baseUrl.'/images/banklogos/' .Evuti::model()->findByPk($nuser->cus)->nom . '.'.Evuti::model()->findByPk($nuser->cus)->pic_ext.'" alt="' . '' . '" width="40px" height="20px" />';
+       
+                }
+              }
+            ?>
+<br/>
+     
+                                      <?php  echo $nuser->resnam;  ?></td>
+                                                                            <td>-</td>
                                     <?php
                                     foreach ($terms as $term) {
                                         echo "<td><div class='tooltip-demo'><div data-toggle='tooltip' data-placement='top' title='This value has not been set'>NA</div><div></td>";
@@ -81,7 +117,29 @@
                                     //      echo $user->resnam;
                                     foreach ($users as $user)
                                         ;
-                                    echo "<td>" . $user->resnam . "</td>";
+                                   ?>
+                                        <td>    <?php
+            $src = Yii::app()->request->baseUrl."/images/banklogos/" . Evuti::model()->findByPk($user->cus)->nom . ".".Evuti::model()->findByPk($user->cus)->pic_ext;
+            if(Evuti::model()->findByPk($user->cus)->pic_ext==''){
+                ;              
+            }
+            else{
+            echo    @getimagesize($src);
+            if (@getimagesize($src)) {
+                
+                    echo '<img class="over" style=" top: 0px; right: 0px;" class="imgbrder" src="'.Yii::app()->request->baseUrl.'/images/banklogos/' .Evuti::model()->findByPk($user->cus)->nom . '.'.Evuti::model()->findByPk($user->cus)->pic_ext.'" alt="' . '' . '" width="100px" height="100px" />';
+                } else {
+         ;      
+                
+                    echo '<img class="over" style=" top: 0px; right: 0px;" class="imgbrder" src="'.Yii::app()->request->baseUrl.'/images/banklogos/' .Evuti::model()->findByPk($user->cus)->nom . '.'.Evuti::model()->findByPk($user->cus)->pic_ext.'" alt="' . '' . '" width="40px" height="20px" />';
+       
+                }
+              }
+            ?>
+<br/>
+                                        <?php echo  $user->resnam; ?></td>
+
+                                   <?php 
                                     echo "<td>" . current($bankrates)->minimum_amount . "</td>";
                                     ?>
                                     <?php
@@ -95,7 +153,7 @@
                                         } else {
                                             ?>
                                             <?php if (Yii::app()->user->name == 'admin') { ?>
-                                                <td>
+                                                <td><div class="tooltip-demo">
                                                         <label type="label" data-html="true" class="" data-toggle="tooltip" data-placement="top" title="Click to send your request &#013;
                                                                Special rate: <?php
                                                                if (current($instrates)->special_rate == 0)
@@ -126,12 +184,12 @@
                                                                >
                                                                    <?php echo current($instrates)->lrate . " %" ?>
                                                         </label>
-                                                    
+                                                    </div>
                                                 </td>
                                             <?php }
                                             else {
                                                 ?>
-                                                <td>
+                                                <td><div class="tooltip-demo">
                                                         <label type="label" data-html="true" class="" data-toggle="tooltip" data-placement="top" title="Click to send your request &#013;
                                                                Special rate: <?php
                                                                if (current($instrates)->special_rate == 0)
@@ -162,7 +220,7 @@
                                                                onclick="loadform(<?php echo current($instrates)->lrate . ",'" . $user->resnam . "','" . $term1->term_name . "','" . $user->cus . "'," . current($instrates)->institutions_quotation_id . ",'" . $bankl->id . "'"; ?>)" >
                     <?php echo current($instrates)->lrate . " %" ?>
                                                         </label>
-                                                    
+                                                    </div>
                                                 </td>
                 <?php } ?>
                                             <!--                                
@@ -277,14 +335,6 @@
         </fieldset>
     </div>
 </div>
-<script src="<?php echo Yii::app()->request->baseUrl; ?>/extras/bower_components/jquery/dist/jquery.min.js"></script>
-<script src="<?php echo Yii::app()->request->baseUrl; ?>/extras/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="<?php echo Yii::app()->request->baseUrl; ?>/extras/bower_components/metisMenu/dist/metisMenu.min.js"></script>
-<script src="<?php echo Yii::app()->request->baseUrl; ?>/extras/bower_components/raphael/raphael-min.js"></script>
-<script src="<?php echo Yii::app()->request->baseUrl; ?>/extras/dist/js/sb-admin-2.js"></script>
-<script src="<?php echo Yii::app()->request->baseUrl; ?>/extras/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
-<script src="<?php echo Yii::app()->request->baseUrl; ?>/extras/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
-<script src="<?php echo Yii::app()->request->baseUrl; ?>/js/jquery.table2excel.js"></script>
 <script>
                                                                    $(function() {
                                                                        $("#button").click(function() {
@@ -350,7 +400,7 @@
 
                                                                            $.ajax({
                                                                                type: "GET",
-                                                                               url: "http://" + document.getElementById("url").value + "/bankafrica1/index.php?r=fdr/default/propose" + "&customer=" + customer +
+                                                                               url: "http://" + document.getElementById("url").value + "/"+document.getElementById("base").value+"/index.php?r=fdr/default/propose" + "&customer=" + customer +
                                                                                        "&amount=" + amount +
                                                                                        "&rate=" + rateid +
                                                                                        "&dbank=" + dbank +

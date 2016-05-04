@@ -1,89 +1,63 @@
-<style>
-    /* The max width is dependant on the container (more info below) */
-    .popover{
-        max-width: 100%; /* Max Width of the popover (depending on the container!) */
-        width: 60%;
-    }
-    .box {
-        border-radius: 10px;
-        padding: 25px;
-        background-color: #fff;
-        text-align: center;
-    }
-    #progressbar {
-        border: 1px solid #333;
-        border-radius: 2px;
-        padding: 2px;
-    }
-    #progressbar > div {
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box;
-        background-color:currentColor;
-        width: 11%;  
-        height: 8px;
-        border: 1px solid #333;
-        border-radius: 0px;
-    }
-    .text {
-        color: #000;
-        margin-top: 15px;
-        font-size: 9px;
-        font-weight: bold;
-    }
-	#register{
-		position:absolute;
-		top:27%;
-		left:38%;
-	}
-	.table-striped>tbody>tr:nth-of-type(odd)
-	{
-		background-color: #f0ad4e;
-		color:white;
-	}
-	.table-striped>tbody>tr:nth-child(2n)
-	{
-		background-color: #8a6d3b;
-		color:white;
-	}
-	.sorting_1{
-		background: #5cb85c;
-	}
-</style>
+<?php
+$this->beginWidget('application.extensions.sidebar.Sidebar', array('title' => 'Securities Trading - How to', 'collapsed' => true, 'position'=>'right'));
+?>
+<ul>
+<i>If you wish to sell a financial security; </i>
+Go to the ‘Securities Trading’ panel and list the financial security that you wish to sell. Make sure you input the required characteristics before submitting.
+
+<i>Buying a financial security</i>
+<li>Review security type, issuer, maturity date, face value and current price </li>
+<li>Buy at stated price against an annual coupon (return) or bid for a discount, if price is biddable.</li>
+<li>Submit a buy or bid order and wait for a response from Africapital quote</li>
+</ul>
+<?php
+$this->endWidget();
+?>
 <div id="page-wrapper">
     <!-- /.row -->
     <div class="row">
         <div class="col-lg-12">
-            <div class="panel panel-default">
+            <div class="panel panel-primary">
                 <div class="panel-heading">
-                    Securities Trading
+                                         <?php   if(Yii::app()->session['country_chosen'] =='' ){  ?>
+                        AFRICAPITAL QUOTE>><< SECURITIES TRADING QUOTES                                                                          <?php
+?>
+                                              
+<?php }else{  $country=Countries::model()->findByPk(Yii::app()->session['country_chosen']);
+ ?>
+<label class="flag flag-<?php echo strtolower($country->iso_alpha2);?>" align="right"></label> 
+ AFRICAPITAL QUOTE>><?php  echo $country->name ?><< SECURITIES TRADING QUOTES                                                                                                      
+
+<?php
+  } ?>
+
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs">
-                        <li class="active"><a href="#home" data-toggle="tab">New Securities</a>
+                        <li class="active"><a href="#home" data-toggle="tab">My Listed Securities</a>
                         </li>
                         <li><a href="#mreq" data-toggle="tab">My Requests</a>
                         </li>
                         <li><a href="#creq" data-toggle="tab">Customer Requests</a>
                         </li>
-                        <li><a href="#messages" data-toggle="tab">Evolution of Securities</a>
+                        <li><a href="#messages" data-toggle="tab">History</a>
                         </li>
-                        <li><a href="#interest" data-toggle="tab">Interest Panel</a>
+                        <li><a href="#interest" data-toggle="tab">Validation</a>
                         </li>
 
                     </ul>
                     <!-- Tab panes -->
                     <div class="tab-content">
                         <div class="tab-pane fade in active" id="home">
-                            <button id="register" type="submit" onclick="event.preventDefault();
-                                    registerneed(<?php echo $userid ?>);" class="btn btn-primary">Register New Securities</button>
+                            <button type="submit" onclick="event.preventDefault();
+                                    registerneed(<?php echo $userid ?>);" class="btn btn-primary">List New Securities</button>
                                     <?php // echo CHtml::link('Register new investment needs',array('registerneeds','onclick'=>'event.preventDefault();sendrequest()'))  ?>
                             <div class="dataTable_wrapper">
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
-                                        <tr style="background:blue;color:white">
+                                        <tr>
                                             <th>Issuer</th>
                                             <th>Issue date</th>
                                             <th>Maturity</th>
@@ -113,7 +87,7 @@
                             <div class="dataTable_wrapper">
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-examplesechis">
                                     <thead>
-                                        <tr style="background:blue;color:white">
+                                        <tr>
                                             <th>Type </th>
                                             <th>Issuer </th>
                                             <th>Issue Date </th>
@@ -126,7 +100,9 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <?php foreach (SecurityList::model()->findAll('owner=:x', array(':x' => $userid)) as $evolutionlist) { ?>
+                                        <?php foreach (SecurityList::model()->findAll('owner=:x', array(':x' => $userid)) as $evolutionlist) {
+
+                                         ?>
                                             <tr>    
                                                 <td><?php echo SecurityTypes::model()->findByPk($evolutionlist->sectype)->name; ?></td>
                                                 <td><?php echo $evolutionlist->issuer; ?></td>
@@ -147,7 +123,7 @@
                             <div class="dataTable_wrapper">
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-examplemyreqsec">
                                     <thead>
-                                        <tr style="background:blue;color:white">
+                                        <tr>
                                             <th>Sent to </th>
                                             <th>Date</th>
                                             <th>Set Discount</th>
@@ -166,6 +142,18 @@
                                         foreach ($myreqsecs as $myreqsec) {
                                             $securityproper = SecurityList::model()->findByPk($myreqsec->ref);
                                             $dsecs = Bqdsec::model()->findAll('refsec_id=:x', array(':x' => $myreqsec->cdos));
+                                             if(Yii::app()->session['country_chosen']==''){
+
+                                    }
+                                    else{
+                                        if(Evuti::model()->findByPk($securityproper->owner)->country_id != Yii::app()->session['country_chosen']){
+                                            continue;
+                                        }
+                                        else{
+                                            ;
+                                        }
+                                    }
+
                                             ?>
                                             <tr>
                                                 <td><?php echo current(Bqcus::model()->findAll('cus=:x', array(':x' => $securityproper->owner)))->resnam; ?></td>
@@ -411,7 +399,7 @@
                             <div class="dataTable_wrapper">
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-examplemreqsec">
                                     <thead>
-                                        <tr style="background:blue;color:white">
+                                        <tr>
                                             <th>From</th>
                                             <th>Date</th>
                                             <th>Qty</th>
@@ -431,6 +419,18 @@
                                         foreach ($creqsecs as $creqsec) {
                                             $securityproper = SecurityList::model()->findByPk($creqsec->ref);
                                             $dsecs = Bqdsec::model()->findAll('refsec_id=:x', array(':x' => $creqsec->cdos));
+                                           
+ if(Yii::app()->session['country_chosen']==''){
+
+                                    }
+                                    else{
+                                        if(Evuti::model()->findByPk($securityproper->owner)->country_id != Yii::app()->session['country_chosen']){
+                                            continue;
+                                        }
+                                        else{
+                                            ;
+                                        }
+                                    }
                                             ?>
                                             <tr>
                                                 <td><?php echo current(Bqcus::model()->findAll('cus=:x', array(':x' => $creqsec->cus)))->resnam; ?></td>
@@ -663,7 +663,7 @@
                             <div class="dataTable_wrapper">
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-examplemyreqcfint">
                                     <thead>
-                                        <tr style="background:blue;color:white">
+                                        <tr>
                                             <th>Security</th>
                                             <th>Date</th>
                                             <th>Status</th>
@@ -674,6 +674,20 @@
 $myreqsecs = Bqhseccontact::model()->findAll('cus=:x', array(':x' => $userid));
 if (count($myreqsecs) > 0) {
     foreach ($myreqsecs as $myreqsec) {
+       
+                                             if(Yii::app()->session['country_chosen']==''){
+
+                                    }
+                                    else{
+                                        $sec_test=SecurityList::model()->findByPk($myreqsec->ref)->owner;
+                                        if(Evuti::model()->findByPk($sec_test->owner)->country_id != Yii::app()->session['country_chosen']){
+                                            continue;
+                                        }
+                                        else{
+                                            ;
+                                        }
+                                    }
+
         ?>
                                                 <tr>
                                                     <td><?php
@@ -947,7 +961,7 @@ $this->widget('zii.widgets.jui.CJuiDatePicker', array(
                                     else {
                                         $.ajax({
                                             type: "GET",
-                                            url: "http://" + document.getElementById("url").value + "/bankafrica1/index.php?r=st/default/submitrequest" +
+                                            url: "http://" + document.getElementById("url").value + "/"+document.getElementById("base").value+"/index.php?r=st/default/submitrequest" +
                                                     "&issuer=" + issuer +
                                                     "&issuedate=" + issuedate +
                                                     "&matdate=" + matdate +
@@ -979,7 +993,7 @@ $this->widget('zii.widgets.jui.CJuiDatePicker', array(
                                 function accept(id) {
                                     $.ajax({
                                         type: "GET",
-                                        url: "http://" + document.getElementById("url").value + "/bankafrica1/index.php?r=st/default/accept&id=" + id
+                                        url: "http://" + document.getElementById("url").value + "/"+document.getElementById("base").value+"/index.php?r=st/default/accept&id=" + id
                                                 ,
                                         data: "", //ProposedSites
                                         cache: false,
@@ -1003,7 +1017,7 @@ $this->widget('zii.widgets.jui.CJuiDatePicker', array(
                                 function reject(id) {
                                     $.ajax({
                                         type: "GET",
-                                        url: "http://" + document.getElementById("url").value + "/bankafrica1/index.php?r=st/default/reject&id=" + id
+                                        url: "http://" + document.getElementById("url").value + "/"+document.getElementById("base").value+"/index.php?r=st/default/reject&id=" + id
                                                 ,
                                         data: "", //ProposedSites
                                         cache: false,
@@ -1027,7 +1041,7 @@ $this->widget('zii.widgets.jui.CJuiDatePicker', array(
                                 function complete(id) {
                                     $.ajax({
                                         type: "GET",
-                                        url:  "http://" + document.getElementById("url").value + "/bankafrica1/index.php?r=st/default/complete&id=" + id
+                                        url:  "http://" + document.getElementById("url").value + "/"+document.getElementById("base").value+"/index.php?r=st/default/complete&id=" + id
                                                 ,
                                         data: "", //ProposedSites
                                         cache: false,

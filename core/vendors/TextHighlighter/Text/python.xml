@@ -57,7 +57,7 @@
   <block name="octinteger" match="0[0-7]+l?" innerClass="number" />
 
   <block name="comment" innerClass="comment" 
-          match="#.+" />
+          match="#.+"/>
 
   <keywords name="reserved" inherits="identifier" innerClass="reserved" case = "yes">
     <keyword match="and"/>

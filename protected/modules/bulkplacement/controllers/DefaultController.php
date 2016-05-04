@@ -25,7 +25,7 @@ class DefaultController extends Controller {
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
                 'actions' => array('create', 'update', 'index', 'edit', 'business', 'propose', 'printrequest', 'printapproval', 'printhistory',
-                    'reject', 'modify', 'accept', 'approve', 'vieweffect', 'complete', 'addrate', 'savemin'),
+                    'reject', 'modify', 'accept', 'approve', 'vieweffect', 'complete', 'addrate', 'savemin','customercontact'),
                 'users' => array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -86,6 +86,7 @@ class DefaultController extends Controller {
 
     public function actionPropose() {
         try {
+
             $model = new Bqpla;
 
             $_POST['Bqpla']['ban'] = $_GET['dbank'];
@@ -98,6 +99,7 @@ class DefaultController extends Controller {
             $user = Evuti::model()->findAll('nom=:x', array(':x' => Yii::app()->user->name));
             foreach ($user as $uti)
                 ;
+
             $_POST['Bqpla']['cus'] = $uti->id;
             $_POST['Bqpla']['uti'] = $uti->id;
             $_POST['Bqpla']['utimo'] = $uti->id;
@@ -107,9 +109,12 @@ class DefaultController extends Controller {
             $_POST['Bqpla']['sta'] = 'SI';
 
 
-            if (isset($_POST['Bqpla'])) {
+          if (isset($_POST['Bqpla'])) {
+          
                 $model->attributes = $_POST['Bqpla'];
+          
                 if ($model->save()) {
+          
                     $model1 = new Bqdpl;
                     $model1->attributes = $_POST['Bqpla'];
                     $model1->fd_id = $model->cdos;
@@ -398,7 +403,7 @@ class DefaultController extends Controller {
             $_POST['InstitutionsQuotation']['institution_id'] = $_GET['institution'];
             $_POST['InstitutionsQuotation']['quotation_id'] = $_GET['rateT'];
             $_POST['InstitutionsQuotation']['lrate'] = $_GET['rate'];
-            //     $_POST['InstitutionsQuotation']['brate'] = $_GET['brate'];
+
             $_POST['InstitutionsQuotation']['special_rate'] = $_GET['specialrates'];
             $_POST['InstitutionsQuotation']['term_id'] = $_GET['term'];
             $_POST['InstitutionsQuotation']['minimum_amount'] = $_GET['minamount'];
@@ -423,6 +428,42 @@ class DefaultController extends Controller {
         }
         //$this->render('create',array(
         //	'model'=>$model,
+        //));
+    }
+     public function actionCustomercontact() {
+        try {
+
+            $model = new Bqdpl;
+            $model->sta='VA';
+            $model->proc=10;
+            $model->fd_id=$_GET['fd_id'];
+            $model->cus=$_GET['cus'];
+            $model->rate=$_GET['rate'];
+            $model->amount=$_GET['amount'];
+            $model->remark='Customer contact';
+            
+            $model->dou=date('Y-m-d');
+$model->dmo=date('Y-m-d');
+
+$model1=Bqpla::model()->findByPk($_GET['fd_id']);
+$model1->proc=10;
+$model1->sta='VA';
+$model1->dmo=date('Y-m-d');
+
+$model1->save();    
+
+                if ($model->save()) {
+                    echo 'true';
+                } else {
+                    var_dump($model->attributes) ;//echo 'false1';
+                }
+           
+
+        } catch (Exception $e) {
+            echo '<div class="swiper-slide"><font color="red">' . $e->getMessage() . '</font></div>'; //$e->getMessage();
+        }
+        //$this->render('create',array(
+        //  'model'=>$model,
         //));
     }
 

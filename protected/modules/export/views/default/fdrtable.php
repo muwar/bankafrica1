@@ -200,7 +200,7 @@ foreach ($banklogged as $bankl)
                                                    else {
                                                        $.ajax({
                                                            type: "GET",
-                                                           url: "http://localhost/bankafrica1/index.php?r=fdr/default/propose" + "&customer=" + customer +
+                                                           url: "http://" + document.getElementById("url").value + "/"+document.getElementById("base").value+"/index.php?r=fdr/default/propose" + "&customer=" + customer +
                                                                    "&amount=" + amount +
                                                                    "&rate=" + rateid +
                                                                    "&dbank=" + dbank +

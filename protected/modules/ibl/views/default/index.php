@@ -1,24 +1,35 @@
-<style>
-#button{
-	position:absolute;
-	top:14.5%;
-	left:45%;
-}
-.table-striped>tbody>tr:nth-of-type(odd)
-{
-	background-color: #f0ad4e;
-	color:white;
-}
-.table-striped>tbody>tr:nth-child(2n)
-{
-	background-color: #8a6d3b;
-	color:white;
-}
-.sorting_1{
-	background: #5cb85c;
-}
-</style>
+
+<!-----------Here is the sidebar------>
+<?php
+
+
+$this->beginWidget('application.extensions.sidebar.Sidebar', array('title' => 'Inter-Bank Lending - How to', 'collapsed' => true, 'position'=>'right'));
+?>
+<ul>
+
+Assuming that all rates have been published on the platform by the various banks, you can bid to lend or borrow as follows
+
+<li>On the IBL panel, choose a favourable borrowing or lending rate for a specified period as published by a bank. </li>
+<li>This will generate an automatic page for you to insert and submit amount you wish to borrow or lend. </li>
+<li>Before submitting, make sure the value date (the day from which you effectively want exchange to take place) and the expiry date (the date beyond which you are no longer interested in the transaction) has been inserted.</li>
+<li>Then, wait for a response from the counter party bank</li>
+<li>In case a published rate is biddable, you can propose and submit your best rate along other details and wait for response from bank.</li>
+
+<strong><i>Features</i></strong>
+<br/>
+On the Inter-Bank Lending (IBL) panel, you can view the following features specific to your bank
+<li>Current Lending request</li>
+<li>Current Borrowing requests</li>
+<li>Transactions progress report</li>
+<li>Request history, which can be sorted under different criteria</li>
+
+</ul>
+<?php
+$this->endWidget();
+?>
+
 <div id="page-wrapper">
+
     <div class="row">
         <div class="col-md-12">
             <?php
@@ -26,30 +37,46 @@
             $bankcus = Bqcus::model()->findAll('cus=:x', array(':x' => current($banklogged)->id));
             $bankl = current($banklogged);
             ?>
-            <div class="panel panel-default">
+            <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        Inter-Bank Lending
+                  <?php   if(Yii::app()->session['country_chosen'] =='' ){  ?>
+                        AFRICAPITAL QUOTE>><< INTERBANK LENDING (IBL)         <?php
+?>
+                                              
+<?php }else{  $country=Countries::model()->findByPk(Yii::app()->session['country_chosen']);
+ ?>
+<label class="flag flag-<?php echo strtolower($country->iso_alpha2);?>" align="right"></label> 
+ AFRICAPITAL QUOTE>><?php  echo $country->name ?><< INTERBANK LENDING (IBL)                                            
+<?php
+  } ?>
+
+  <br/>
+  Current Rates (%)/Period>>LR: Lending Rate<< BR: Borrowing Rate
                     </h4>
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
                     <div class="dataTable_wrapper">
                        
-                        <button class="btn  btn-success btn1" id="button">Export</button>
+                        <h3 align="center"><button class="btn  btn-success btn1" id="button">Export to excel</button> </h3>
 
                         <table class="table table-striped table-bordered table-hover table2excel tableresults" id="dataTables-example1">
                             <thead>
-                                <tr style="background:blue;color:white">
-                                    <th rowspan='2' style="vertical-align: middle;"> Banks</th>
+                                <tr>
+                                    <th rowspan='2'> Banks</th>
                                     <?php foreach ($terms as $tterm) { ?>
                                         <th colspan='2'><?php echo $tterm->term_name; ?></th>
                                     <?php } ?>
                                 </tr>
-                                <tr style="background:green;color:white">
+                                <tr>
                                     <?php foreach ($terms as $tterm) { ?>
-                                        <th><?php echo 'LR'; ?></th>
-                                        <th><?php echo 'BR'; ?></th>
+                                        <th>
+<div class="tooltip-demo"> <label data-toggle="tooltip" data-placement="top" title="Lending Rate">LR
+                                    </label >  </div>
+                                        </th>
+                                        <th><div class="tooltip-demo"> <label data-toggle="tooltip" data-placement="top" title="Borrowing Rate">BR
+                                    </label >  </div></th>
                                     <?php } ?>
                                 </tr>
                             </thead>
@@ -57,7 +84,13 @@
                                 <?php
                                 $bankprofile = Evprof::model()->findAll('lib=:x', array(':x' => 'Bank'));
                                 $bankprof = current($bankprofile);
+
+                                if(Yii::app()->session['country_chosen'] =='' ){
                                 $surveyusers = Evuti::model()->findAll('pro=:x', array(':x' => $bankprof->id));
+                              }
+                                else{
+$surveyusers = Evuti::model()->findAll('pro=:x and country_id=:y', array(':x' => $bankprof->id,':y'=>Yii::app()->session['country_chosen']));
+                                }
 
                                 foreach ($surveyusers as $susers) {
                                     $types = RateTypes::model()->findAll('rt_name=:a or rt_name=:b', array(':a' => 'Inter-Bank Lending', ':b' => 'Inter-Bank Borrowing'));
@@ -67,7 +100,30 @@
                                         $nusers = Bqcus::model()->findAll('cus=:x', array(':x' => $susers->id));
                                         foreach ($nusers as $nuser)
                                             ;
-                                        echo "<tr class='odd gradeX'><td>" . $nuser->resnam . "</td>";
+                                        echo "<tr class='odd gradeX'>"; ?>
+                                        <td>
+                                             <?php
+            $src = Yii::app()->request->baseUrl."/images/banklogos/" . Evuti::model()->findByPk($nuser->cus)->nom . ".".Evuti::model()->findByPk($nuser->cus)->pic_ext;
+            if(Evuti::model()->findByPk($nuser->cus)->pic_ext==''){
+                echo 'here';        
+            }
+            else{
+            echo    @getimagesize($src);
+            if (@getimagesize($src)) {
+                
+                    echo '<img class="over" style=" top: 0px; right: 0px;" class="imgbrder" src="'.Yii::app()->request->baseUrl.'/images/banklogos/' .Evuti::model()->findByPk($nuser->cus)->nom . '.'.Evuti::model()->findByPk($nuser->cus)->pic_ext.'" alt="' . '' . '" width="100px" height="100px" />';
+                } else {
+         ;      
+                
+                    echo '<img class="over" style=" top: 0px; right: 0px;" class="imgbrder" src="'.Yii::app()->request->baseUrl.'/images/banklogos/' .Evuti::model()->findByPk($nuser->cus)->nom . '.'.Evuti::model()->findByPk($nuser->cus)->pic_ext.'" alt="' . '' . '" width="40px" height="20px" />';
+       
+                }
+              }
+            ?>
+<br/>
+                                            
+                                            <?php echo $nuser->resnam;?> </td>
+                            <?php
                                         foreach ($terms as $term) {
                                             echo "<td><div class='tooltip-demo'><div data-toggle='tooltip' data-placement='top' title='This value has not been set'>NA</div><div></td>";
                                             echo "<td><div class='tooltip-demo'><div data-toggle='tooltip' data-placement='top' title='This value has not been set'>NA</div><div></td>";
@@ -80,9 +136,29 @@
                                         //      echo $user->resnam;
                                         foreach ($users as $user)
                                             ;
-                                        echo "<td>" . $user->resnam . "</td>";
+                                          ?>
+                                        <td>    <?php
+            $src = Yii::app()->request->baseUrl."/images/banklogos/" . Evuti::model()->findByPk($user->cus)->nom . ".".Evuti::model()->findByPk($user->cus)->pic_ext;
+            if(Evuti::model()->findByPk($user->cus)->pic_ext==''){
+                echo 'here';        
+            }
+            else{
+            echo    @getimagesize($src);
+            if (@getimagesize($src)) {
+                
+                    echo '<img class="over" style=" top: 0px; right: 0px;" class="imgbrder" src="'.Yii::app()->request->baseUrl.'/images/banklogos/' .Evuti::model()->findByPk($user->cus)->nom . '.'.Evuti::model()->findByPk($user->cus)->pic_ext.'" alt="' . '' . '" width="100px" height="100px" />';
+                } else {
+         ;      
+                
+                    echo '<img class="over" style=" top: 0px; right: 0px;" class="imgbrder" src="'.Yii::app()->request->baseUrl.'/images/banklogos/' .Evuti::model()->findByPk($user->cus)->nom . '.'.Evuti::model()->findByPk($user->cus)->pic_ext.'" alt="' . '' . '" width="40px" height="20px" />';
+       
+                }
+              }
+            ?>
+<br/>
+                                        <?php echo  $user->resnam; ?></td>
 
-                                        foreach ($terms as $term1) {
+                                   <?php     foreach ($terms as $term1) {
                                             $lending = RateTypes::model()->findAll('rt_name=:x', array(':x' => 'Inter-Bank Lending'));
                                             $borrow = RateTypes::model()->findAll('rt_name=:x', array(':x' => 'Inter-Bank Borrowing'));
                                             $linstrates = InstitutionsQuotation::model()->findAll('institution_id=:x and term_id=:y and quotation_id=:z', array(':x' => $susers->id, ':y' => $term1->term_id, ':z' => current($lending)->rt_id));
@@ -602,7 +678,7 @@
 
                 $.ajax({
                     type: "GET",
-                    url: "http://" + document.getElementById("url").value + "/bankafrica1/index.php?r=ibl/default/lpropose" + "&lbbank=" + lbbank +
+                    url: "http://" + document.getElementById("url").value + "/"+document.getElementById("base").value+"/index.php?r=ibl/default/lpropose" + "&lbbank=" + lbbank +
                             "&lprate=" + lprate +
                             "&lamount=" + lamount +
                             "&rate=" + rateid +
@@ -656,7 +732,8 @@
             else {
                 $.ajax({
                     type: "GET",
-                    url: "http://" + document.getElementById("url").value + "/bankafrica1/index.php?r=ibl/default/bpropose" + "&bbbank=" + bbbank +
+                    url: "http://" + document.getElementById("url").value + "/"+document.getElementById("base").value+"/index.php?r=ibl/default/bpropose" + 
+                            "&bbbank=" + bbbank +
                             "&bprate=" + bprate +
                             "&bamount=" + bamount +
                             "&rate=" + rateid +

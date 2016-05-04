@@ -52,7 +52,7 @@ class Bqpla extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('amo, prat, brat', 'numerical'),
+			array('amo, prat', 'numerical'),
 			array('cus, num', 'length', 'max'=>15),
 			array('typ, neg', 'length', 'max'=>3),
 			array('ban', 'length', 'max'=>30),

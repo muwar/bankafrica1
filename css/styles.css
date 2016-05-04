@@ -99,16 +99,36 @@
 	-webkit-filter: blur(5px);
 	z-index: 0;
 }
-
-.grad{
-	position: absolute;
-	top: -20px;
-	left: -20px;
-	right: -40px;
-	bottom: -40px;
-	width: auto;
-	height: auto;
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(0,0,0,0)), color-stop(100%,rgba(0,0,0,0.65))); /* Chrome,Safari4+ */
-	z-index: 1;
-	opacity: 0.7;
-}
+    /* The max width is dependant on the container (more info below) */
+    .popover{
+        max-width: 100%; /* Max Width of the popover (depending on the container!) */
+        width: 60%;
+    }
+    .box {
+        border-radius: 10px;
+        padding: 25px;
+        background-color: #fff;
+        text-align: center;
+    }
+    #progressbar {
+        border: 1px solid #125089;
+        border-radius: 2px;
+        padding: 2px;
+    }
+    #progressbar > div {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        background-color:currentColor;
+        width: 11%;  
+        height: 8px;
+        border: 1px solid #333;
+        border-radius: 0px;
+    }
+    .text {
+        color: #000;
+        margin-top: 15px;
+        font-size: 9px;
+        font-weight: bold;
+    }
+	  

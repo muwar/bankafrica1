@@ -1,30 +1,11 @@
-<style>
-#button{
-	position:absolute;
-	top:13.5%;
-	left:45%;
-}
-.table-striped>tbody>tr:nth-of-type(odd)
-{
-	background-color: #f0ad4e;
-	color:white;
-}
-.table-striped>tbody>tr:nth-child(2n)
-{
-	background-color: #8a6d3b;
-	color:white;
-}
-.sorting_1{
-	background: #5cb85c;
-}
-</style>
+
 <div id="page-wrapper">
     <div class="row">
         <div class="col-md-12">
             <div class="dataTable_wrapper">
                 <table class="table table-striped table-bordered table-hover" id="dataTables-example1">
                     <thead>
-                        <tr style="background:blue;color:white">
+                        <tr>
                             <th>#</th>
                             <th>User</th>
                             <th>Profile</th>
@@ -115,7 +96,7 @@
 //alert(statevalue);
                                 $.ajax({
                                     type: "GET",
-                                    url: "http://"+document.getElementById('url').value+"/bankafrica1/index.php?r=adminS5F1T6P0/default/manageusers" +
+                                    url: "http://"+document.getElementById('url').value+"/"+document.getElementById("base").value+ "/index.php?r=adminS5F1T6P0/default/manageusers" +
                                             "&id=" + id +
                                             "&statevalue=" + statevalue,
                                     data: "", //ProposedSites

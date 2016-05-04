@@ -1,70 +1,53 @@
-<style>
-    /* The max width is dependant on the container (more info below) */
-    .popover{
-        max-width: 100%; /* Max Width of the popover (depending on the container!) */
-        width: 60%;
-    }
-    .box {
-        border-radius: 10px;
-        padding: 25px;
-        background-color: #fff;
-        text-align: center;
-    }
-    #progressbar {
-        border: 1px solid #333;
-        border-radius: 2px;
-        padding: 2px;
-    }
-    #progressbar > div {
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box;
-        background-color:currentColor;
-        width: 11%;  
-        height: 8px;
-        border: 1px solid #333;
-        border-radius: 0px;
-    }
-    .text {
-        color: #000;
-        margin-top: 15px;
-        font-size: 9px;
-        font-weight: bold;
-    }
-	#register{
-		position:absolute;
-		top:36%;
-		left:38%;
-	}
-	.table-striped>tbody>tr:nth-of-type(odd)
-	{
-		background-color: #f0ad4e;
-		color:white;
-	}
-	.table-striped>tbody>tr:nth-child(2n)
-	{
-		background-color: #8a6d3b;
-		color:white;
-	}
-	.sorting_1{
-		background: #5cb85c;
-	}
-</style>
+<?php
+$this->beginWidget('application.extensions.sidebar.Sidebar', array('title' => 'Corporate Finance - How to', 'collapsed' => true, 'position'=>'right'));
+?>
+<ul>
+<i>Entrepreneurs</i>
+<li>Enter and submit the following information;</li>
+<ul>
+<li>Company's profile alongside all relevant information as requested</li>
+<li>Summary of investment project (background, main operations, financials, projections</li>
+<li>Investment needs of your company</li>
+</ul>
+<li>Submitted information will be reviewed and published for all potential investors to access</li>
+<li>You will hear from us once an investor is interested in your company or venture
+</li>
+<i>Investors</i>
+<li>Review all published investment opportunities
+<li>Indicate your interest on any particular investment by submitting an investor request form
+<li>Africapital quote will get back to you, with more details about the opportunity.
+
+</ul>
+<?php
+$this->endWidget();
+?>
 
 <div id="page-wrapper">
 
     <!-- /.row -->
     <div class="row">
         <div class="col-lg-12">
-            <div class="panel panel-default">
+            <div class="panel panel-primary">
                 <div class="panel-heading">
-                    Corporate Finance
+                                           <?php   if(Yii::app()->session['country_chosen'] =='' ){ ?>
+
+                        AFRICAPITAL QUOTE>><< CORPORATE FINANCE (CF)                                       QUOTES                                                                          <?php
+?>
+                                              
+<?php }else{ $country=Countries::model()->findByPk(Yii::app()->session['country_chosen']);
+ ?>
+<label class="flag flag-<?php echo strtolower($country->iso_alpha2);?>" align="right"></label> 
+ AFRICAPITAL QUOTE>><?php  echo $country->name ?><< CORPORATE FINANCE (CF)                                                                                                                              <?php
+  } ?>
+
+
+              
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs">
-                        <li class="active"><a href="#home" data-toggle="tab">Registered investment needs</a>
+                        <li class="active"><a href="#home" data-toggle="tab">My listed projects</a>
                         </li>
                         <li><a href="#mreq" data-toggle="tab">My Requests</a>
                         </li>
@@ -78,12 +61,12 @@
                     <!-- Tab panes -->
                     <div class="tab-content">
                         <div class="tab-pane fade in active" id="home">
-                            <button id="register" type="submit" onclick="event.preventDefault();
-                                    registerneed(<?php echo $userid ?>);" class="btn btn-primary">Register new investment needs</button>
+                            <button type="submit" onclick="event.preventDefault();
+                                    registerneed(<?php echo $userid ?>);" class="btn btn-primary">List a new investment project</button>
                                     <?php // echo CHtml::link('Register new investment needs',array('registerneeds','onclick'=>'event.preventDefault();sendrequest()'))  ?>
                             <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                 <thead>
-                                    <tr style="background:blue;color:white">
+                                    <tr>
                                         <th>Project</th>
                                         <th>Executive Summary</th>
                                         <th>Investment need</th>
@@ -119,7 +102,7 @@
                             <div class="dataTable_wrapper">
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-examplemyreqcf">
                                     <thead>
-                                        <tr style="background:blue;color:white">
+                                        <tr>
                                             <th>Sent to </th>
                                             <th>Date</th>
                                             <th>Project</th>
@@ -136,6 +119,16 @@
                                         $myreqcfs = Bqcf::model()->findAll('cus=:x', array(':x' => $userid));
                                         foreach ($myreqcfs as $myreqcf) {
                                             $cfproper = Cominvest::model()->findByPk($myreqcf->num);
+                                            if(Yii::app()->session['country_chosen']==''){
+
+                                            }
+else{                                              if(Evuti::model()->findByPk($cfproper->user)->country_id!=Yii::app()->session['country_chosen']){
+    continue;
+}
+else{
+    ;
+}
+}
                                             $dcfs = Bqdcf::model()->findAll('cf_id=:x', array(':x' => $myreqcf->cdos));
                                             ?>
                                             <tr>
@@ -380,7 +373,7 @@
                             <div class="dataTable_wrapper">
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-examplecreqcf">
                                     <thead>
-                                        <tr style="background:blue;color:white">
+                                        <tr>
                                             <th>From</th>
                                             <th>Date</th>
                                             <th>Project</th>
@@ -404,6 +397,19 @@
                                                     foreach ($myreqcfs as $myreqcf) {
                                                         $projproper = Cominvest::model()->findByPk($myreqcf->num);
                                                         $dcfs = Bqdcf::model()->findAll('cf_id=:x', array(':x' => $myreqcf->cdos));
+                                                        if(Yii::app()->session['country_chosen']==''){
+
+                                                        }
+                                                        else{   
+
+                                                        $user_test=Evuti::model()->findByPk($myreqcf->cus);
+                                                        if($user_test->country_id != Yii::app()->session['country_chosen']){
+                                                            continue;
+                                                        }
+                                                        else{
+                                                            ;
+                                                        }
+}
                                                         ?>
                                                         <tr>
                                                             <td><?php echo current(Bqcus::model()->findAll('cus=:x', array(':x' => $myreqcf->cus)))->resnam; ?></td>
@@ -650,7 +656,7 @@
                             <div class="dataTable_wrapper">
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-examplemyreqcfint">
                                     <thead>
-                                        <tr style="background:blue;color:white">
+                                        <tr>
                                             <th>Project</th>
                                             <th>Date</th>
                                             <th>Status</th>
@@ -662,7 +668,19 @@
                                         if (count($myreqcfcontacts) > 0) {
                                             foreach ($myreqcfcontacts as $myreqcfcontact) {
                                             $cfproperc = Cominvest::model()->findByPk($myreqcfcontact->num);
-                                    
+                                                
+                                                    if(Yii::app()->session['country_chosen']==''){
+
+                                                    }
+                                                    else{
+                                                        if($cfproperc!=Yii::app()->session['country_chosen']){
+                                                            continue;
+                                                        }
+                                                        else{
+                                                            ;
+                                                        }
+                                                    }
+
                                                 ?>
                                                 <tr>
                                                     <td><?php echo $cfproperc->project_name;//echo current(Bqcus::model()->findAll('cus=:x', array(':x' => $cfproperc->company_id)))->resnam;  ?></td>
@@ -828,7 +846,7 @@
                                     else {
                                         $.ajax({
                                             type: "GET",
-                                            url: "http://localhost/bankafrica1/index.php?r=cf/default/submitrequest" + "&projname=" + projname +
+                                            url: "http://" + document.getElementById('url').value + "/"+document.getElementById("base").value+ "/index.php?r=cf/default/submitrequest" + "&projname=" + projname +
                                                     "&amount=" + amount +
                                                     "&execsum=" + execsum +
                                                     "&id=" + id +
@@ -854,7 +872,7 @@
                                 function accept(id) {
                                     $.ajax({
                                         type: "GET",
-                                        url: "http://localhost/bankafrica1/index.php?r=cf/default/accept&id=" + id
+                                        url: "http://" + document.getElementById('url').value + "/"+document.getElementById("base").value+ "/index.php?r=cf/default/accept&id=" + id
                                                 ,
                                         data: "", //ProposedSites
                                         cache: false,
@@ -878,7 +896,7 @@
                                 function reject(id) {
                                     $.ajax({
                                         type: "GET",
-                                        url: "http://localhost/bankafrica1/index.php?r=cf/default/reject&id=" + id
+                                        url: "http://" + document.getElementById('url').value + "/"+document.getElementById("base").value+ "/index.php?r=cf/default/reject&id=" + id
                                                 ,
                                         data: "", //ProposedSites
                                         cache: false,
@@ -902,7 +920,7 @@
                                 function complete(id) {
                                     $.ajax({
                                         type: "GET",
-                                        url: "http://localhost/bankafrica1/index.php?r=cf/default/complete&id=" + id
+                                        url: "http://" + document.getElementById('url').value + "/"+document.getElementById("base").value+ "/index.php?r=cf/default/complete&id=" + id
                                                 ,
                                         data: "", //ProposedSites
                                         cache: false,

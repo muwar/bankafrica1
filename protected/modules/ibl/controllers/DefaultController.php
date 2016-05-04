@@ -24,7 +24,7 @@ class DefaultController extends Controller {
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
                 'actions' => array('create', 'update','index', 'edit','business','lpropose','bpropose',
-                    'printrequest','printapproval','printhistory','export','addrate'),
+                    'printrequest','printapproval','printhistory','export','addrate','customercontact'),
                 'users' => array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -80,6 +80,36 @@ class DefaultController extends Controller {
         //	'model'=>$model,
         //));
     }
+        public function actionCustomercontact() {
+        try {
+            $model = new Bqdibl;
+            $model->sta='VA';
+            $model->proc=10;
+            $model->ibl_id=$_GET['ibl_id'];
+            $model->cus=$_GET['cus'];
+            $model->dou=date('Y-m-d');
+$model->dmo=date('Y-m-d');
+
+$model1=Bqibl::model()->findByPk($_GET['ibl_id']);
+$model1->proc=10;
+$model1->sta='VA';
+$model1->dmo=date('Y-m-d');
+$model1->save();         
+                if ($model->save()) {
+                    echo 'true';
+                } else {
+                    var_dump($model->attributes) ;//echo 'false1';
+                }
+           
+
+        } catch (Exception $e) {
+            echo '<div class="swiper-slide"><font color="red">' . $e->getMessage() . '</font></div>'; //$e->getMessage();
+        }
+        //$this->render('create',array(
+        //  'model'=>$model,
+        //));
+    }
+
     public function actionLpropose() {
         try {
             $model = new Bqibl;

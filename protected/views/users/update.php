@@ -1,3 +1,7 @@
+
+<div id="page-wrapper" style="background: #e7e7e7;">
+    <div class="row" style="padding-top: 3%;">
+
 <?php
 /* @var $this EvutiController */
 /* @var $model Evuti */
@@ -19,3 +23,5 @@ $this->menu=array(
 <h1>Update Evuti <?php echo $model->cdos; ?></h1>
 
 <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+    </div>
+    </div>

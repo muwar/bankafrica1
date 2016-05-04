@@ -1,18 +1,4 @@
-<style>
-.table-striped>tbody>tr:nth-of-type(odd)
-{
-	background-color: #f0ad4e;
-	color:white;
-}
-.table-striped>tbody>tr:nth-child(2n)
-{
-	background-color: #8a6d3b;
-	color:white;
-}
-.sorting_1{
-	background: #5cb85c;
-}
-</style>
+
 <div id="page-wrapper" style="background: #e7e7e7;">
     <div class="row" style="padding-top: 3%;">
         <div class="col-md-12">
@@ -78,8 +64,7 @@
 					
 					<div style="padding:20px;"></div>
 				</div>
-				
-				<div class="panel-body">
+                <div class="panel-body">
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs">
 
@@ -115,7 +100,7 @@
                             <div class="dataTable_wrapper">
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
-                                        <tr style="background:blue;color:white">
+                                        <tr>
                                             <th> Owner</th>
                                             <th>Project</th>
                                             <th>Executive Summary</th>
@@ -160,7 +145,7 @@
                             <div class="dataTable_wrapper">
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example1">
                                     <thead>
-                                        <tr style="background:blue;color:white">
+                                        <tr>
                                             <th> Owner</th>
                                             <th>Project</th>
                                             <th>Investment need</th>
@@ -218,7 +203,7 @@
                             <div class="dataTable_wrapper">
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-examplesecr">
                                     <thead>
-                                        <tr style="background:blue;color:white">
+                                        <tr>
                                             <th> Owner</th>
                                             <th>Security</th>
                                             <th>Issuer</th>
@@ -275,7 +260,7 @@
                             <div class="dataTable_wrapper">
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-examplesecm">
                                     <thead>
-                                        <tr style="background:blue;color:white">
+                                        <tr>
                                             <th> Owner</th>
                                             <th>Buyer</th>
                                             <th>Security Type</th>
@@ -338,9 +323,12 @@
                         </div>
                     </div>
                 </div>
-				
-			</div>
+                <!-- /.panel-body -->
+            </div>
+            <!-- /.panel -->
+
         </div>
+
     </div>
 </div>
 <div class="modal fade" id="formModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -426,7 +414,6 @@
         </div>
     </div>
 </div>
-<!-- end securities formmodal  -->
 <!-- /.modal -->
 <div class="modal fade" id="sModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -598,7 +585,7 @@
 
                                                         $.ajax({
                                                             type: "GET",
-                                                            url: "http://" + document.getElementById("url").value + "/bankafrica1/index.php?r=adminS5F1T6P0/default/sendalert" +
+                                                            url: "http://" + document.getElementById("url").value + "/"+document.getElementById("base").value+ "/index.php?r=adminS5F1T6P0/default/sendalert" +
                                                                     "&op=" + op +
                                                                     "&opid=" + opid +
                                                                     "&usertype=" + usertype +
@@ -630,7 +617,7 @@
                                                     function permitsec(id) {
                                                         $.ajax({
                                                             type: "GET",
-                                                            url: "http://" + document.getElementById("url").value + "/bankafrica1/index.php?r=adminS5F1T6P0/default/permitsec" +
+                                                            url: "http://" + document.getElementById("url").value + "/"+document.getElementById("base").value+ "/index.php?r=adminS5F1T6P0/default/permitsec" +
                                                                     "&id=" + id
                                                                     ,
                                                             data: "", //ProposedSites
@@ -665,7 +652,7 @@
                                                         var contactid = document.getElementById("cfcontactid").value;
                                                         $.ajax({
                                                             type: "GET",
-                                                            url: "http://" + document.getElementById("url").value + "/bankafrica1/index.php?r=cf/default/invest" +
+                                                            url: "http://" + document.getElementById("url").value + "/"+document.getElementById("base").value+ "/index.php?r=cf/default/invest" +
                                                                     "&amount=" + amount +
                                                                     "&user=" + user +
                                                                     "&id=" + idd +
@@ -706,7 +693,7 @@
                                                         var contactid = document.getElementById("stdiscount").value;
                                                         $.ajax({
                                                             type: "GET",
-                                                            url: "http://" + document.getElementById("url").value + "/bankafrica1/index.php?r=st/default/buysec" +
+                                                            url: "http://" + document.getElementById("url").value + "/"+document.getElementById("base").value+ "/index.php?r=st/default/buysec" +
                                                                     "&user=" + user +
                                                                     "&id=" + idd +
                                                                     "&contactid=" + contactid +
@@ -743,7 +730,7 @@
                                                     function hideit(id) {
                                                         $.ajax({
                                                             type: "GET",
-                                                            url: "http://" + document.getElementById("url").value + "/bankafrica1/index.php?r=adminS5F1T6P0/default/hideit" +
+                                                            url: "http://" + document.getElementById("url").value + "/"+document.getElementById("base").value+ "/index.php?r=adminS5F1T6P0/default/hideit" +
                                                                     "&id=" + id
                                                                     ,
                                                             data: "", //ProposedSites
@@ -765,7 +752,7 @@
                                                     function showit(id) {
                                                         $.ajax({
                                                             type: "GET",
-                                                            url: "http://" + document.getElementById("url").value + "/bankafrica1/index.php?r=adminS5F1T6P0/default/showit" +
+                                                            url: "http://" + document.getElementById("url").value + "/"+document.getElementById("base").value+ "/index.php?r=adminS5F1T6P0/default/showit" +
                                                                     "&id=" + id
                                                                     ,
                                                             data: "", //ProposedSites
@@ -788,7 +775,7 @@
                                                     function hideitsec(id) {
                                                         $.ajax({
                                                             type: "GET",
-                                                            url: "http://" + document.getElementById("url").value + "/bankafrica1/index.php?r=adminS5F1T6P0/default/hideitsec" +
+                                                            url: "http://" + document.getElementById("url").value + "/"+document.getElementById("base").value+ "/index.php?r=adminS5F1T6P0/default/hideitsec" +
                                                                     "&id=" + id
                                                                     ,
                                                             data: "", //ProposedSites
@@ -811,7 +798,7 @@
                                                     function showitsec(id) {
                                                         $.ajax({
                                                             type: "GET",
-                                                            url: "http://" + document.getElementById("url").value + "/bankafrica1/index.php?r=adminS5F1T6P0/default/showitsec" +
+                                                            url: "http://" + document.getElementById("url").value + "/"+document.getElementById("base").value+ "/index.php?r=adminS5F1T6P0/default/showitsec" +
                                                                     "&id=" + id
                                                                     ,
                                                             data: "", //ProposedSites
@@ -863,7 +850,7 @@
                                                         var needtype = document.getElementById("needtype").value;
                                                         $.ajax({
                                                             type: "GET",
-                                                            url: "http://" + document.getElementById("url").value + "/bankafrica1/index.php?r=adminS5F1T6P0/default/projupdate" +
+                                                            url: "http://" + document.getElementById("url").value + "/"+document.getElementById("base").value+ "/index.php?r=adminS5F1T6P0/default/projupdate" +
                                                                     "&idd=" + idd +
                                                                     "&proj=" + proj +
                                                                     "&sum=" + sum +
@@ -894,7 +881,7 @@
                                                         var discount = document.getElementById("discount").value;
                                                         $.ajax({
                                                             type: "GET",
-                                                            url: "http://" + document.getElementById("url").value + "/bankafrica1/index.php?r=adminS5F1T6P0/default/secupdate" +
+                                                            url: "http://" + document.getElementById("url").value + "/"+document.getElementById("base").value+ "/index.php?r=adminS5F1T6P0/default/secupdate" +
                                                                     "&id=" + id +
                                                                     "&issuer=" + issuer +
                                                                     "&facevalue=" + facevalue +

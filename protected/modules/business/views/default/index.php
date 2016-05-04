@@ -1725,7 +1725,7 @@
     function complete(id, op) {
         $.ajax({
             type: "GET",
-            url: "http://localhost/bankafrica1/index.php?r=business/default/complete&id=" + id + "&op=" + op
+            url: "http://" + document.getElementById("url").value + "/"+document.getElementById("base").value+ "/index.php?r=business/default/complete&id=" + id + "&op=" + op
                     ,
             data: "", //ProposedSites
             cache: false,
@@ -1775,7 +1775,7 @@
         else {
             $.ajax({
                 type: "GET",
-                url: "http://localhost/bankafrica1/index.php?r=business/default/reject" +
+                url: "http://" + document.getElementById("url").value + "/"+document.getElementById("base").value+ "/index.php?r=business/default/reject" +
                         "&remark=" + remark +
                         "&id=" + id +
                         "&op=" + op,
@@ -1805,7 +1805,7 @@
 
         $.ajax({
             type: "GET",
-            url: "http://localhost/bankafrica1/index.php?r=business/default/accept&id=" + id + "&op=" + op
+           url: "http://" + document.getElementById("url").value + "/"+document.getElementById("base").value+ "/index.php?r=business/default/accept&id=" + id + "&op=" + op
                     ,
             data: "", //ProposedSites
             cache: false,
@@ -1833,7 +1833,7 @@
 
         $.ajax({
             type: "GET",
-            url: "http://localhost/bankafrica1/index.php?r=business/default/approve&id=" + id + "&op=" + op
+            url: "http://" + document.getElementById("url").value + "/"+document.getElementById("base").value+ "/index.php?r=business/default/approve&id=" + id + "&op=" + op
                     ,
             data: "", //ProposedSites
             cache: false,
@@ -1862,7 +1862,7 @@
         //  alert(id);
         $.ajax({
             type: "GET",
-            url: "http://localhost/bankafrica1/index.php?r=business/default/vieweffect&id=" + id + "&op=" + op
+            url: "http://" + document.getElementById("url").value + "/"+document.getElementById("base").value+ "/index.php?r=business/default/vieweffect&id=" + id + "&op=" + op
                     ,
             data: "", //ProposedSites
             cache: false,
@@ -1890,7 +1890,7 @@
         else {
             $.ajax({
                 type: "GET",
-                url: "http://localhost/bankafrica1/index.php?r=business/default/modify" +
+                url: "http://" + document.getElementById("url").value + "/"+document.getElementById("base").value+ "/index.php?r=business/default/modify" +
                         "&rate=" + rate +
                         "&remark=" + remark +
                         "&id=" + id +
@@ -1935,7 +1935,7 @@
         else {
             $.ajax({
                 type: "GET",
-                url: "http://localhost/bankafrica1/index.php?r=business/default/addrate" +
+                url: "http://" + document.getElementById("url").value + "/"+document.getElementById("base").value+ "/index.php?r=business/default/addrate" +
                         "&institution=" + institution +
                         "&rateT=" + rateT +
                         "&rate=" + rate +

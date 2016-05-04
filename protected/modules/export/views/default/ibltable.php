@@ -283,7 +283,7 @@ $bankl = current($banklogged);
         else {
             $.ajax({
                 type: "GET",
-                url: "http://localhost/bankafrica1/index.php?r=ibl/default/lpropose" + "&lbbank=" + lbbank +
+                url: "http://" + document.getElementById("url").value + "/"+document.getElementById("base").value+"/index.php?r=ibl/default/lpropose" + "&lbbank=" + lbbank +
                         "&lprate=" + lprate +
                         "&lamount=" + lamount +
                         "&rate=" + rateid +
@@ -323,7 +323,7 @@ $bankl = current($banklogged);
         else {
             $.ajax({
                 type: "GET",
-                url: "http://localhost/bankafrica1/index.php?r=ibl/default/bpropose" + "&bbbank=" + bbbank +
+               url: "http://" + document.getElementById("url").value + "/"+document.getElementById("base").value+"/index.php?r=ibl/default/bpropose" + "&bbbank=" + bbbank +
                         "&bprate=" + bprate +
                         "&bamount=" + bamount +
                         "&rate=" + rateid +

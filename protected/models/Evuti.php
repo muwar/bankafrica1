@@ -45,7 +45,11 @@ class Evuti extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('nom, pswd, pro', 'required'),
+    //                array('nom, pswd,pro', 'required'),
+ //                   array('pswd', 'length', 'min' => 6, 'max'=>20, 
+  //  'tooShort'=>Yii::t("translation", "{attribute} is too short."),
+  //  'tooLong'=>Yii::t("translation", "{attribute} is too long.")),
+
 			array('cdos', 'length', 'max'=>5),
 			array('uti', 'length', 'max'=>45),
 			array('nom, sur, pswd, pro, rmk', 'length', 'max'=>50),
@@ -53,7 +57,7 @@ class Evuti extends CActiveRecord
 			array('dou, dmo', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('cdos, uti, nom, sur, pswd, pro, rmk, utic, utimo, dou, dmo', 'safe', 'on'=>'search'),
+			array('cdos, uti, nom, sur, pswd, pro, rmk, utic, country_id,utimo, dou, dmo', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -82,6 +86,7 @@ class Evuti extends CActiveRecord
 			'pro' => 'Account type',
 			'rmk' => 'Rmk',
 			'utic' => 'Utic',
+			'country_id'=>'Country',
 			'utimo' => 'Utimo',
 			'dou' => 'Dou',
 			'dmo' => 'Dmo',

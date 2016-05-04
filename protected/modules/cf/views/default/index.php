@@ -1,30 +1,43 @@
-<style>
-#button{
-	position:absolute;
-	top:14.5%;
-	left:45%;
-}
-.table-striped>tbody>tr:nth-of-type(odd)
-{
-	background-color: #f0ad4e;
-	color:white;
-}
-.table-striped>tbody>tr:nth-child(2n)
-{
-	background-color: #8a6d3b;
-	color:white;
-}
-.sorting_1{
-	background: #5cb85c;
-}
-</style>
+<?php
+$this->beginWidget('application.extensions.sidebar.Sidebar', array('title' => 'Corporate Finance - How to', 'collapsed' => true, 'position'=>'right'));
+?>
+<ul>
+<i>Entrepreneurs</i>
+<li>Enter and submit the following information;</li>
+<ul>
+<li>Company's profile alongside all relevant information as requested</li>
+<li>Summary of investment project (background, main operations, financials, projections</li>
+<li>Investment needs of your company</li>
+</ul>
+<li>Submitted information will be reviewed and published for all potential investors to access</li>
+<li>You will hear from us once an investor is interested in your company or venture
+</li>
+<i>Investors</i>
+<li>Review all published investment opportunities
+<li>Indicate your interest on any particular investment by submitting an investor request form
+<li>Africapital quote will get back to you, with more details about the opportunity.
+
+</ul>
+<?php
+$this->endWidget();
+?>
 <div id="page-wrapper">
     <div class="row">
         <div class="col-md-12">
-            <div class="panel panel-default">
+            <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        Corporate Finance
+                                           <?php   if(Yii::app()->session['country_chosen'] =='' ){ ?>
+
+                        AFRICAPITAL QUOTE>><< CORPORATE FINANCE (CF)                                       QUOTES                                                                          <?php
+?>
+                                              
+<?php }else{ $country=Countries::model()->findByPk(Yii::app()->session['country_chosen']);
+ ?>
+<label class="flag flag-<?php echo strtolower($country->iso_alpha2);?>" align="right"></label> 
+ AFRICAPITAL QUOTE>><?php  echo $country->name ?><< CORPORATE FINANCE (CF)                                                                                                                              <?php
+  } ?>
+
                     </h4>
                 </div>
 
@@ -34,11 +47,11 @@
                 ?><!-- /.panel-heading -->
                 <div class="panel-body">
                     <div class="dataTable_wrapper">
-                      
-                                                <button class="btn  btn-success btn1" id="button">Export</button>
+                    <h3 align="center"><button class="btn  btn-success btn1" id="button">Export to excel</button> </h3>
+
                         <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                             <thead>
-                                <tr style="background:blue;color:white">
+                                <tr>
                                     <th>Investment Opportunity</th>
                                     <th>Executive Summary</th>
                                     <th>Investment need</th>
@@ -47,11 +60,22 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($cfrecords as $cf) { ?>
+                                <?php foreach ($cfrecords as $cf) {
+                                    if(Yii::app()->session['country_chosen']==''){
+;
+                                    }
+                                    else{
+                                    $user_test=Evuti::model()->findByPk($cf->user);
+                                    if($user_test->country_id==Yii::app()->session['country_chosen']){
+                                        ;
+                                    }
+                                    else{
+                                        continue;
+                                    }
+                                }
+
+                                 ?>
                                     <tr >
-    <!--                                        <td>
-                                        <?php // echo Bqcus::model()->findByPk($cf->company_id)->resnam; ?></label>
-                                        </td>   -->
                                         <td><?php echo $cf->project_name; ?></td>
                                         <td>
                                             <?php
@@ -65,12 +89,6 @@
                                         <td><?php echo $cf->investment_need; ?></td>
                                         <td><?php echo InvestmentType::model()->findByPk($cf->investment_type)->name; ?></td>
                                         <td>
-                                            <!--
-                                            <div class="tooltip-demo">
-                                                <label  data-toggle="tooltip" data-placement="top" title="Click to invest" onclick="loadform(<?php echo $cf->id . "," . $loggeduser->id . ',' . $cf->company_id; ?>)">
-                                                    contact us                                                
-                                                </label>
-                                            </div> -->
                                             <?php if (Yii::app()->user->name == 'admin') { ?>
                                                 <div class="tooltip-demo">
                                                     <label  data-toggle="tooltip" data-placement="top" title="Click to invest">
@@ -294,7 +312,7 @@
                                                             else {
                                                                 $.ajax({
                                                                     type: "GET",
-                                                                    url: "http://" + document.getElementById("url").value + "/bankafrica1/index.php?r=cf/default/invest" +
+                                                                    url: "http://" + document.getElementById("url").value + "/"+document.getElementById("base").value+"/index.php?r=cf/default/invest" +
                                                                             "&amount=" + amount +
                                                                             "&user=" + user +
                                                                             "&id=" + idd
@@ -331,7 +349,7 @@
 
                                                             $.ajax({
                                                                 type: "GET",
-                                                                url: "http://" + document.getElementById("url").value + "/bankafrica1/index.php?r=cf/default/investcontact" +
+                                                                url: "http://" + document.getElementById("url").value + "/"+document.getElementById("base").value+"/index.php?r=cf/default/investcontact" +
                                                                         "&name=" + name +
                                                                         "&email=" + email +
                                                                         "&tel=" + tel +

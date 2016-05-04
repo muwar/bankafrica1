@@ -1,30 +1,41 @@
-<style>
-#button{
-	position:absolute;
-	top:14.5%;
-	left:45%;
-}
-.table-striped>tbody>tr:nth-of-type(odd)
-{
-	background-color: #f0ad4e;
-	color:white;
-}
-.table-striped>tbody>tr:nth-child(2n)
-{
-	background-color: #8a6d3b;
-	color:white;
-}
-.sorting_1{
-	background: #5cb85c;
-}
-</style>
+<?php
+$this->beginWidget('application.extensions.sidebar.Sidebar', array('title' => 'Bulk placement - How to', 'collapsed' => true, 'position'=>'right'));
+?>
+<ul>
+<li>Check to meet minimum amount accepted by bank. Minimum amount proposed by AfriCapital Quote is 2 million USD.</li>
+<li>Rates have been published for three different term periods which may be different, designed to attract short, medium and long term investors. </li>
+<li>Choose a favourable rate that will correspond to a term period and bank/financial institution of your choice. </li>
+<li>A page will pop up automatically for you to insert and submit the amount you wish to deposit along requested information</li>
+<li>Wait for a response from bank relating to approval and directives on how to complete transaction with bank.</li>
+<li>In case a published rate is biddable, you can propose and submit a favourable rate along other details and wait for response from bank</li>
+
+
+
+</ul>
+<?php
+$this->endWidget();
+?>
+
 <div id="page-wrapper">
     <div class="row">
         <div class="col-md-12">
-            <div class="panel panel-default">
+            <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h4 class="panel-title">
-                        Bulk Placement (Wholesale Deposits)
+<?php   if(Yii::app()->session['country_chosen'] =='' ){  ?>
+                        AFRICAPITAL QUOTE>><< WHOLESALE FIXED DEPOSITS (WFD) QUOTES                   <?php
+?>
+                                 
+<?php }else{ $country=Countries::model()->findByPk(Yii::app()->session['country_chosen']);
+ ?>
+<label class="flag flag-<?php echo strtolower($country->iso_alpha2);?>" align="right"></label> 
+ AFRICAPITAL QUOTE>><?php  echo $country->name ?><< WHOLESALE FIXED DEPOSITS (WFD) QUOTES                                                                           
+
+<?php
+  } ?>
+
+  <br/>
+Current quotations in %/per year
                     </h4>
                 </div>
 
@@ -36,15 +47,15 @@
                 <div class="panel-body">
                     <div class="dataTable_wrapper">
                      
-                        <button class="btn  btn-success btn1" id="button">Export</button>
+                       <h3 align="center"><button class="btn  btn-success btn1" id="button">Export</button></h3>
                         <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                             <thead>
-                                <tr style="background:blue;color:white">
+                                <tr>
                                     <th> Bank</th>
                                     <th>Minimum</th>
                                     <?php foreach ($terms as $tterm) { ?>
-                                        <th class="tooltip-demo"><label data-toggle="tooltip" data-placement="top" title="<?php echo $tterm->term_duration ?>"><?php echo $tterm->term_name; ?>
-                                    </label ></th>
+                                        <th><div class="tooltip-demo"> <label data-toggle="tooltip" data-placement="top" title="<?php echo $tterm->term_duration ?>"><?php echo $tterm->term_name; ?>
+                                    </label >  </div></th>
                             <?php } ?>
                             <th>Special Rates?</th>
                             <th>Fees</th>
@@ -55,7 +66,12 @@
                                 $bankprofile = Evprof::model()->findAll('lib=:x', array(':x' => 'Bank'));
                                 foreach ($bankprofile as $bankprof)
                                     ;
+   if(Yii::app()->session['country_chosen']==''){   
                                 $surveyusers = Evuti::model()->findAll('pro=:x', array(':x' => $bankprof->id));
+                              }
+                              else{
+                                                              $surveyusers = Evuti::model()->findAll('pro=:x and country_id=:y', array(':x' => $bankprof->id,':y'=>Yii::app()->session['country_chosen']));  
+                              }
                                 foreach ($surveyusers as $susers) {
 
                                     $types = RateTypes::model()->findAll('rt_name=:a', array(':a' => 'Bulk Placement'));
@@ -66,9 +82,31 @@
                                         $nusers = Bqcus::model()->findAll('cus=:x', array(':x' => $susers->id));
                                         foreach ($nusers as $nuser)
                                             ;
-                                        echo "<tr class='odd gradeX'><td>" . $nuser->resnam . "</td>";
-                                        ?>
-                                    <td>-</td>
+                                        echo "<tr class='odd gradeX'>";  ?>
+
+                                                                           <td>    <?php
+            $src = Yii::app()->request->baseUrl."/images/banklogos/" . Evuti::model()->findByPk($nuser->cus)->nom . ".".Evuti::model()->findByPk($nuser->cus)->pic_ext;
+            if(Evuti::model()->findByPk($nuser->cus)->pic_ext==''){
+                ;              
+            }
+            else{
+
+            echo    @getimagesize($src);
+            if (@getimagesize($src)) {
+                
+                    echo '<img class="over" style=" top: 0px; right: 0px;" class="imgbrder" src="'.Yii::app()->request->baseUrl.'/images/banklogos/' .Evuti::model()->findByPk($nuser->cus)->nom . '.'.Evuti::model()->findByPk($nuser->cus)->pic_ext.'" alt="' . '' . '" width="100px" height="100px" />';
+                } else {
+         ;      
+                
+                    echo '<img class="over" style=" top: 0px; right: 0px;" class="imgbrder" src="'.Yii::app()->request->baseUrl.'/images/banklogos/' .Evuti::model()->findByPk($nuser->cus)->nom . '.'.Evuti::model()->findByPk($nuser->cus)->pic_ext.'" alt="' . '' . '" width="40px" height="20px" />';
+       
+                }
+              }
+            ?>
+<br/>
+     
+                                      <?php  echo $nuser->resnam;  ?></td>
+                                                                          <td>-</td>
                                     <?php
                                     foreach ($terms as $term) {
                                         echo "<td><div class='tooltip-demo'><div data-toggle='tooltip' data-placement='top' title='This value has not been set'>NA</div><div></td>";
@@ -80,9 +118,29 @@
                                     $users = Bqcus::model()->findAll('cus=:x', array(':x' => $bankrate->institution_id));
                                     //      echo $user->resnam;
                                     foreach ($users as $user)
-                                        ;
-                                    echo "<td>" . $user->resnam . "</td>";
-                                    echo "<td>" . current($bankrates)->minimum_amount . "</td>";
+                                        ;    ?>
+                                        <td>    <?php
+            $src = Yii::app()->request->baseUrl."/images/banklogos/" . Evuti::model()->findByPk($user->cus)->nom . ".".Evuti::model()->findByPk($user->cus)->pic_ext;
+            if(Evuti::model()->findByPk($user->cus)->pic_ext==''){
+                ;              
+            }
+            else{
+            echo    @getimagesize($src);
+            if (@getimagesize($src)) {
+                
+                    echo '<img class="over" style=" top: 0px; right: 0px;" class="imgbrder" src="'.Yii::app()->request->baseUrl.'/images/banklogos/' .Evuti::model()->findByPk($user->cus)->nom . '.'.Evuti::model()->findByPk($user->cus)->pic_ext.'" alt="' . '' . '" width="100px" height="100px" />';
+                } else {
+         ;      
+                
+                    echo '<img class="over" style=" top: 0px; right: 0px;" class="imgbrder" src="'.Yii::app()->request->baseUrl.'/images/banklogos/' .Evuti::model()->findByPk($user->cus)->nom . '.'.Evuti::model()->findByPk($user->cus)->pic_ext.'" alt="' . '' . '" width="40px" height="20px" />';
+       
+                }
+              }
+            ?>
+<br/>
+                                        <?php echo  $user->resnam; ?></td>
+
+                                   <?php        echo "<td>" . current($bankrates)->minimum_amount . "</td>";
                                     ?>
                                     <?php
                                     foreach ($terms as $term1) {
@@ -373,7 +431,7 @@
 
                                                            $.ajax({
                                                                type: "GET",
-                                                               url: "http://" + document.getElementById("url").value + "/bankafrica1/index.php?r=bulkplacement/default/propose" + "&customer=" + customer +
+                                                               url: "http://" + document.getElementById("url").value + "/"+document.getElementById("base").value+ "/index.php?r=bulkplacement/default/propose" + "&customer=" + customer +
                                                                        "&amount=" + amount +
                                                                        "&rate=" + rateid +
                                                                        "&dbank=" + dbank +

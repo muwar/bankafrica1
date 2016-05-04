@@ -31,21 +31,34 @@
         font-size: 9px;
         font-weight: bold;
     }
-	.table-striped>tbody>tr:nth-of-type(odd)
-	{
-		background-color: #f0ad4e;
-		color:white;
-	}
-	.table-striped>tbody>tr:nth-child(2n)
-	{
-		background-color: #8a6d3b;
-		color:white;
-	}
-	.sorting_1{
-		background: #5cb85c;
-	}
 </style>
+<script>
+    function toggle1(id) {
+        $("#the_rest" + id).toggle();
+    }
+    $(document).ready(function() {
+        $(".sub1").hide();
+        $(".sub2").hide();
+    });
+    function toggle2(id) {
+//        alert(id);
+        $("#the_restinner" + id).toggle();
+    }
+</script>
+<?php
+$this->beginWidget('application.extensions.sidebar.Sidebar', array('title' => 'Commercial Borrowing Rates - How to', 'collapsed' => true, 'position'=>'right'));
+?>
+<ul>
+<li>Typical commercial borrowing rates have been published by lending institutions.</li>
+<li>Choose a favourable rate corresponding to a credit period and bank/lending institution of your choice.</li>
+<li>An automatic pop up page will appear for you to insert and submit specific information relevant to the credit you are seeking.</li>
+<li>Wait a response from the bank and directives on how to proceed.</li>
+<li>In case a published rate is biddable, you can propose and submit a better rate along other details and wait for response from bank.</li>
 
+</ul>
+<?php
+$this->endWidget();
+?>
 <div id="page-wrapper">
     <div class="row">
         <div class="col-md-12">
@@ -57,9 +70,25 @@
 
             $cbhistory = Bqcb::model()->findAll('lban=:y or cus=:x', array(':y' => $ucode->id, ':x' => $ucode->id))
             ?>
-            <div class="panel panel-default">
+            <div class="panel panel-primary">
                 <div class="panel-heading">
                     <h4 class="panel-title">
+                     <?php   if(Yii::app()->session['country_chosen'] =='' ){  ?>
+                        AFRICAPITAL QUOTE>><< COMMERCIAL BORROWING (CB) QUOTES                     <?php
+?>
+                                              
+<?php }else{  $country=Countries::model()->findByPk(Yii::app()->session['country_chosen']);
+ ?>
+<label class="flag flag-<?php echo strtolower($country->iso_alpha2);?>" align="right"></label> 
+
+ AFRICAPITAL QUOTE>><?php  echo $country->name ?><< COMMERCIAL BORROWING (CB) QUOTES                                                      
+
+<?php
+  } ?>
+
+  <br/>
+  Current Rates (%)/Period>>LR: Lending Rate<< BR: Borrowing Rate
+                 
                         <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"></a>
                     </h4>
                 </div>
@@ -86,7 +115,7 @@
                                 <div class="dataTable_wrapper">
                                     <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                         <thead>
-                                            <tr style="background:blue;color:white">
+                                            <tr>
 <!--                                                <th> Operation</th> -->
                                                 <th>Minimum</th>
                                                 <?php foreach ($terms as $tterm) { ?>
@@ -180,7 +209,7 @@
                                                 <div class="dataTable_wrapper">
                                                     <table class="table table-striped table-bordered table-hover" id="dataTables-exampler">
                                                         <thead>
-                                                            <tr style="background:blue;color:white">
+                                                            <tr>
                                                                 <th>Term</th>
                                                                 <th>Rate</th>
                                                                 <th>Biddable?</th>
@@ -209,7 +238,12 @@
                                                                 <input type="hidden" value=0 id="state<?php echo $rate->rt_id . $term->term_id; ?>">
                                                                 <input type="hidden" class="form-control" id="term<?php echo $rate->rt_id . $term->term_id; ?>" name="term" value="<?php echo $term->term_id; ?>" placeholder="Term"><!--This will automatically be populated from the options-->
                                                                 <td><label><?php echo $term->term_name; ?></label></td>
-                                                                <td><input type="text" class="form-control" id="rate<?php echo $rate->rt_id . $term->term_id; ?>" name="rate" placeholder="Rate "></td>
+                                                                <td>
+<div class="input-group" style="width:100px">
+                                                                <input type="text" class="form-control" id="rate<?php echo $rate->rt_id . $term->term_id; ?>" name="rate" placeholder="Rate ">
+                                                                <span class="input-group-addon">%</span>
+</div>
+                                                                </td>
                                                                 <td><input value='<?php echo $rate->rt_id . $term->term_id; ?>' type="checkbox" id="specialrates<?php echo $rate->rt_id . $term->term_id; ?>" name="specialrates<?php echo $rate->rt_id . $term->term_id; ?>" onclick="switcher(this.value)" ></td>
                                                                 <td><input type="text" class="form-control" id="minamount<?php echo $rate->rt_id . $term->term_id; ?>" name="minamount" placeholder="Minimum amt "></td>
                                                                 <td><input type="text" class="form-control" id="scharges<?php echo $rate->rt_id . $term->term_id; ?>" name="scharges" placeholder="Setup charges "></td>
@@ -224,7 +258,12 @@
                                                                 <input type="hidden" value=0 id="state<?php echo $rate->rt_id . $term->term_id; ?>">
                                                                 <input type="hidden" class="form-control" id="term<?php echo $rate->rt_id . $term->term_id; ?>" name="term" value="<?php echo $term->term_id; ?>" placeholder="Term"><!--This will automatically be populated from the options-->
                                                                 <td><label><?php echo $term->term_name; ?></label></td>
-                                                                <td><input type="text" class="form-control" id="rate<?php echo $rate->rt_id . $term->term_id; ?>" name="rate" placeholder="<?php echo $checkrecentrecord->lrate; ?> "></td>
+                                                                <td>
+<div class="input-group" style="width:100px">
+                                                                <input type="text" class="form-control" id="rate<?php echo $rate->rt_id . $term->term_id; ?>" name="rate" placeholder="<?php echo $checkrecentrecord->lrate; ?> ">
+                                                                <span class="input-group-addon">%</span>
+</div>
+                                                                </td>
                                                                 <td><input value='<?php echo $rate->rt_id . $term->term_id; ?>' type="checkbox" id="specialrates<?php echo $rate->rt_id . $term->term_id; ?>" name="specialrates<?php echo $rate->rt_id . $term->term_id; ?>" onclick="switcher(this.value)" <?php
                                                                     if ($checkrecentrecord->special_rate == 1)
                                                                         echo "checked";
@@ -259,7 +298,7 @@
                                 <div class="dataTable_wrapper">
                                     <table class="table table-striped table-bordered table-hover" id="dataTables-exampler1">
                                         <thead>
-                                            <tr style="background:blue;color:white">
+                                            <tr>
                                                 <th>For</th>
 
                                                 <th>Client</th>
@@ -267,10 +306,8 @@
                                                 <th>Rate</th>
                                                 <th>Amount</th>
                                                 <th>Status</th>
-                                                <th>Approve</th>
-                                                <th>Reject</th>
-                                                <th>Modify</th>
-                                                <th>Details</th>
+
+                                                <th> View Details</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -278,7 +315,19 @@
                                             foreach ($allcbs as $allcb) {
                                                 $statedrate = InstitutionsQuotation::model()->findByPk($allcb->num);
                                                 $ratetype = RateTypes::model()->findByPk($statedrate->quotation_id);
-                                                $clients = Bqcus::model()->findAll('cus=:x', array(':x' => $allcb->cus));
+
+                                                            if(Yii::app()->session['country_chosen'] =='' ){ 
+                                            $clients = Bqcus::model()->findAll('cus=:x', array(':x' => $allcb->cus));
+                                        }
+                                        else{
+                                         $clients = Bqcus::model()->findAll('cus=:x and country_id=:y', array(':x' => $allcb->cus, ':y'=>Yii::app()->session['country_chosen']));   
+                                         if(count($clients)==0){
+                                            continue;
+                                         }
+                                         else{
+                                            ;
+                                         }
+                                        }
                                                 $dibls = Bqdcb::model()->findAll('cb_id=:x', array(':x' => $allcb->cdos));
                                                 if ($allcb->proc == 0) {
 //                                                                $op="CBR";
@@ -290,7 +339,28 @@
                                                     <tr>
                                                     <?php } ?>
                                                     <td><?php echo $ratetype->rt_name; ?></td>
-                                                    <td><?php echo current($clients)->resnam; ?></td>
+                                                    <td>
+                                                     <?php
+            $src = Yii::app()->request->baseUrl."/images/banklogos/" . Evuti::model()->findByPk(current($clients)->cus)->nom . ".".Evuti::model()->findByPk(current($clients)->cus)->pic_ext;
+            if(Evuti::model()->findByPk(current($clients)->cus)->pic_ext==''){
+                ;              
+            }
+            else{
+            echo    @getimagesize($src);
+            if (@getimagesize($src)) {
+                
+                    echo '<img class="over" style=" top: 0px; right: 0px;" class="imgbrder" src="'.Yii::app()->request->baseUrl.'/images/banklogos/' .Evuti::model()->findByPk(current($clients)->cus)->nom . '.'.Evuti::model()->findByPk(current($clients)->cus)->pic_ext.'" alt="' . '' . '" width="100px" height="100px" />';
+                } else {
+         ;      
+                
+                    echo '<img class="over" style=" top: 0px; right: 0px;" class="imgbrder" src="'.Yii::app()->request->baseUrl.'/images/banklogos/' .Evuti::model()->findByPk(current($clients)->cus)->nom . '.'.Evuti::model()->findByPk(current($clients)->cus)->pic_ext.'" alt="' . '' . '" width="40px" height="20px" />';
+       
+                }
+              }
+            ?>
+
+<br/>
+                                                    <?php echo  current($clients)->resnam; ?></td>
                                                     <td><?php echo date('d/m/Y', strtotime($allcb->dou)); ?></td>
                                                     <td><div class="tooltip-demo">
                                                             <label type="label" data-html="true" class="" data-toggle="tooltip" data-placement="top" title="These values were stated;
@@ -357,72 +427,58 @@
                                                         </div>
                                                     </td>
                                                     <td><?php
-                                                        if ($allcb->proc == 0)
-                                                            echo "New";
-                                                        else {
-                                                            if ($allcb->proc == 9)
-                                                                echo "Completed";
-                                                            else
-                                                                echo "Pending";
-                                                        }
+                                                     if ($allcb->proc == 0)
+                                                        echo "New";
+                                                    else {
+                                                        if ($allcb->proc == 1)
+                                                            echo 'Viewed';
+                                                        if ($allcb->proc == 9)
+                                                            echo "Completed";
+                                                        if($allcb->proc == 10)
+                                                            echo 'Customer contacted';
+                                                        else
+                                                            echo "Customer contacted";
+                                                     
+                                                                                                           }
                                                         ?></td>
-
-
-                                                    <td>
-                                                        <?php if ($allcb->proc == 9) { ?>
-                                                            Approved<?php
-                                                        } if (( $allcb->proc == 0) || ( $allcb->proc == 3) || ( $allcb->proc == 1)) {
-                                                            ?>
-                                                            <button type="submit" class="btn btn-primary" onclick="event.preventDefault();
-                accept(<?php echo $allcb->cdos . "," . "'CBR'" ?>);">Accept</button><?php
-                                                                }
-                                                                if (( $allcb->proc == 5)) {
-                                                                    ?>
-                                                            Approved
-                                                            <!--    <button type="submit" class="btn btn-primary" onclick="event.preventDefault();
-        approve(<?php echo $allcb->cdos . "," . "'CBR'" ?>);">Approve</button>--><?php } ?></td>
-                                                    <td>
-                                                        <?php if ($allcb->proc == 5) { ?>
-                                                            Already approved<?php
-                                                        }
-                                                        if ($allcb->proc == 8) {
-                                                            ?>
-                                                            Rejected<?php
-                                                        } if (( $allcb->proc == 0) || ( $allcb->proc == 3) || ( $allcb->proc == 1)) {
-                                                            ?>
-                                                            <button type="submit" class="btn btn-primary" onclick="event.preventDefault();
-                rejectl(<?php echo $allcb->cdos . "," . "'CBR'"; ?>);">Reject</button> <?php } ?>
-                                                    </td>
-                                                    <td>
-                                                        <?php
-                                                        if (( $allcb->proc == 8)) {
-                                                            ?>
-                                                            Rejected <?php
-                                                        }
-                                                        if (( $allcb->proc == 3) || ( $allcb->proc == 4)) {
-                                                            ?>
-                                                            Modified<?php
-                                                        }
-                                                        if ($allcb->proc == 5) {
-                                                            ?>
-                                                            <!--        <button type="submit" class="btn btn-primary" onclick="event.preventDefault();
-            complete(<?php echo $allcb->cdos . "," . "'CBR'"; ?>);">Completed?</button> 
-                
-                                                            -->
-                                                            ...<?php
-                                                        }
-                                                        if ($allcb->proc == 9) {
-                                                            ?>Completed
-                                                            <?php
-                                                        }
-                                                        if (/* (                                            $allcb->proc == 2) || */( $allcb->proc == 1) || ( $allcb->proc == 0)) {
-                                                            ?>  
-                                                            <button type="submit" class="btn btn-primary" onclick="event.preventDefault();
-                modifyl(<?php echo $allcb->cdos . "," . "'CBR'"; ?>);">Modify</button> <?php } ?>
-                                                    </td>
                                                     <td>
                                                         <button type="button" class="btn btn-default" data-container="body" data-html="true" data-toggle="popover" data-placement="bottom"  
-                                                                data-content="<?php foreach ($dibls as $dibl) { ?>
+                                                                data-content="<div class='row'>
+                                                            <div class='col-md-12'>
+                                                            <div class='col-md-6'> 
+                      <h3 align=center> 
+                                                           <strong>
+Customer: <?php echo current($clients)->resnam; ?><br/>
+Tel: <?php if(current($clients)->telephone!=''){
+    echo current($clients)->telephone;}
+        else{
+
+          echo   ' Not available'; 
+             } ?><br/>
+Email: <?php if(current($clients)->email!=''){
+    echo current($clients)->email;}
+        else{
+
+          echo   ' Not available'; 
+             } ?>
+             </div>
+             <div class='col-md-6'> 
+<?php  if(current($dibls)->proc!=10){  ?>
+<form>
+             Have you successfully contacted this customer?</br>
+              Yes
+              <input type='radio' name='contact' value=1 onclick='customercontact(1, <?php echo current($clients)->cus.",". current($dibls)->cb_id;  ?>);' > 
+              No
+              <input type='radio' name='contact' value=0 onclick='customercontact(0,<?php echo current($clients)->cus.",". current($dibls)->cb_id;  ?>);'> 
+ </form>    
+ <?php } ?>
+                            </strong>
+                            </h3>
+                                </div>
+             </div>
+
+
+                                                                <?php foreach ($dibls as $dibl) { ?>
                                                                     <div class='panel-body'>
                                                                     <ul class='chat'>
                                                                     <?php if ($dibl->proc == 0) { ?>
@@ -604,7 +660,7 @@
                                 <div class="dataTable_wrapper">
                                     <table class="table table-striped table-bordered table-hover" id="dataTables-exampler4">
                                         <thead>
-                                            <tr style="background:blue;color:white">
+                                            <tr>
                                                 <th>Sent to </th>
                                                 <th>Date</th>
                                                 <th>Rate</th>
@@ -622,11 +678,43 @@
                                             foreach ($myreqfds as $myreqfd) {
                                                 $ratingibl = InstitutionsQuotation::model()->findByPk($myreqfd->num);
                                                 $ratingrateibl = RateTypes::model()->findByPk($ratingibl->quotation_id);
-                                                $senttoibl = Bqcus::model()->findAll('cus=:x', array(':x' => $myreqfd->lban));
+
+                                                              if(Yii::app()->session['country_chosen'] =='' ){ 
+                                            $senttoibl = Bqcus::model()->findAll('cus=:x', array(':x' => $myreqfd->lban));
+                                        }
+                                        else{
+                                        $senttoibl = Bqcus::model()->findAll('cus=:x and country_id=:y', array(':x' => $myreqfd->lban,':y'=>Yii::app()->session['country_chosen']));   
+                                        if(count($senttoibl)==0){
+                                            continue;
+                                        }
+                                        else{
+                                            ;
+                                        }
+                                        }
                                                 $detailibls = Bqdcb::model()->findAll('cb_id=:x', array(':x' => $myreqfd->cdos));
                                                 ?>
                                                 <tr>
-                                                    <td> <?php echo current($senttoibl)->resnam; ?></td>   
+                                                    <td> 
+ <?php
+            $src = Yii::app()->request->baseUrl."/images/banklogos/" . Evuti::model()->findByPk(current($senttoibl)->cus)->nom . ".".Evuti::model()->findByPk(current($senttoibl)->cus)->pic_ext;
+            if(Evuti::model()->findByPk(current($senttoibl)->cus)->pic_ext==''){
+                ;              
+            }
+            else{
+            echo    @getimagesize($src);
+            if (@getimagesize($src)) {
+                
+                    echo '<img class="over" style=" top: 0px; right: 0px;" class="imgbrder" src="'.Yii::app()->request->baseUrl.'/images/banklogos/' .Evuti::model()->findByPk(current($senttoibl)->cus)->nom . '.'.Evuti::model()->findByPk(current($senttoibl)->cus)->pic_ext.'" alt="' . '' . '" width="100px" height="100px" />';
+                } else {
+         ;      
+                
+                    echo '<img class="over" style=" top: 0px; right: 0px;" class="imgbrder" src="'.Yii::app()->request->baseUrl.'/images/banklogos/' .Evuti::model()->findByPk(current($senttoibl)->cus)->nom . '.'.Evuti::model()->findByPk(current($senttoibl)->cus)->pic_ext.'" alt="' . '' . '" width="40px" height="20px" />';
+       
+                }
+              }
+            ?>
+<br/>
+                                                    <?php echo current($senttoibl)->resnam; ?></td>   
                                                     <td><?php echo date('d/m/Y', strtotime($myreqfd->dou)); ?></td>
                                                     <td>
                                                         <div class="tooltip-demo">
@@ -946,7 +1034,7 @@
                                 <div class="dataTable_wrapper">
                                     <table class="table table-striped table-bordered table-hover" id="dataTables-exampleo">
                                         <thead>
-                                            <tr style="background:blue;color:white">
+                                            <tr>
                                                 <th>Bank</th>
 <!--          <th>Transaction</th> -->
                                                 <th>Term</th>
@@ -959,7 +1047,26 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php foreach ($cbhistory as $cbhis) { ?>
+                                            <?php foreach ($cbhistory as $cbhis) { 
+
+ if(Yii::app()->session['country_chosen']!=''){
+                                                $country_test=Bqcus::model()->findByPk($chhis->lban);
+                                                if($country_test->country_id==Yii::app()->session['country_chosen']){
+                                                    ;
+                                                }
+                                                else{
+                                                    continue;
+                                                }
+
+                                            }
+                                            else{
+                                                ;
+                                            }
+
+
+
+
+                                                ?>
                                                 <tr>
                                                     <?php if ($ucode->id == $cbhis->cus) { ?>
                                                         <td><?php echo Bqcus::model()->findByPk($cbhis->lban)->resnam; ?></td>
@@ -1011,7 +1118,7 @@
                                                 <div class="dataTable_wrapper">
                                                     <table class="table table-striped table-bordered table-hover" id="dataTables-examples<?php echo $i; ?>">
                                                         <thead>
-                                                            <tr style="background:blue;color:white">
+                                                            <tr>
                                                                 <th>Term</th>
                                                                 <th>Rate</th>
                                                                 <th>Biddable?</th>
@@ -1159,38 +1266,18 @@
     <!-- /.modal-dialog -->
 </div>
 
-<!-- jQuery -->
-<script src="<?php echo Yii::app()->request->baseUrl; ?>/extras/bower_components/jquery/dist/jquery.min.js"></script>
-<!-- Bootstrap Core JavaScript -->
-<script src="<?php echo Yii::app()->request->baseUrl; ?>/extras/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-
-<!-- Flot Charts JavaScript -->
-<script src="extras/bower_components/flot/excanvas.min.js"></script>
-<script src="extras/bower_components/flot/jquery.flot.js"></script>
-<script src="extras/bower_components/flot/jquery.flot.pie.js"></script>
-<script src="extras/bower_components/flot/jquery.flot.resize.js"></script>
-<script src="extras/bower_components/flot/jquery.flot.time.js"></script>
-<script src="extras/bower_components/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
-<script src="//cdn.jsdelivr.net/jquery.flot/0.8.3/jquery.flot.min.js"></script>
-
-<!-- Metis Menu Plugin JavaScript -->
-<script src="<?php echo Yii::app()->request->baseUrl; ?>/extras/bower_components/metisMenu/dist/metisMenu.min.js"></script>
-<!-- Morris Charts JavaScript -->
-<script src="<?php echo Yii::app()->request->baseUrl; ?>/extras/bower_components/raphael/raphael-min.js"></script>
-
-        <!--<script src="<?php echo Yii::app()->request->baseUrl; ?>/extras/js/morris-data.js"></script>-->
-<!-- Custom Theme JavaScript -->
-<script src="<?php echo Yii::app()->request->baseUrl; ?>/extras/dist/js/sb-admin-2.js"></script>
-<!-- DataTables JavaScript -->
-<script src="<?php echo Yii::app()->request->baseUrl; ?>/extras/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
-<script src="<?php echo Yii::app()->request->baseUrl; ?>/extras/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
-<!-- Page-Level Demo Scripts - Tables - Use for reference -->
 
 <script>
+    $(document).ready(function() {
+        //localStorage.clear();
+        //alert(localStorage.length);
+        //$("#Formore").append("localStorage.length");
+        //document.getElementById('basket').value = localStorage.length;
+    });
     function complete(id, op) {
         $.ajax({
             type: "GET",
-            url: "http://" + document.getElementById("url").value + "/bankafrica1/index.php?r=cbr/default/complete&id=" + id + "&op=" + op
+            url: "http://" + document.getElementById("url").value + "/"+document.getElementById("base").value+ "/index.php?r=cbr/default/complete&id=" + id + "&op=" + op
                     ,
             data: "", //ProposedSites
             cache: false,
@@ -1236,7 +1323,7 @@
         else {
             $.ajax({
                 type: "GET",
-                url: "http://" + document.getElementById("url").value + "/bankafrica1/index.php?r=cbr/default/reject" +
+                url: "http://" + document.getElementById("url").value + "/"+document.getElementById("base").value+ "/index.php?r=cbr/default/reject" +
                         "&remark=" + remark +
                         "&id=" + id +
                         "&op=" + op,
@@ -1263,7 +1350,7 @@
 
         $.ajax({
             type: "GET",
-            url: "http://" + document.getElementById("url").value + "/bankafrica1/index.php?r=cbr/default/accept&id=" + id + "&op=" + op
+            url: "http://" + document.getElementById("url").value + "/"+document.getElementById("base").value+ "/index.php?r=cbr/default/accept&id=" + id + "&op=" + op
                     ,
             data: "", //ProposedSites
             cache: false,
@@ -1287,7 +1374,7 @@
 
         $.ajax({
             type: "GET",
-            url: "http://" + document.getElementById("url").value + "/bankafrica1/index.php?r=cbr/default/approve&id=" + id + "&op=" + op
+            url: "http://" + document.getElementById("url").value + "/"+document.getElementById("base").value+ "/index.php?r=cbr/default/approve&id=" + id + "&op=" + op
                     ,
             data: "", //ProposedSites
             cache: false,
@@ -1311,7 +1398,7 @@
         //  alert(id);
         $.ajax({
             type: "GET",
-            url: "http://" + document.getElementById("url").value + "/bankafrica1/index.php?r=cbr/default/vieweffect&id=" + id + "&op=" + op
+            url: "http://" + document.getElementById("url").value + "/"+document.getElementById("base").value+ "/index.php?r=cbr/default/vieweffect&id=" + id + "&op=" + op
                     ,
             data: "", //ProposedSites
             cache: false,
@@ -1337,7 +1424,7 @@
         else {
             $.ajax({
                 type: "GET",
-                url: "http://" + document.getElementById("url").value + "/bankafrica1/index.php?r=cbr/default/modify" +
+                url: "http://" + document.getElementById("url").value + "/"+document.getElementById("base").value+ "/index.php?r=cbr/default/modify" +
                         "&rate=" + rate +
                         "&remark=" + remark +
                         "&id=" + id +
@@ -1377,7 +1464,7 @@
             else {
                 $.ajax({
                     type: "GET",
-                    url: "http://" + document.getElementById('url').value + "/bankafrica1/index.php?r=cbr/default/addrate" +
+                    url: "http://" + document.getElementById('url').value + "/"+document.getElementById("base").value+ "/index.php?r=cbr/default/addrate" +
                             "&institution=" + institution +
                             "&rateT=" + rateT +
                             "&rate=" + rate +
@@ -1423,7 +1510,7 @@
         else {
             $.ajax({
                 type: "GET",
-                url: "http://" + document.getElementById('url').value + "/bankafrica1/index.php?r=cbr/default/addrate" +
+                url: "http://" + document.getElementById('url').value + "/"+document.getElementById("base").value+ "/index.php?r=cbr/default/addrate" +
                         "&institution=" + institution +
                         "&rateT=" + rateT +
                         "&rate=" + rate +
@@ -1451,60 +1538,115 @@
     }
 </script>
 
+<!-- Flot Charts JavaScript -->
+<script src="extras/bower_components/flot/excanvas.min.js"></script>
+<script src="extras/bower_components/flot/jquery.flot.js"></script>
+<script src="extras/bower_components/flot/jquery.flot.pie.js"></script>
+<script src="extras/bower_components/flot/jquery.flot.resize.js"></script>
+<script src="extras/bower_components/flot/jquery.flot.time.js"></script>
+<script src="extras/bower_components/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
+<script src="extras/js/flot-data.js"></script>
+<script src="<?php echo Yii::app()->request->baseUrl; ?>/extras/bower_components/morrisjs/morris.min.js"></script>
+<script src="<?php echo Yii::app()->request->baseUrl; ?>/extras/js/morris-data.js"></script>
+
+
+
+<!-- jQuery -->
+<script src="<?php echo Yii::app()->request->baseUrl; ?>/extras/bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="<?php echo Yii::app()->request->baseUrl; ?>/extras/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- Metis Menu Plugin JavaScript -->
+<script src="<?php echo Yii::app()->request->baseUrl; ?>/extras/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+<!-- Morris Charts JavaScript -->
+<script src="<?php echo Yii::app()->request->baseUrl; ?>/extras/bower_components/raphael/raphael-min.js"></script>
+
+        <!--<script src="<?php echo Yii::app()->request->baseUrl; ?>/extras/js/morris-data.js"></script>-->
+<!-- Custom Theme JavaScript -->
+<script src="<?php echo Yii::app()->request->baseUrl; ?>/extras/dist/js/sb-admin-2.js"></script>
+<!-- DataTables JavaScript -->
+<script src="<?php echo Yii::app()->request->baseUrl; ?>/extras/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+<script src="<?php echo Yii::app()->request->baseUrl; ?>/extras/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+<!-- Page-Level Demo Scripts - Tables - Use for reference -->
 <script>
     $(document).ready(function() {
-		$(".sub1").hide();
-        $(".sub2").hide();
-		
-		$('#dataTables-exampleo').DataTable({
-            responsive: true
-        });
-		
-		$('#dataTables-examples4').DataTable({
-            responsive: true
-        });
-		
-		$('#dataTables-examples5').DataTable({
-            responsive: true
-        });
-		
-		$('#dataTables-examples6').DataTable({
-            responsive: true
-        });
-		
         $('#dataTables-example').DataTable({
             responsive: true
         });
-		
-		$('#dataTables-exampler1').DataTable({
-            responsive: true
-        });
-		
-		$('#dataTables-exampler2').DataTable({
-            responsive: true
-        });
-		
-		$('#dataTables-exampler3').DataTable({
-            responsive: true
-        });
-		
-		$('#dataTables-exampler4').DataTable({
-            responsive: true
-        });
-		
-		$('#dataTables-exampler5').DataTable({
-            responsive: true
-        });
-		
-		$('#dataTables-exampler6').DataTable({
-            responsive: true
-        });
-		
-		$('#dataTables-exampler7').DataTable({
+    });
+
+    $(document).ready(function() {
+        $('#dataTables-exampler1').DataTable({
             responsive: true
         });
     });
-	function switcher(id) {
+    $(document).ready(function() {
+        $('#dataTables-exampler2').DataTable({
+            responsive: true
+        });
+    });
+    $(document).ready(function() {
+        $('#dataTables-exampler3').DataTable({
+            responsive: true
+        });
+    });
+    $(document).ready(function() {
+        $('#dataTables-exampler4').DataTable({
+            responsive: true
+        });
+    });
+    $(document).ready(function() {
+        $('#dataTables-exampler5').DataTable({
+            responsive: true
+        });
+    });
+    $(document).ready(function() {
+        $('#dataTables-exampler6').DataTable({
+            responsive: true
+        });
+    });
+    $(document).ready(function() {
+        $('#dataTables-exampler7').DataTable({
+            responsive: true
+        });
+    });
+
+
+        function customercontact(state,customer,cb_id) {
+            if(state==0){
+                                        $('#msg').html(" successfully Captured");
+                        $('#sModal').modal('show');
+
+            }
+      else{ 
+            $.ajax({
+                type: "GET",
+                url: "http://" + document.getElementById('url').value + "/bankafricat1/index.php?r=cbr/default/customercontact" +
+                        
+                        "&state=" + state +
+                        "&customer=" + customer +
+                        "&cb_id=" + cb_id,
+                data: "", //ProposedSites
+                cache: false,
+                success: function(data) {
+                    if (data == 'true') {
+                        $('#msg').html(" Good luck in your transactions");
+                        $('#sModal').modal('show');
+
+                    } else {
+                        alert(data + "Failure: Data Could Not Be Saved. Try Again.");
+                    }
+                },
+                error: function(data) {
+                    alert("Error Sending Data.");
+                }
+            });
+     }   
+    }
+
+</script>
+<script>
+    function switcher(id) {
+        //alert(id);
         if (document.getElementById('state' + id).value == 1) {
             document.getElementById('state' + id).value = 0;
         }
@@ -1512,28 +1654,17 @@
             document.getElementById('state' + id).value = 1;
         }
     }
-	
-	function toggle1(id) {
-        $("#the_rest" + id).toggle();
-    }
-	
-	function toggle2(id) {
-        $("#the_restinner" + id).toggle();
-    }
-</script>
-<script>
-    
 </script>
 <script>
     // tooltip demo
     $('.tooltip-demo').tooltip({
         selector: "[data-toggle=tooltip]",
         container: "body"
-    });
+    })
 
     // popover demo
     $("[data-toggle=popover]")
-        .popover()
+            .popover()
 </script>
 <script>
     $('[data-toggle="popover"]').popover({
@@ -1541,5 +1672,34 @@
     });
     // popover demo
     $("[data-toggle=popover]")
-        .popover()
+            .popover()
+</script>
+<script>
+    $(document).ready(function() {
+        $('#dataTables-exampleo').DataTable({
+            responsive: true
+        });
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        $('#dataTables-examples4').DataTable({
+            responsive: true
+        });
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        $('#dataTables-examples5').DataTable({
+            responsive: true
+        });
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        $('#dataTables-examples6').DataTable({
+            responsive: true
+        });
+    });
 </script>

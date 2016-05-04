@@ -31,8 +31,10 @@ class Sidebar extends CWidget {
 
         echo '<div class="left_menu" id="leftmenu">';
         
-       echo '<div class="title">' ;
-		echo  CHtml::encode($this->title);
+      echo '<div class="title">' ;
+        echo CHtml::encode($this->title);
+        echo CHtml::ajaxLink('&gt;&gt;', '', false, array('id' => 
+ 'toggle_left_menu'));     
         echo '</div>';
 	}
 	else{
@@ -46,8 +48,10 @@ class Sidebar extends CWidget {
 
         echo '<div class="right_menu" id="rightmenu">';
         
-       echo '<div class="title">' ;
-		echo  CHtml::encode($this->title);
+    echo '<div class="title">' ;
+        echo CHtml::encode($this->title);
+        echo CHtml::ajaxLink('&gt;&gt;', '', false, array('id' => 
+ 'toggle_right_menu'));
         echo '</div>';
 	}
 

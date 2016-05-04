@@ -128,9 +128,9 @@ return array(
           ), */
         // uncomment the following to use a MySQL database
         'db' => array(
-            'connectionString' => 'mysql:host=localhost;dbname=bankafrica',//ngtltd2_ibank',
+            'connectionString' => 'mysql:host=localhost;dbname=bankafrica',//ngtltd2_ibank',bankafrica
             'emulatePrepare' => true,
-            'username' => 'root',// 'ngtltd2_ibank',
+            'username' => 'root',// 'root',ngtltd2_ibank
             	'password' => 's3cr3t',//'s3cr3t',//1170807906
 //            'password' => '',
             'charset' => 'utf8',

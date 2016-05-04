@@ -25,7 +25,7 @@ class DefaultController extends Controller {
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
                 'actions' => array('create', 'update','index', 'edit','business',
-                   'propose','printrequest','printapproval','printhistory','reject','modify','accept','approve','vieweffect',
+                   'propose','printrequest','printapproval','printhistory','reject','modify','accept','approve','vieweffect','customercontact',
                 'complete','addrate'),
                 'users' => array('@'),
             ),
@@ -390,6 +390,36 @@ class DefaultController extends Controller {
         }
         //$this->render('create',array(
         //	'model'=>$model,
+        //));
+    }
+ public function actionCustomercontact() {
+        try {
+            $model = new Bqdcb;
+            $model->sta='VA';
+            $model->proc=10;
+            $model->cb_id=$_GET['cb_id'];
+            $model->remark='Customer contact';
+            $model->cus=$_GET['cus'];
+            $model->dou=date('Y-m-d');
+$model->dmo=date('Y-m-d');
+
+$model1=Bqcb::model()->findByPk($_GET['cb_id']);
+$model1->proc=10;
+$model1->sta='VA';
+$model1->dmo=date('Y-m-d');
+$model1->save();         
+                if ($model->save()) {
+                    echo 'true';
+                } else {
+                    var_dump($model->attributes) ;//echo 'false1';
+                }
+           
+
+        } catch (Exception $e) {
+            echo '<div class="swiper-slide"><font color="red">' . $e->getMessage() . '</font></div>'; //$e->getMessage();
+        }
+        //$this->render('create',array(
+        //  'model'=>$model,
         //));
     }
 }

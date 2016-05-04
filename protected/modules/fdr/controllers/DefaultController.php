@@ -25,7 +25,7 @@ class DefaultController extends Controller {
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
                 'actions' => array('create', 'update', 'index', 'edit', 'business', 'propose', 'printrequest', 'printapproval', 'printhistory',
-                    'reject', 'modify', 'accept', 'approve', 'vieweffect', 'complete', 'addrate', 'savemin'),
+                    'reject', 'modify', 'accept', 'approve', 'vieweffect', 'complete', 'addrate', 'savemin','customercontact'),
                 'users' => array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -482,6 +482,37 @@ class DefaultController extends Controller {
         }
         //$this->render('create',array(
         //	'model'=>$model,
+        //));
+    }
+        public function actionCustomercontact() {
+        try {
+            $model = new Bqdfd;
+            $model->sta='VA';
+            $model->proc=10;
+            $model->fd_id=$_GET['fd_id'];
+            $model->cus=$_GET['cus'];
+            $model->dou=date('Y-m-d');
+$model->dmo=date('Y-m-d');
+
+$model1=Bqfd::model()->findByPk($_GET['fd_id']);
+$model1->proc=10;
+$model1->sta='VA';
+$model1->dmo=date('Y-m-d');
+
+$model1->save();    
+
+                if ($model->save()) {
+                    echo 'true';
+                } else {
+                    var_dump($model->attributes) ;//echo 'false1';
+                }
+           
+
+        } catch (Exception $e) {
+            echo '<div class="swiper-slide"><font color="red">' . $e->getMessage() . '</font></div>'; //$e->getMessage();
+        }
+        //$this->render('create',array(
+        //  'model'=>$model,
         //));
     }
 
